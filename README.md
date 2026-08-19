@@ -64,6 +64,26 @@ Fullständig information om schema och poängfördelning finns i [info](./info/R
 
 ---
 
+## Komma igång
+Testramverket `yrgo::test` ligger i en git-submodul (`libs/test`), som inte följer med vid en
+vanlig kloning. Klona därför repot rekursivt:
+
+```bash
+git clone --recursive https://github.com/Yrgo-25/hwsw-test.git
+```
+
+Är repot redan klonat utan `--recursive` är mappen `libs/test` tom. Hämta då submodulen i
+efterhand:
+
+```bash
+git submodule update --init --recursive
+```
+
+Utan det här steget misslyckas alla bygg mot `yrgo::test` med felmeddelandet
+`No rule to make target 'lib'`.
+
+---
+
 ## Kodformattering
 `ci/format.sh` formaterar C/C++-kod med `clang-format` samt Python-kod med `black`:
 
