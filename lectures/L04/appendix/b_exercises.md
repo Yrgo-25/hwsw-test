@@ -36,7 +36,7 @@ Er egen `driver::timer::Esp32s3` från **P02** anropar ESP-IDF:s C-funktioner i 
 skriva direkt till register, vilket kräver mockningstekniken i **L06**. Er `driver::timer::Stub`
 är däremot redan enhetstestbar nu, precis som `Atmega328p`-drivern ovan (se
 [bilaga B i L01](../../L01/appendix/b_exercises.md) för samma *princip* i litet format; notera
-att övningens `test::driver::timer::Interface` är en förenklad variant med ett annat API än det
+att övningens `driver::timer::Interface` är en förenklad variant med ett annat API än det
 riktiga). Att skriva dessa tester för er egen kodbas är en del av **P04**.
 
 ---
