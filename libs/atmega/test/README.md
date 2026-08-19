@@ -9,7 +9,7 @@ README för vilken fil som hör till vilken lektion.
 
 ## Kompilering samt exekvering av tester
 
-Tack vara den bifogade [makefilen](./makefile) kan testerna kompileras samt köras via följande kommando (i denna katalog):
+Tack vara den bifogade [makefilen](./Makefile) kan testerna kompileras samt köras via följande kommando (i denna katalog):
 
 ```make
 make
@@ -44,7 +44,7 @@ make clean && make EXTRA_FLAGS="-fsanitize=address,undefined -fno-sanitize-recov
 ## Tillägg av nya filer
 
 Lägg till nya testfiler i bygget genom att lägga till sökvägen för dessa till
-`TEST_FILES` i [makefilen](./makefile). Som exempel, om en fil döpt `example/file.cpp` läggs
+`TEST_FILES` i [makefilen](./Makefile). Som exempel, om en fil döpt `example/file.cpp` läggs
 till i denna katalog, lägg till motsvarande rad såsom visas nedan:
 
 ```makefile
@@ -70,7 +70,7 @@ make avbryter med `missing separator`.
 ## Tillägg av nya källkodsfiler från biblioteket
 
 Lägg till samtliga nya källkodsfiler från biblioteket i bygget genom att lägga till sökvägen för dessa till
-`SOURCE_FILES` i [makefilen](./makefile). Som exempel, om en fil döpt `new/libfile.cpp` läggs
+`SOURCE_FILES` i [makefilen](./Makefile). Som exempel, om en fil döpt `new/libfile.cpp` läggs
 till i källkatalogen [source](../source/), lägg till motsvarande rad såsom visas nedan:
 
 ```makefile
