@@ -1,18 +1,21 @@
 # L02 - Enhetstester (del I)
 
 ## Dagordning
-* Struktur på ett enhetstest: Arrange-Act-Assert.
-* Genomgång av `TEST()` samt `EXPECT_*`-makrona i `yrgo::test`.
-* Enhetstestning av GPIO-drivern i det delade [ATmega328p-övningsbiblioteket](../../libs/atmega/README.md).
+* Från stubb till riktig driver: introduktion till det delade
+  [ATmega328p-övningsbiblioteket](../../libs/atmega/README.md).
+* Den virtuella hårdvaruplattformen: hur registerskrivningar kan verifieras utan fysisk hårdvara.
+* Enhetstestning av GPIO-drivern i övningsbiblioteket, samt jakt på de inplanterade buggarna.
 * **P04**-start: projektets syfte, upplägg och krav.
 
 ---
 
 ## Mål med lektionen
-* Kunna strukturera ett enhetstest enligt Arrange-Act-Assert.
-* Kunna skriva enhetstester för en enskild klass med `yrgo::test`.
-* Ha en fungerande testsvit för `driver::gpio::Atmega328p`, med eventuella buggar i drivern
-  åtgärdade.
+* Kunna skriva enhetstester för en riktig driver som skriver direkt till hårdvaruregister.
+* Kunna verifiera drivern mot den virtuella hårdvaruplattformen, både genom att ställa in
+  "hårdvaran" före anropet och läsa av vad drivern skrev efteråt.
+* Kunna analysera ett testfel, inklusive en krasch, och avgöra om felet ligger i testet eller i
+  drivern.
+* Ha en fungerande testsvit för `driver::gpio::Atmega328p`, med hittade buggar åtgärdade.
 
 ---
 
@@ -31,8 +34,8 @@
 ---
 
 ## Utvärdering
-* Vad innebär Arrange-Act-Assert, och varför är strukturen användbar när man läser andras tester?
 * Vilka buggar hittade ni i `driver::gpio::Atmega328p`, om några?
+* Hur avgjorde ni om ett rött testfall berodde på ert test eller på drivern?
 * Varför räcker det att testa `driver::gpio::Atmega328p` mot en virtuell hårdvaruplattform, men
   er egen `driver::gpio::Esp32s3` kräver en annan teknik (se **L06**)?
 * Vad innebär det att ett test är deterministiskt, och varför är det viktigt?
