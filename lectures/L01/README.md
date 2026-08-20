@@ -27,6 +27,7 @@
 * Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
   * Ni får tid på er att genomföra uppgifterna enskilt.
   * Uppgifterna gås sedan igenom i helklass.
+* Lösningsförslag finns [här](./exercises/README.md).
 
 ---
 
@@ -38,7 +39,7 @@
 ---
 
 ## Nästa lektion
-* Enhetstester (del I): grunder samt enhetstester för GPIO-drivern.
+* Enhetstester (del I): enhetstester för GPIO-drivern i ATmega328p-övningsbiblioteket.
 * Introduktion till kursens projekt, **P04**.
 
 ---
