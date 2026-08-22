@@ -6,6 +6,9 @@ regressioner den dagen någon faktiskt kör det. **Kontinuerlig integration (CI)
 testsviten (samt annan kontroll, t.ex. kodformattering) körs automatiskt vid varje push och
 pull request, så att ett misslyckat test upptäcks direkt, av alla, varje gång.
 
+Ni har redan en pipeline som gör det, den ni satte upp i **L05**. Den här lektionen handlar om
+att förstå den i detalj och härda den, inte om att bygga en ny från grunden.
+
 ---
 
 ## Anatomin i en GitHub Actions-pipeline
@@ -28,6 +31,17 @@ formatteringsfel stoppar alltså inte testkörningen, och tvärtom: ni får reda
 en enda körning, i stället för att behöva rätta det ena för att ens få se det andra. Ett jobb är
 också den enhet som får en egen, ren runner; därför hör "bygg och kör tester" och "kontrollera
 formattering" hemma i var sitt jobb.
+
+Er egen pipeline från **L05** har samma uppdelning, med två skillnader: `firmware-build` bygger
+firmwaren för `ESP32-S3` och laddar upp den som artefakt, och de två jobben körs *i ordning* via
+`needs:` i stället för parallellt (se [bilaga A i L05](../../L05/appendix/a_ci_startup.md)). Efter
+**L12** har den sannolikt också ett jobb för statisk analys eller sanitizers. Principen är
+densamma oavsett antal: ett jobb, en fråga, en egen runner.
+
+Er pipeline har sedan **L05** tre jobb: formatteringskontroll, firmware-bygge och testkörning.
+Frågan är inte längre *om* de finns, utan hur de förhåller sig till varandra. Ett testjobb är
+varken lika snabbt som formatteringskontrollen eller lika dyrt som ett fullt firmware-bygge, så
+var det hör hemma i kedjan är ett verkligt designbeslut, inte en formalitet.
 
 ```text
                 push / pull_request mot main
@@ -56,35 +70,51 @@ formattering" hemma i var sitt jobb.
 
 ---
 
-## Att bygga ESP-IDF-firmware i CI
-Utöver att bygga och köra er testsvit ska er egen pipeline i **P04** även bygga er firmware för
-`ESP32-S3` via ESP-IDF, som ett eget jobb. Det är fullt möjligt på en vanlig, GitHub-hostad
-runner utan fysisk hårdvara: att **kompilera** firmware kräver bara rätt verktygskedja, inte ett
-riktigt kort, det är först **flashning** och körning mot riktig hårdvara som kräver det (se
-**L17**).
+## Att härda pipelinen
+En pipeline som fungerar är inte samma sak som en pipeline man litar på. Tre saker gör störst
+skillnad när den väl används dagligen av en hel grupp.
 
-I stället för att installera hela ESP-IDF-verktygskedjan för hand i varje körning kan ni
-använda Espressifs officiella GitHub Action, som paketerar verktygskedjan i en Docker-image.
-Ett ungefärligt exempel (kontrollera aktuell dokumentation för actionen för exakt syntax och
-giltiga versioner):
+### Branch protection: att ett rött kryss faktiskt betyder något
+Som standard *visar* GitHub att jobben misslyckades, men hindrar ingen från att merga ändå. Under
+*Settings → Branches → Add branch ruleset* för `main` kan ni kräva att namngivna jobb har lyckats
+innan en pull request går att merga (*Require status checks to pass*). Först då är pipelinen en
+grind och inte bara en lampa.
+
+Det är också den inställning som gör kravet i **P04** meningsfullt: all utveckling sker via
+branches och pull requests, och det är på pull requesten kontrollen ska ske.
+
+### Caching: att inte bygga om samma sak varje gång
+Varje jobb får en ren runner, vilket är poängen, men det betyder också att allt som hämtas eller
+byggs hämtas och byggs om från noll varje körning. Det som är dyrt och sällan ändras kan sparas
+mellan körningar med `actions/cache`, t.ex. ESP-IDF:s verktygskedja eller nedladdade beroenden.
+Nyckeln är vad cachen ska brytas mot: cachar ni för brett riskerar ni att bygga vidare på ett
+gammalt resultat och missa ett verkligt fel.
+
+### `concurrency`: att inte köra körningar ni inte längre bryr er om
+Pushar någon tre gånger i rad till samma branch startar tre körningar, varav de två första redan
+är ointressanta. Med `concurrency` avbryts den föregående körningen automatiskt när en ny startar
+för samma branch:
 
 ```yaml
-build-firmware:
-  name: Build firmware
-  runs-on: ubuntu-latest
-  steps:
-    - name: Check out repository
-      uses: actions/checkout@v4
-    - name: Build firmware with ESP-IDF
-      uses: espressif/esp-idf-ci-action@v1
-      with:
-        esp_idf_version: v5.2
-        target: esp32s3
-        command: idf.py build
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 ```
 
-Jobbet verifierar alltså att firmwaren går att bygga med rätt verktygskedja. Ingen fysisk `ESP32-S3` behövs, eftersom kompileringen sker helt på GitHub Actions-runnern. Det är först vid flashning och körning på riktig hårdvara som ett faktiskt kort krävs.
+---
 
-En lyckad pipeline ger alltså förtroende för att projektet fortfarande följer kodstandarden, går att bygga och klarar sina tester.
+## Vad som inte hör hemma i pipelinen
+GitHubs runner är en virtuell maskin i ett datacenter. Den har ingen `ESP32-S3` inkopplad, och
+kan alltså varken flasha, mäta en blinkperiod eller läsa av en riktig temperatursensor. Den
+gränsen är fysisk, inte teknisk: allt som bara kräver en verktygskedja går att automatisera, allt
+som kräver ett kort gör det inte, i alla fall inte på en GitHub-hostad runner.
+
+Det betyder inte att hårdvarutestning är dömd till att vara manuell för alltid. Kör ni en egen
+runner på en maskin med ett kort inkopplat kan även flashning och test mot fysisk hårdvara
+automatiseras. Den varianten, och dess praktiska baksidor, tittar vi på i **L17**.
+
+En lyckad pipeline ger alltså förtroende för att projektet fortfarande följer kodstandarden, går
+att bygga för både värddator och `ESP32-S3`, och klarar sina tester. Att det dessutom *fungerar*
+på riktig hårdvara är en separat fråga.
 
 ---

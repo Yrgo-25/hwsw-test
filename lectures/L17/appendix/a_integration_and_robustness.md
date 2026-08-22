@@ -31,6 +31,38 @@ Det är de sex fälten ni ska använda i övningsuppgiften i [bilaga B](./b_exer
 
 ---
 
+## Att automatisera hårdvarutestning: self-hosted runner (demo)
+Pipelinen från **L05**/**L13** kör på en GitHub-hostad runner (`runs-on: ubuntu-latest`), en
+virtuell maskin utan något kort inkopplat. Den kan bygga firmwaren och spara den som artefakt, men
+inte flasha den. Demot i **L05** körde på en self-hosted runner, men skillnaden var då bara var
+maskinen stod, inte vad den kunde göra.
+
+Gränsen går dock inte vid tekniken, utan vid var runnern står. GitHub Actions kan lika gärna köra
+jobb på en maskin ni själva äger, en **self-hosted runner**. Står den maskinen med en `ESP32-S3`
+inkopplad via USB kan ett jobb hämta firmware-artefakten, flasha kortet med `esptool.py` och köra
+ett testskript mot den seriella porten, helt automatiskt vid varje push. Det kallas
+*hardware-in-the-loop* (HIL) och är så här hårdvarutestning automatiseras i industrin.
+
+Att registrera runnern tar bokstavligen någon minut, och ni såg det göras i **L05**: maskinen
+registreras under *Settings → Actions → Runners* och får en egen etikett, som jobbet sedan begär
+via `runs-on:`. Det som gör tekniken krävande är allt därefter:
+* **Maskinen måste vara igång.** Är den avstängd när någon pushar blir jobbet stående i kö, precis
+  som ni såg demonstrerat i **L05**. En pipeline som fastnar eller blir röd av skäl som inte har med
+  koden att göra slutar snabbt att tas på allvar.
+* **Hårdvaran måste vara i ett känt utgångsläge.** Ett kort som hängt sig sedan förra körningen
+  gör nästa testresultat värdelöst.
+* **Säkerhet.** En self-hosted runner kör kod från repot på er egen maskin. På ett publikt repo
+  kan vem som helst öppna en pull request och därmed köra godtycklig kod hos er, vilket är
+  anledningen till att GitHub avråder från self-hosted runners på publika repon.
+
+Vi demonstrerar upplägget under lektionen. Det ingår inte i kraven för **P04**, dels för att det
+förutsätter att varje grupp har ett kort permanent inkopplat till en maskin som alltid är igång,
+dels för att den manuella dokumentationen (se ovan) är det ni faktiskt bedöms på. Poängen är att
+ni ska veta att gränsen mellan "automatiserbart" och "kräver en människa" går att flytta, och vad
+det kostar att flytta den.
+
+---
+
 ## Säker och robust mjukvara
 Ett system som styr fysisk hårdvara bör hantera ogiltig indata och oväntade tillstånd på ett
 kontrollerat sätt, i stället för att fortsätta i ett odefinierat tillstånd. Några principer:
