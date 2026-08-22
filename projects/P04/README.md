@@ -10,9 +10,8 @@ och med samma grupper som dessa projekt.
 ni faktiskt skriver tester mot den kodbasen.
 
 Syftet är att:
-* Skriva enhetstester för era sex `Stub`-klasser från **P02** (adc, factory, gpio, serial,
-  tempsensor, timer), samt för minst en av de riktiga `Esp32s3`-drivers via mockning av
-  ESP-IDF:s C-funktioner.
+* Skriva enhetstester för era riktiga `Esp32s3`-drivers via mockning av ESP-IDF:s C-funktioner,
+  minst en driver per gruppmedlem.
 * Skriva enhetstester för era ML-algoritmer (**P03**): den adaptiva regressionsmodellen samt
   minst ett neuralt nätverkslager.
 * Skriva komponenttester för `system::logic::Logic`, där flera stubbade drivers samverkar.
@@ -27,13 +26,19 @@ Syftet är att:
 Projektet påbörjas i **L02**, direkt efter att grunderna i enhetstestning med `yrgo::test`
 introducerats, och pågår genom hela kursen fram till redovisning i **L19**. Arbetet sker
 löpande i takt med att nya testnivåer och verktyg introduceras på lektionerna:
-* **L02–L04:** Enhetstester för era befintliga GPIO-, seriell- samt timer-stubbar. Övriga tre
-  stubbar (adc, tempsensor, factory) följer samma mönster och skrivs löpande.
-* **L05–L06:** Analys av **P02**s testbara design samt mockning av ESP-IDF:s C-funktioner.
-* **L07:** Enhetstester för `Tmp36`s temperaturformel samt för era ML-algoritmer från **P03**,
-  plus tillämpning av mockningstekniken från **L06** på fler egna drivers.
+* **L02–L04:** Testramverket och testbygget på plats i ert eget repo, samt de första
+  enhetstesterna. Börja med det som går att testa utan mockning: er adaptiva regressionsmodell
+  `ml::lin_reg::Adaptive` från **P03** och `driver::tempsensor::Tmp36`s temperaturformel. Övningarna på lektionerna körs mot kursens
+  ATmega328p-övningsbibliotek; tekniken därifrån tillämpar ni sedan på er egen kodbas.
+* **L05:** Uppsättning av CI-pipeline: formatteringskontroll, firmware-bygge med
+  artefaktuppladdning samt automatisk körning av er testsvit.
+* **L06:** Analys av **P02**s testbara design, samt mockning av ESP-IDF:s C-funktioner.
+* **L07:** Fördjupning kring testning av beräkningar: referensvärden och rimliga toleranser för
+  `Tmp36` och `ml::lin_reg::Adaptive`, plus tillämpning av mockningstekniken från **L06** på fler
+  egna drivers.
 * **L08–L09, L11:** Komponenttester för `system::logic::Logic`.
-* **L12–L13:** Statisk analys samt CI-pipeline (inklusive firmware-bygge).
+* **L12–L13:** Statisk analys som eget jobb i pipelinen, samt härdning av pipelinen
+  (jobbordning, branch protection, caching).
 * **L14–L17:** (VG) Mätdatainsamling, processning, visualisering samt HW/SW-integrationstester.
 * **L18:** Finputsning och redovisningsförberedelser.
 * **L19:** Redovisning och inlämning.
@@ -44,9 +49,10 @@ löpande i takt med att nya testnivåer och verktyg introduceras på lektionerna
 Testsviten ska vara uppdelad i tydligt separerade nivåer, i linje med testpyramiden som
 introduceras i **L01**:
 
-1. **Enhetstester**: testar en enskild klass i isolation. Stubbarna testas direkt (de är redan
-   hårdvaruoberoende); de riktiga `Esp32s3`-drivers testas genom att mocka de
-   ESP-IDF-funktioner de anropar (se **L06**), inte mot fysisk hårdvara.
+1. **Enhetstester**: testar en enskild klass i isolation. De riktiga `Esp32s3`-drivers testas
+   genom att mocka de ESP-IDF-funktioner de anropar (se **L06**), inte mot fysisk hårdvara. Ren
+   beräkningslogik, som `driver::tempsensor::Tmp36` och era ML-algoritmer, går att testa direkt,
+   med en stubb som testdubbel där ett beroende behövs.
 2. **Komponenttester**: testar hur flera klasser samverkar, t.ex. `system::logic::Logic`
    tillsammans med samtliga sex stubbade drivers, eller ett helt neuralt nätverk uppbyggt av
    flera lager. Beroenden som inte testas direkt ersätts med stubbar via respektive interface.
@@ -65,29 +71,42 @@ ett gemensamt golv som gör att var och en av er har något konkret att bidra ti
 själva betyget sätts däremot individuellt, se [Bedömning](#bedömning).
 
 ### Enhetstester för drivers (G)
-Skriv enhetstester för era sex `Stub`-klasser från **P02**, exempelvis:
-* **`driver::gpio::Stub`:** korrekt starttillstånd samt att `write()`/`read()` fungerar.
-* **`driver::serial::Stub`:** att inmatade rader returneras korrekt, och att utskriven text går
-  att läsa av i testet.
-* **`driver::timer::Stub`:** att timeout indikeras vid rätt tidpunkt, varken för tidigt eller
-  för sent.
-* **`driver::adc::Stub` samt `driver::tempsensor::Stub`:** att simulerade värden returneras
-  korrekt.
-* **`driver::factory::Stub`:** att den skapar rätt typ av drivers, och att era komponenttester
-  (se nedan) kan komma åt de skapade instanserna.
+Skriv enhetstester för era riktiga `Esp32s3`-drivers genom att mocka de ESP-IDF-funktioner de
+anropar (se **L06**). Testerna ska varken kräva fysisk hårdvara eller länka mot ESP-IDF:s riktiga
+driverkomponenter för att kunna köras på värddatorn.
 
-Skriv därutöver enhetstester för `driver::tempsensor::Tmp36`s temperaturformel (se **L07**), samt
-för minst en av de riktiga `Esp32s3`-drivers (t.ex. `driver::gpio::Esp32s3`) genom att mocka
-de ESP-IDF-funktioner den anropar (se **L06**). De sistnämnda testerna ska varken kräva fysisk
-hårdvara eller länka mot ESP-IDF:s riktiga driverkomponenter för att köras på värddatorn.
+**Omfattning: minst en driver per gruppmedlem.** Med 6–8 drivers och fyra medlemmar innebär det
+att merparten av driverlagret täcks, och att var och en av er har något eget att visa upp och
+förklara vid redovisningen (se [Bedömning](#bedömning)). Fördela driverna mellan er och notera
+fördelningen i bidragsrapporten.
+
+Exempel på vad ett drivertest bör verifiera:
+* **`driver::gpio::Esp32s3`:** att rätt pin och nivå skickas vidare vid `write()`, och att
+  `read()` returnerar det värde mocken matar tillbaka.
+* **`driver::serial::Esp32s3`:** att utskriven text hamnar i den mockade UART-bufferten, korrekt
+  formaterad.
+* **`driver::timer::Esp32s3`:** att timern konfigureras med rätt period, och att ett mockat
+  avbrott ger förväntat beteende.
+* **Initiering och felhantering:** att drivern hanterar ett misslyckat ESP-IDF-anrop (en returkod
+  skild från `ESP_OK`) kontrollerat, i stället för att gå vidare i ett odefinierat tillstånd.
+
+Skriv därutöver enhetstester för `driver::tempsensor::Tmp36`s temperaturformel (se **L07**). Den
+går att testa redan innan mockningen är på plats, genom att skicka in en `driver::adc::Stub` som
+ger kända insignaler.
 
 ### Enhetstester för ML-algoritmer (G)
-Skriv enhetstester för `ml::lin_reg::Adaptive` samt minst ett av era neurala nätverkslager från
-**P03** (t.ex. `Dense`, eller ett CNN-lager om ni implementerade det i Fas 2). Om er grupp
-implementerade `driver::tempsensor::Smart` i **P03**, skriv enhetstester för den också, med en
-`driver::adc::Stub` för att ge kända, simulerade insignaler. Verifiera bland annat gränsfall
-(ogiltig indata, ogiltig lärhastighet) samt att beräkningar ger korrekt resultat för kända,
-framräknade exempel.
+Skriv enhetstester för det ni byggde i **P03**:
+* **`ml::lin_reg::Adaptive`** (Fas 1): att träningen konvergerar, att en tränad modell predikterar
+  korrekt för kända, framräknade exempel, samt gränsfall som ogiltig indata och ogiltig
+  lärhastighet.
+* **`driver::tempsensor::Smart`** (Fas 1): mata in kända råvärden via en `driver::adc::Stub` och
+  verifiera den predikterade temperaturen. Notera att `Smart` ärver samma
+  `driver::tempsensor::Interface` som `Tmp36`, och därför testas på precis samma sätt.
+* **Er valda algoritm från Fas 2**, vilken den än blev: verifiera centrala beräkningssteg,
+  träningens beteende samt rimliga gränsfall. Vad som är meningsfullt att testa beror på vilken
+  algoritm ni valde; motivera era val av testfall vid redovisningen.
+
+Samtliga dessa tester körs på värddatorn och kräver varken målhårdvara eller mockning av ESP-IDF.
 
 ### Komponenttester (G)
 Skriv komponenttester för `system::logic::Logic` som verifierar samspelet med dess drivers, med
@@ -100,14 +119,16 @@ hjälp av `driver::factory::Stub` och de övriga stubbarna, exempelvis:
   baserat på simulerade värden i `driver::tempsensor::Stub`.
 
 ### Testautomatisering (G)
-* Sätt upp en CI-pipeline (GitHub Actions) som bygger och kör hela testsviten automatiskt vid
-  varje push och pull request.
-* Samma pipeline ska även bygga er firmware för `ESP32-S3` via ESP-IDF, som ett separat jobb.
-  Det kräver ingen fysisk hårdvara eller självhostad runner, se [bilaga A i L13](../../lectures/L13/appendix/a_ci.md#att-bygga-esp-idf-firmware-i-ci)
-  för ett konkret exempel. Flashning och körning mot riktig hårdvara ligger utanför CI, se
-  **L17**.
-* Kodformattering ska kontrolleras automatiskt i samma pipeline, i linje med
-  [ci/format.sh](../../ci/format.sh) i det här repot.
+Pipelinen sätts upp redan i **L05** och byggs ut löpande under kursen. Vid inlämning ska den:
+* Bygga och köra hela testsviten automatiskt vid varje push och pull request.
+* Bygga er firmware för `ESP32-S3` via ESP-IDF, och i samma jobb ladda upp den byggda binären
+  som en artefakt (`actions/upload-artifact`), så att den går att hämta från körningen på GitHub. Det kräver ingen fysisk hårdvara eller self-hosted runner, se
+  [bilaga A i L05](../../lectures/L05/appendix/a_ci_startup.md) för ett konkret exempel.
+  Flashning och körning mot riktig hårdvara ligger utanför CI, se **L17**.
+* Kontrollera kodformattering automatiskt, i linje med [ci/format.sh](../../ci/format.sh) i det
+  här repot.
+* Vara konfigurerad så att en pull request med röda jobb inte går att merga till `main`
+  (branch protection, se **L13**).
 
 ### Kodkvalitet (G)
 * Kör statisk analys (`clang-tidy` och/eller `cppcheck`) på kodbasen och åtgärda relevanta
@@ -134,6 +155,26 @@ hjälp av `driver::factory::Stub` och de övriga stubbarna, exempelvis:
 
 ---
 
+## Användning av AI-verktyg
+Ni får använda Claude (eller motsvarande AI-verktyg) till:
+* att skriva enhets- och komponenttester samt ESP-IDF-mockar,
+* att sätta upp repot och projektet (t.ex. build-konfiguration, mappstruktur, CI-pipeline),
+* att förklara felmeddelanden, verktygsutdata och testramverkets API.
+
+Det som bedöms är inte vem som skrev raderna, utan att ni förstår och kan stå för det ni lämnar
+in. Två saker följer av det:
+* **Granska allt ni committar.** Ett AI-genererat test som ser rimligt ut men inte verifierar
+  något, t.ex. för att det saknar assertion eller testar stubben i stället för den riktiga koden,
+  är värre än inget test alls: det ger falsk trygghet. Kontrollera att testet faktiskt blir rött
+  när koden är trasig, innan ni litar på att det blir grönt när den fungerar.
+* **Ni ska kunna förklara varje test ni åberopar** vid redovisningen: vad det verifierar, vilken
+  testnivå det tillhör och varför det är utformat som det är (se [Bedömning](#bedömning)).
+
+Ange tydligt i `p04_report.md` var och hur AI-verktyg har använts. Samma regler gäller i **P03**,
+med den skillnaden att själva ML-implementationen där ska vara skriven för hand av gruppen.
+
+---
+
 ## Versionshantering (Git)
 * All kod versionshanteras i samma repo som **P02** och **P03**.
 * All utveckling ska ske via branches och pull requests.
@@ -148,8 +189,9 @@ hjälp av `driver::factory::Stub` och de övriga stubbarna, exempelvis:
   [Bedömning](#bedömning)).
 
 ### Bidragsrapport (obligatorisk)
-Ni lämnar in en gemensam bidragsrapport i filen `p04_rapport.md` där ni övergripande beskriver
-vem som gjorde vad, vilka testnivåer och verktyg ni använde, samt eventuella avgränsningar
+Ni lämnar in en gemensam bidragsrapport i filen `p04_report.md` där ni övergripande beskriver
+vem som gjorde vad, vilka testnivåer och verktyg ni använde, var och hur AI-verktyg har använts
+(se [Användning av AI-verktyg](#användning-av-ai-verktyg)), samt eventuella avgränsningar
 (t.ex. vilka integrationstester som inte kunde automatiseras och varför). Utvärderingsfrågorna
 besvaras i samma fil (se [Utvärdering](#utvärdering)).
 
@@ -165,10 +207,13 @@ bidragsrapporten och din förmåga att förklara tester och designbeslut vid red
 även om gruppens gemensamma testsvit uppfyller kraven.
 
 ### G (individuellt)
-* Git-historiken visar att du personligen har skrivit fungerande enhets- och/eller
-  komponenttester för minst en del av kodbasen (en driver eller en ML-algoritm).
-* Du kan förklara dina egna tester: vad de testar, vilken testnivå de tillhör
-  (enhets-, komponent- eller integrationstest) och varför de är utformade som de är.
+* Git-historiken visar att du personligen har bidragit med fungerande enhets- och/eller
+  komponenttester för minst en del av kodbasen (en driver eller en ML-algoritm). Att AI-verktyg
+  använts som stöd är tillåtet (se [Användning av AI-verktyg](#användning-av-ai-verktyg)); det
+  som räknas är att testerna är dina, att de fungerar och att du kan stå för dem.
+* Du kan förklara dina tester: vad de testar, vilken testnivå de tillhör (enhets-, komponent-
+  eller integrationstest) och varför de är utformade som de är. Kan du inte förklara ett test
+  räknas det inte som ditt bidrag, oavsett vad Git-historiken visar.
 * Du kan redogöra för hur testsviten byggs och körs, både lokalt och i CI-pipelinen.
 * Gruppens gemensamma testsvit och CI-pipeline uppfyller G-kraven i [Krav](#krav); annars
   finns inget konkret för dig att visa upp och förklara.
@@ -179,10 +224,10 @@ ett av kursplanens två VG-moment:
 * **Säker och robust programvara:** du har själv identifierat och testat relevanta edge cases
   (ogiltig indata, gränsvärden, samtidiga händelser) och/eller åtgärdat fel som hittats av
   statisk analys eller sanitizers, och kan motivera varför just dessa gör systemet mer robust.
-* **Ett testramverk för kontinuerlig testning:** du har själv byggt eller vidareutvecklat en
-  väsentlig del av CI-pipelinen, teststrukturen eller ESP-IDF-mockningen, och kan förklara hur
-  den möjliggör fortsatt testning genom produktens livscykel, inte bara att den finns, utan
-  varför den är utformad som den är.
+* **Ett testramverk för kontinuerlig testning:** du har ansvarat för och drivit fram en väsentlig
+  del av CI-pipelinen, teststrukturen eller ESP-IDF-mockningen, och kan förklara hur den
+  möjliggör fortsatt testning genom produktens livscykel, inte bara att den finns, utan varför
+  den är utformad som den är.
 
 ---
 
@@ -197,7 +242,7 @@ Projektet redovisas för lärare under lektionstid:
 ---
 
 ## Utvärdering
-Besvara följande frågor gemensamt i `p04_rapport.md`, tillsammans med bidragsrapporten:
+Besvara följande frågor gemensamt i `p04_report.md`, tillsammans med bidragsrapporten:
 1. Vilka delar av kodbasen var enklast respektive svårast att skriva enhetstester för, och
    varför?
 2. Hur avgjorde ni var gränsen går mellan ett enhetstest och ett komponenttest i er kodbas?
