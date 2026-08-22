@@ -2,11 +2,11 @@
 
 Material från föreläsningar:
 * [L01](./L01/README.md): Kursintroduktion, teststrategi och testpyramiden.
-* [L02](./L02/README.md): Enhetstester (del I), grunder samt GPIO-drivern.
+* [L02](./L02/README.md): Enhetstester (del I), GPIO-drivern i övningsbiblioteket.
 * [L03](./L03/README.md): Enhetstester (del II), den seriella drivern.
 * [L04](./L04/README.md): Enhetstester (del III), timer-drivern.
-* [L05](./L05/README.md): Testbar design, interfaces, dependency injection samt `clang-format`.
-* [L06](./L06/README.md): Stubbar och virtuell hårdvara.
+* [L05](./L05/README.md): CI-uppstart, automatiserad testkörning samt `clang-format`.
+* [L06](./L06/README.md): Testbar design, stubbar och virtuell hårdvara.
 * [L07](./L07/README.md): Enhetstester (del IV), Tmp36s temperaturformel samt ML-algoritmerna.
 * [L08](./L08/README.md): Komponenttester (del I), systemlogik och stubbar.
 * [L09](./L09/README.md): Komponenttester (del II), gränsvärden och edge cases.
