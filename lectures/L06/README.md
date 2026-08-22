@@ -1,6 +1,8 @@
-# L06 - Stubbar och virtuell hårdvara
+# L06 - Testbar design, stubbar och virtuell hårdvara
 
 ## Dagordning
+* Testbar design: interfaces som gräns mellan logik och hårdvara, och dependency injection direkt
+  via konstruktorn respektive via en factory (som i **P02**).
 * Skillnaden mellan en stubb, en mock och en fake.
 * Repetition: era befintliga stubbar från **P02**, och vilken nivå de testar (**L02–L04**).
 * Virtuell hårdvara: att mocka ESP-IDF:s C-funktioner för att enhetstesta driverklassernas egen
@@ -10,6 +12,11 @@
 ---
 
 ## Mål med lektionen
+* Kunna förklara varför testbarhet är en designegenskap, inte något som tillkommer i efterhand.
+* Kunna förklara hur `driver::factory::Interface` gör det möjligt att växla mellan
+  `system::logic::Logic` i hårdvaruläge och simulerat läge utan att ändra `Logic` själv.
+* Kunna resonera kring vad som hade behövt ändras om en klass i stället skapade sina beroenden
+  internt.
 * Kunna förklara skillnaden mellan stubbar, mockar och fakes, samt när respektive lämpar sig.
 * Kunna förklara vilken nivå era befintliga `driver::*::Stub`-klasser testar, jämfört med de
   riktiga `Esp32s3`-klasserna.
@@ -20,15 +27,21 @@
 ## Instruktioner
 
 ### Innan lektionen
-* Läs [bilaga A](./appendix/a_stubs_and_virtual_hw.md) om stubbar och virtuell hårdvara.
+* Läs [bilaga A](./appendix/a_testable_design.md) om testbar design.
+* Läs [bilaga B](./appendix/b_stubs_and_virtual_hw.md) om stubbar och virtuell hårdvara.
 
 ### Under lektionen
 * Delta aktivt på genomgången.
-* Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md) i grupp.
+* Gå igenom hur `system::logic::Logic` respektive `driver::tempsensor::Tmp36` tar emot sina
+  beroenden i **P02**, och varför det gör dem testbara.
+* Genomför övningsuppgifterna i [bilaga C](./appendix/c_exercises.md) i grupp.
 
 ---
 
 ## Utvärdering
+* Vad är skillnaden mellan en klass som tar emot sina beroenden via konstruktorn (via referenser
+  eller via en factory), och en klass som skapar dem internt, sett till testbarhet?
+* Varför tar er `Logic` emot en hel factory i stället för sina drivers en och en?
 * Vad är skillnaden mellan en stubb och en mock, sett till hur testresultatet verifieras?
 * Era stubbar från **P02** (t.ex. `driver::gpio::Stub`) och en mockad ESP-IDF-funktion löser
   liknande problem, hårdvaruoberoende. Vad är skillnaden i vad de faktiskt testar?
