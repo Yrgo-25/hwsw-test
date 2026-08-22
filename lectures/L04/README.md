@@ -35,7 +35,7 @@
 ---
 
 ## Nästa lektion
-* Testbar design.
+* CI-uppstart.
 * Fortsatt arbete med **P04**.
 
 ---
