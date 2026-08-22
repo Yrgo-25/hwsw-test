@@ -95,9 +95,9 @@ Ta bort `#ifdef LECTURE8`/`#endif` i båda testfilerna, implementera stubbarna m
 **Två krav som är lätta att missa:**
 * **Ge samtliga konstruktorparametrar default-värden**, som i
   [include/driver/adc/stub.h](./include/driver/adc/stub.h). Testfilerna skapar stubbarna med
-  argument (`gpio::Stub{Direction::Input}`, `timer::Stub{100U}`), medan
+  argument (`gpio::Stub{Mode::Input}`, `timer::Stub{100U}`), medan
   [logic/logic_test.cpp](./test/logic/logic_test.cpp) skapar dem helt utan argument. En stubb med
-  bara `explicit Stub(Direction)` klarar stubbtesterna men går inte att bygga ihop med
+  bara `explicit Stub(Mode)` klarar stubbtesterna men går inte att bygga ihop med
   komponenttestet.
 * **`isInterruptEnabled()` i `driver::gpio::Stub` ska spegla både pin-masken och portens
   aktivering**, precis som `enableInterrupt()`/`enableInterruptOnPort()` i

@@ -23,9 +23,9 @@ så det här är repetition:
 
 **Två krav som är lätta att missa:**
 * **Ge samtliga konstruktorparametrar default-värden**, som i `adc/stub.h`. Stubbtesterna skapar
-  stubbarna med argument (`gpio::Stub{Direction::Input}`, `timer::Stub{100U}`), medan
+  stubbarna med argument (`gpio::Stub{Mode::Input}`, `timer::Stub{100U}`), medan
   `logic_test.cpp` nedan skapar dem helt utan argument. En stubb med bara
-  `explicit Stub(Direction)` klarar stubbtesterna men går inte att bygga ihop med komponenttestet.
+  `explicit Stub(Mode)` klarar stubbtesterna men går inte att bygga ihop med komponenttestet.
 * **`isInterruptEnabled()` i `driver::gpio::Stub` ska spegla både pin-masken och portens
   aktivering**, precis som den riktiga drivern gör med `PCMSK`/`PCICR`. Två oberoende booleaner
   räcker inte: det färdiga testfallet `DebounceHandling` förutsätter att

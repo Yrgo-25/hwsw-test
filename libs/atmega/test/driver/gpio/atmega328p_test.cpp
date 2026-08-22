@@ -3,10 +3,11 @@
  */
 #include <cstdint>
 
+#include "yrgo/test/test.h"
+
 #include "arch/avr/hw_platform.h"
 #include "driver/gpio/atmega328p.h"
 #include "utils/utils.h"
-#include "yrgo/test/test.h"
 
 #ifdef TESTSUITE
 
@@ -146,7 +147,7 @@ TEST(Gpio_Atmega328p, Initialization)
     for (std::uint8_t pin{}; pin < pinMax; ++pin)
     {
         // Create a new GPIO instance with the current pin number.
-        // Example: gpio::Atmega328p gpio{pin, gpio::Direction::Output};
+        // Example: gpio::Atmega328p gpio{pin, gpio::Mode::Output};
 
         // Expect the instance to be initialized correctly if the pin is valid.
         // Tips: Check if the instance is initialized by invoking gpio.isInitialized().

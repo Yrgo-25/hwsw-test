@@ -32,10 +32,10 @@ public:
      * @brief Constructor.
      *
      * @param[in] pin The pin number of the GPIO.
-     * @param[in] direction The GPIO direction.
+     * @param[in] mode GPIO mode.
      * @param[in] callback Callback associated with the GPIO (default = none).
      */
-    explicit Atmega328p(uint8_t pin, Direction direction, void (*callback)() = nullptr) noexcept;
+    explicit Atmega328p(uint8_t pin, Mode mode, void (*callback)() = nullptr) noexcept;
 
     /**
      * @brief Destructor.
@@ -53,11 +53,11 @@ public:
     bool isInitialized() const noexcept override;
 
     /**
-     * @brief Get the data direction of the GPIO.
+     * @brief Get the configured mode of the GPIO.
      *
-     * @return The data direction of the GPIO.
+     * @return The configured mode of the GPIO.
      */
-    Direction direction() const noexcept override;
+    Mode mode() const noexcept override;
 
     /**
      * @brief Read input of the GPIO.
@@ -117,8 +117,8 @@ private:
     /** Hardware structure associated with the GPIO. */
     Hardware* myHw;
 
-    /** Data direction. */
-    Direction myDirection;
+    /** Configured mode. */
+    Mode myMode;
 
     /** Associated I/O port. */
     const IoPort myIoPort;

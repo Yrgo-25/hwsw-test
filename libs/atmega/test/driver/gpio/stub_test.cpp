@@ -16,18 +16,18 @@ namespace
 /**
  * @brief Initialization test.
  *
- *        Verify that the stub is always initialized, and that it reports the direction given at
+ *        Verify that the stub is always initialized, and that it reports the mode given at
  *        construction.
  */
 TEST(Gpio_Stub, Initialization)
 {
-    gpio::Stub input{gpio::Direction::Input};
+    gpio::Stub input{gpio::Mode::Input};
     EXPECT_TRUE(input.isInitialized());
-    EXPECT_EQ(static_cast<int>(input.direction()), static_cast<int>(gpio::Direction::Input));
+    EXPECT_EQ(static_cast<int>(input.mode()), static_cast<int>(gpio::Mode::Input));
 
-    gpio::Stub output{gpio::Direction::Output};
+    gpio::Stub output{gpio::Mode::Output};
     EXPECT_TRUE(output.isInitialized());
-    EXPECT_EQ(static_cast<int>(output.direction()), static_cast<int>(gpio::Direction::Output));
+    EXPECT_EQ(static_cast<int>(output.mode()), static_cast<int>(gpio::Mode::Output));
 }
 
 /**
@@ -37,7 +37,7 @@ TEST(Gpio_Stub, Initialization)
  */
 TEST(Gpio_Stub, WriteAndRead)
 {
-    gpio::Stub led{gpio::Direction::Output};
+    gpio::Stub led{gpio::Mode::Output};
     EXPECT_FALSE(led.read());
 
     led.write(true);
@@ -54,7 +54,7 @@ TEST(Gpio_Stub, WriteAndRead)
  */
 TEST(Gpio_Stub, Toggle)
 {
-    gpio::Stub led{gpio::Direction::Output};
+    gpio::Stub led{gpio::Mode::Output};
     EXPECT_FALSE(led.read());
 
     led.toggle();
@@ -72,7 +72,7 @@ TEST(Gpio_Stub, Toggle)
  */
 TEST(Gpio_Stub, SimulatedInput)
 {
-    gpio::Stub button{gpio::Direction::InputPullup};
+    gpio::Stub button{gpio::Mode::InputPullup};
     EXPECT_FALSE(button.read());
 
     button.setState(true);
@@ -90,7 +90,7 @@ TEST(Gpio_Stub, SimulatedInput)
  */
 TEST(Gpio_Stub, Interrupt)
 {
-    gpio::Stub button{gpio::Direction::InputPullup};
+    gpio::Stub button{gpio::Mode::InputPullup};
     EXPECT_FALSE(button.isInterruptEnabled());
     EXPECT_FALSE(button.isPortInterruptEnabled());
 
