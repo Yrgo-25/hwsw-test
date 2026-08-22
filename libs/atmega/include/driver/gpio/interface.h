@@ -10,14 +10,14 @@ namespace driver
 namespace gpio
 {
 /**
- * @brief Enumeration of GPIO directions.
+ * @brief Enumeration of GPIO modes.
  */
-enum class Direction : uint8_t
+enum class Mode : uint8_t
 {
     Input,       // Input without internal pull-up resistor enabled (tri-state).
     InputPullup, // Input with internal pull-up resistor enabled.
     Output,      // Output.
-    Count,       // Number of supported data directions.
+    Count,       // Number of supported modes.
 };
 
 /**
@@ -42,11 +42,11 @@ public:
     virtual bool isInitialized() const noexcept = 0;
 
     /**
-     * @brief Get the data direction of the GPIO.
+     * @brief Get the configured mode of the GPIO.
      *
-     * @return The data direction of the GPIO.
+     * @return The configured mode of the GPIO.
      */
-    virtual Direction direction() const noexcept = 0;
+    virtual Mode mode() const noexcept = 0;
 
     /**
      * @brief Read input of the GPIO.

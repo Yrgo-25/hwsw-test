@@ -55,9 +55,9 @@ container::CallbackArray<IoPortCount> myCallbacks{};
 /** Pin registry (1 = reserved, 0 = free). */
 uint32_t myPinRegistry{};
 
-constexpr bool isPinFree(const uint8_t id) noexcept;
-constexpr bool isDirectionValid(const Direction direction) noexcept;
-Hardware* findHw(const Atmega328p::IoPort ioPort) noexcept;
+constexpr bool isPinFree(uint8_t id) noexcept;
+constexpr bool isModeValid(const Mode mode) noexcept;
+Hardware* findHw(Atmega328p::IoPort ioPort) noexcept;
 
 } // namespace
 
@@ -101,16 +101,16 @@ struct Hardware myHwPortD
 };
 
 // -----------------------------------------------------------------------------
-Atmega328p::Atmega328p(const uint8_t pin, const Direction direction, void (*callback)()) noexcept
+Atmega328p::Atmega328p(const uint8_t pin, const Mode mode, void (*callback)()) noexcept
     : myHw{nullptr}
-    , myDirection{direction}
+    , myMode{mode}
     , myIoPort{getIoPort(pin)}
     , myId{pin}
     , myPin{getPhysicalPin()}
 {
-    // Reserve hardware if the pin is free and the data direction is valid.
-    // Put the GPIO in safe sstate on failure.
-    if (isPinFree(myId) && isDirectionValid(myDirection))
+    // Reserve hardware if the pin is free and the specified GPIO mode is valid.
+    // Put the GPIO in safe state on failure.
+    if (isPinFree(myId) && isModeValid(myMode))
     {
         // Register the given callback for the associated I/O port if specified.
         if (initHw() && (nullptr != callback))
@@ -137,7 +137,7 @@ Atmega328p::~Atmega328p() noexcept
 bool Atmega328p::isInitialized() const noexcept { return nullptr != myHw; }
 
 // -----------------------------------------------------------------------------
-Direction Atmega328p::direction() const noexcept { return myDirection; }
+Mode Atmega328p::mode() const noexcept { return myMode; }
 
 // -----------------------------------------------------------------------------
 bool Atmega328p::read() const noexcept
@@ -150,7 +150,7 @@ bool Atmega328p::read() const noexcept
 void Atmega328p::write(const bool output) noexcept
 {
     // Only write output if the GPIO is initialized and configured as output.
-    if (!isInitialized() || (myDirection != Direction::Output)) { return; }
+    if (!isInitialized() || (Mode::Output != myMode)) { return; }
 
     // Set/clear the output as specified.
     if (output) { utils::set(myHw->portx, myPin); }
@@ -161,7 +161,7 @@ void Atmega328p::write(const bool output) noexcept
 void Atmega328p::toggle() noexcept
 {
     // Only toggle output if the GPIO is initialized and configured as output.
-    if (!isInitialized() || (myDirection != Direction::Output)) { return; }
+    if (!isInitialized() || (Mode::Output != myMode)) { return; }
 
     // The hardware will toggle the output when writing to the pin register.
     utils::set(myHw->pinx, myPin);
@@ -238,15 +238,15 @@ bool Atmega328p::initHw() noexcept
     // Mark the pin as reserved.
     utils::set(myPinRegistry, myId);
 
-    // Set data direction as specified.
-    switch (myDirection)
+    // Configure GPIO mode as specified.
+    switch (myMode)
     {
         // Enable the interupt pull-up resistor if specified.
-        case Direction::InputPullup:
+        case Mode::InputPullup:
             utils::set(myHw->portx, myPin);
             break;
         // Set the GPIO to output if specified.
-        case Direction::Output:
+        case Mode::Output:
             utils::set(myHw->ddrx, myPin);
             break;
         // Do nothing as default - operate as tri-state input.
@@ -271,9 +271,9 @@ namespace
 constexpr bool isPinFree(const uint8_t id) noexcept { return PinCount > id; }
 
 // -----------------------------------------------------------------------------
-constexpr bool isDirectionValid(const Direction direction) noexcept
+constexpr bool isModeValid(const Mode mode) noexcept
 {
-    return static_cast<uint8_t>(Direction::Count) > static_cast<uint8_t>(direction);
+    return static_cast<uint8_t>(Mode::Count) > static_cast<uint8_t>(mode);
 }
 
 // -----------------------------------------------------------------------------

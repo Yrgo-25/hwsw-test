@@ -170,7 +170,7 @@ typedef struct
     /** Pin bit mask. */
     uint64_t pin_bit_mask;
 
-    /** GPIO mode (direction). */
+    /** GPIO mode. */
     int mode;
 
     /** Pullup enablement flag. */
