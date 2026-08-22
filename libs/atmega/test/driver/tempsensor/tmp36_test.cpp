@@ -4,11 +4,10 @@
 #include <cstdint>
 #include <memory>
 
-#include "yrgo/test/test.h"
-
 #include "driver/adc/stub.h"
 #include "driver/tempsensor/tmp36.h"
 #include "utils/utils.h"
+#include "yrgo/test/test.h"
 
 #ifdef TESTSUITE
 

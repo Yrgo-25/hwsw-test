@@ -7,8 +7,6 @@
 #include <stdexcept>
 #include <thread>
 
-#include "yrgo/test/test.h"
-
 #include "driver/eeprom/stub.h"
 #include "driver/gpio/stub.h"
 #include "driver/serial/stub.h"
@@ -16,6 +14,7 @@
 #include "driver/timer/stub.h"
 #include "driver/watchdog/stub.h"
 #include "logic/stub.h"
+#include "yrgo/test/test.h"
 
 //! @todo Remove this #ifdef block once all stubs are implemented!
 #ifdef STUBS_IMPLEMENTED

@@ -4,11 +4,10 @@
 #include <cstdint>
 #include <limits>
 
-#include "yrgo/test/test.h"
-
 #include "arch/avr/hw_platform.h"
 #include "driver/eeprom/atmega328p.h"
 #include "utils/utils.h"
+#include "yrgo/test/test.h"
 
 #ifdef TESTSUITE
 

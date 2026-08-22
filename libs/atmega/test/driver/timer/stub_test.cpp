@@ -3,9 +3,8 @@
  */
 #include <cstdint>
 
-#include "yrgo/test/test.h"
-
 #include "driver/timer/stub.h"
+#include "yrgo/test/test.h"
 
 #ifdef TESTSUITE
 

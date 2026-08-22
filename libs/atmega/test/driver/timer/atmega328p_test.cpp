@@ -3,11 +3,10 @@
  */
 #include <cstdint>
 
-#include "yrgo/test/test.h"
-
 #include "arch/avr/hw_platform.h"
 #include "driver/timer/atmega328p.h"
 #include "utils/utils.h"
+#include "yrgo/test/test.h"
 
 #ifdef TESTSUITE
 

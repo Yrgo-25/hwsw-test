@@ -1,9 +1,8 @@
 /**
  * @brief Unit tests for the GPIO driver stub.
  */
-#include "yrgo/test/test.h"
-
 #include "driver/gpio/stub.h"
+#include "yrgo/test/test.h"
 
 #ifdef TESTSUITE
 
