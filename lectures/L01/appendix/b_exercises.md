@@ -4,8 +4,9 @@ Ni har redan hårdvara och en egen kodbas från **P02** sedan tidigare, men dess
 att öva på själva tekniken i ett litet, isolerat format innan ni tillämpar den på riktigt.
 
 Ni ska skapa två små, självständiga stubbdrivers som efterliknar hårdvara med vanliga
-medlemsvariabler. Ni ska sedan skriva enhetstester för dessa. Samma princip använder ni sedan
-mot era egna stubbar från **P02** i **L02–L04**.
+medlemsvariabler. Ni ska sedan skriva enhetstester för dessa. Samma princip, ett interface med
+en hårdvaruoberoende implementation, möter ni sedan i övningsbibliotekets riktiga drivers i
+**L02–L04**.
 
 **OBS!** Namnrymden `driver::` är densamma som i övningsbiblioteket och i **P02**, men
 interfacen ni bygger här är kraftigt förenklade övningsvarianter, och har alltså *inte* samma

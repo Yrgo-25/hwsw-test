@@ -29,10 +29,9 @@ sköter registerkommunikationen internt i ESP-IDF. Det ger två olika nivåer at
 olika tekniker:
 1. **Stubba driverns eget interface**: en klass som ärver t.ex. `driver::gpio::Interface` och
    används i stället för den riktiga drivern av annan kod, t.ex. systemlogiken. Ni byggde redan
-   dessa stubbar i **P02** (`driver::gpio::Stub` med flera); att skriva enhetstester för dem är
-   en del av **P04**, med samma teknik som ni övat på i **L02–L04**. Den här tekniken används
-   för att **komponenttesta** kod som *beror på* en driver (se **L08**), inte för att testa
-   drivern själv.
+   dessa stubbar i **P02** (`driver::gpio::Stub` med flera). Den här tekniken används för att
+   **komponenttesta** kod som *beror på* en driver (se **L08**), inte för att testa drivern
+   själv. Stubben är alltså ett verktyg ni testar *med*, inte något ni testar.
 2. **Mocka ESP-IDF:s C-funktioner**: eftersom driverklassen internt anropar ESP-IDF:s C-API,
    krävs en annan teknik för att kunna **enhetstesta driverklassen själv** på värddatorn. Det är
    den tekniken som beskrivs nedan.

@@ -33,11 +33,12 @@ timer som aldrig blev initierad när den går ur scope?
 
 ## Tillämpa på er egen kodbas
 Er egen `driver::timer::Esp32s3` från **P02** anropar ESP-IDF:s C-funktioner i stället för att
-skriva direkt till register, vilket kräver mockningstekniken i **L06**. Er `driver::timer::Stub`
-är däremot redan enhetstestbar nu, precis som `Atmega328p`-drivern ovan (se
+skriva direkt till register, vilket kräver mockningstekniken i **L06**. Det är där, och inte här,
+ni skriver enhetstester för era egna drivers i **P04**. Er `driver::timer::Stub` används under
+tiden som **testdubbel** när ni testar kod som beror på en timer (se
 [bilaga B i L01](../../L01/appendix/b_exercises.md) för samma *princip* i litet format; notera
 att övningens `driver::timer::Interface` är en förenklad variant med ett annat API än det
-riktiga). Att skriva dessa tester för er egen kodbas är en del av **P04**.
+riktiga).
 
 ---
 

@@ -8,7 +8,7 @@ på genomgången och fråga under lektionen när ni kör fast.
 
 ## Läs er egen pipeline
 Studera `.github/workflows/ci.yml` i ert eget repo (workflowen ni satte upp i **L05**, och
-sannolikt byggde ut i **L12**) och beskriv hur pipelinen är uppbyggd:
+byggde ut i **L06** och sannolikt även i **L12**) och beskriv hur pipelinen är uppbyggd:
 * Vad utlöser pipelinen (`on:`)?
 * Vilka jobb (`jobs:`) innehåller den, och vilken fråga besvarar respektive jobb?
 * Vilka steg använder `uses:` respektive `run:`?
@@ -18,8 +18,9 @@ sannolikt byggde ut i **L12**) och beskriv hur pipelinen är uppbyggd:
 ---
 
 ## Se över ordningen mellan jobben
-Er pipeline har sedan **L05** jobb för formattering, firmware-bygge och testkörning. Nu när
-testsviten dessutom vuxit rejält är det värt att se över hur de förhåller sig till varandra:
+Er pipeline har jobb för formattering och firmware-bygge sedan **L05**, och för testkörning sedan
+**L06**. Nu när testsviten dessutom vuxit rejält är det värt att se över hur de förhåller sig till
+varandra:
 * Rita upp den nuvarande kedjan. Vilka jobb väntar på vilka, via `needs:`?
 * Bestäm var testjobbet hör hemma. Ska det köras parallellt med firmware-bygget, före det, eller
   ska firmware-bygget bero på att testerna går igenom? Motivera utifrån hur lång tid jobben tar

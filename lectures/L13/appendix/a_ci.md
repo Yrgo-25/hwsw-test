@@ -32,14 +32,14 @@ en enda körning, i stället för att behöva rätta det ena för att ens få se
 också den enhet som får en egen, ren runner; därför hör "bygg och kör tester" och "kontrollera
 formattering" hemma i var sitt jobb.
 
-Er egen pipeline från **L05** har samma uppdelning, med två skillnader: `firmware-build` bygger
-firmwaren för `ESP32-S3` och laddar upp den som artefakt, och de två jobben körs *i ordning* via
-`needs:` i stället för parallellt (se [bilaga A i L05](../../L05/appendix/a_ci_startup.md)). Efter
-**L12** har den sannolikt också ett jobb för statisk analys eller sanitizers. Principen är
-densamma oavsett antal: ett jobb, en fråga, en egen runner.
+Er egen pipeline har samma uppdelning. Den fick sina två första jobb i **L05**, `firmware-build`
+och `check-format`, körda *i ordning* via `needs:` i stället för parallellt (se
+[bilaga A i L05](../../L05/appendix/a_ci_startup.md)), och ett `unit-tests`-jobb i **L06**, när de
+första egna testerna fanns. Efter **L12** har den sannolikt också ett jobb för statisk analys eller
+sanitizers. Principen är densamma oavsett antal: ett jobb, en fråga, en egen runner.
 
-Er pipeline har sedan **L05** tre jobb: formatteringskontroll, firmware-bygge och testkörning.
-Frågan är inte längre *om* de finns, utan hur de förhåller sig till varandra. Ett testjobb är
+Er pipeline har alltså tre jobb: formatteringskontroll, firmware-bygge och testkörning. Frågan är
+inte längre *om* de finns, utan hur de förhåller sig till varandra. Ett testjobb är
 varken lika snabbt som formatteringskontrollen eller lika dyrt som ett fullt firmware-bygge, så
 var det hör hemma i kedjan är ett verkligt designbeslut, inte en formalitet.
 

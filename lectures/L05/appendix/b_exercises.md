@@ -1,5 +1,20 @@
 # Bilaga B - Övningsuppgifter
 
+## Gruppuppgift: fördela drivers
+Innan ni börjar koda, bestäm vem som gör vad. **P04** kräver enhetstester för era riktiga
+`Esp32s3`-drivers, minst en driver per gruppmedlem, och betyget sätts individuellt utifrån vad var
+och en faktiskt har bidragit med.
+* Lista era drivers och fördela dem inom gruppen. Har ni fler drivers än medlemmar, fördela de
+  återstående också, ingen ska bli utan och ingen ska ta allt.
+* Skriv ned fördelningen direkt i `p04_report.md`. Den kan justeras senare, men då ska ändringen
+  synas.
+* Fundera på om någon driver är märkbart svårare än de andra (t.ex. den seriella), och hur ni i så
+  fall kompenserar för det.
+
+Själva drivertesterna skriver ni från **L06**, när ni har mockningstekniken på plats.
+
+---
+
 Övningarna nedan görs i **ert eget repo** och är en del av projektarbetet i **P04**. De gås inte
 igenom i helklass efteråt, eftersom varje grupps kodbas ser olika ut; utgå i stället från demot i
 [bilaga A](./a_ci_startup.md) och fråga under lektionen när ni kör fast.
@@ -63,21 +78,14 @@ få båda gröna i ert eget repo.
 
 ---
 
-## Kodövning: låt era egna tester köras automatiskt
-Pipelinen ovan bygger och granskar kod. Lägg nu till jobbet som gör den till en testpipeline, se
-bilaga A:
-* Lägg till testramverket i ert repo, som submodul, om ni inte redan gjort det.
-* Lägg till ett kommando som bygger och kör er testsvit (t.ex. `make test`), och kontrollera att
-  det fungerar lokalt.
-* Lägg till ett `unit-tests`-jobb som kör det kommandot.
-* Låt ett testfall misslyckas medvetet (t.ex. `EXPECT_EQ(1, 2)`), pusha, och verifiera att
-  pipelinen blir röd och att felet syns i jobbets logg. Återställ därefter.
-
-Det handlar alltså om **era egna** tester, för era `ESP32-S3`-drivers och ML-algoritmer i **P04**,
-inte om testerna ni skrivit mot ATmega328p-övningsbiblioteket under **L02–L04**. Har ni ännu inte
-skrivit några egna tester går det bra att börja med ett enda, mot något som inte kräver mockning av
-ESP-IDF (det kommer i **L06**), t.ex. `driver::tempsensor::Tmp36`s temperaturformel eller
-`ml::lin_reg::Adaptive` från **P03**. Poängen är att få kedjan på plats; testerna fyller ni på med löpande
-under kursen.
+## Förbered för testjobbet i L06
+Er pipeline kör ännu inga tester, eftersom era egna tester börjar skrivas först i **L06**. Passa på
+att få infrastrukturen på plats nu, så att jobbet kan läggas till direkt då:
+* Lägg till testramverket i ert repo, lämpligen som submodul
+  ([yrgo-test](https://github.com/yrgo-libs/yrgo-test.git)).
+* Lägg till ett kommando som bygger och kör er (ännu tomma) testsvit, t.ex. ett `test`-mål i er
+  `Makefile`, och kontrollera att det fungerar lokalt.
+* Kontrollera att `submodules: recursive` finns i checkout-steget, annars hittar jobbet inget
+  ramverk att bygga mot i **L06**.
 
 ---

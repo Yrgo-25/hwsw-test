@@ -3,7 +3,7 @@
 ## Dagordning
 * Enhetstestning av timer-drivern i det delade [ATmega328p-övningsbiblioteket](../../libs/atmega/README.md).
 * Testning av tidsberoende logik utan att faktiskt behöva vänta i tester.
-* Fortsatt arbete med **P04**.
+* Resten av lektionen: fortsatt arbete med testsviten i övningsbiblioteket.
 
 ---
 
@@ -35,7 +35,6 @@
 ---
 
 ## Nästa lektion
-* CI-uppstart.
-* Fortsatt arbete med **P04**.
+* CI-uppstart, och det praktiska arbetet med **P04** drar i gång i er egen kodbas.
 
 ---
