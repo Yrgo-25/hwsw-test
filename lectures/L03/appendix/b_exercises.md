@@ -25,9 +25,10 @@
 
 ## Tillämpa på er egen kodbas
 Er egen `driver::serial::Esp32s3` från **P02** anropar ESP-IDF:s C-funktioner i stället för att
-skriva direkt till register, vilket kräver mockningstekniken i **L06**. Er `driver::serial::Stub`
-är däremot redan enhetstestbar nu, precis som `Atmega328p`-drivern ovan. Att skriva dessa tester
-för er egen kodbas är en del av **P04**.
+skriva direkt till register, vilket kräver mockningstekniken i **L06**. Det är där, och inte här,
+ni skriver enhetstester för era egna drivers i **P04**. Er `driver::serial::Stub` används under
+tiden som **testdubbel** när ni testar kod som beror på en seriell driver, den är alltså inte
+själv målet för testerna.
 
 ---
 

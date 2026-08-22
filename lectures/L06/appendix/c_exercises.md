@@ -49,6 +49,32 @@ Mocka er `driver::gpio::Esp32s3` i sin helhet:
 
 ---
 
+## Kodövning: låt era egna tester köras automatiskt
+Nu finns det äntligen egna tester att köra, så pipelinen från **L05** ska få sitt testjobb:
+* Kontrollera att er testsvit byggs och körs med ett enda kommando lokalt (t.ex. `make test`),
+  och att den innehåller drivertesterna ni just skrev.
+* Lägg till ett `unit-tests`-jobb i `.github/workflows/ci.yml`:
+
+  ```yaml
+    unit-tests:
+      name: Build and run unit tests
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+          with:
+            submodules: recursive
+        - name: Build and run test suite
+          run: make test
+  ```
+
+* Låt ett testfall misslyckas medvetet (t.ex. `EXPECT_EQ(1, 2)`), pusha, och verifiera att
+  pipelinen blir röd och att felet syns i jobbets logg. Återställ därefter.
+* Fundera på var jobbet hör hemma i kedjan: parallellt med firmware-bygget, eller före det via
+  `needs:`? Ni behöver inte bestämma er slutgiltigt nu, frågan tas upp igen i **L13**.
+
+---
+
 ## Diskussion
 * Varför behöver driverklassens egen kod inte ändras alls för att kunna testas mot en mockad
   ESP-IDF-funktion?

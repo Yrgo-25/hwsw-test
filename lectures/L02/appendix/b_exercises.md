@@ -35,12 +35,19 @@ måste själva ringa in var det small:
 ---
 
 ## Tillämpa på er egen kodbas
-Samma teknik, ett interface med en riktig implementation och en hårdvaruoberoende stubb,
-gäller för er egen `driver::gpio::Interface` från **P02**. Skillnaden är att er
-`driver::gpio::Esp32s3` anropar ESP-IDF:s C-funktioner i stället för att skriva direkt till
-register, vilket kräver en annan mockningsteknik (se **L06**). Er `driver::gpio::Stub`, som ni
-redan byggde i **P02**, har däremot ingen sådan begränsning, den är redan enhetstestbar precis
-som `Atmega328p`-drivern ovan. Att skriva dessa tester för er egen kodbas är en del av **P04**.
+Samma teknik, ett interface med en riktig implementation och en hårdvaruoberoende stubb, gäller
+för er egen `driver::gpio::Interface` från **P02**. Skillnaden är att er `driver::gpio::Esp32s3`
+anropar ESP-IDF:s C-funktioner i stället för att skriva direkt till register, vilket kräver en
+annan mockningsteknik. Den går vi igenom i **L06**, och det är då ni börjar skriva enhetstester
+för era egna drivers i **P04**.
+
+Er `driver::gpio::Stub` fyller en annan roll: den är inte något ni testar, utan en **testdubbel**
+ni testar *med*, när ni testar kod som beror på en GPIO-driver.
+
+Fram till **L06** är det alltså övningsbiblioteket ni arbetar i, inte er egen kodbas. Det är inte
+en tillfällighet: samtliga era `Esp32s3`-drivers går via ESP-IDF, och tekniken för att komma runt
+det kommer först då. Tiden fram till dess använder ni till att bli varma i kläderna på riktiga
+drivers, om än på en annan mikrokontroller.
 
 ---
 

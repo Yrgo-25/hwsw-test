@@ -3,7 +3,7 @@
 ## Dagordning
 * Enhetstestning av serial-drivern i det delade [ATmega328p-övningsbiblioteket](../../libs/atmega/README.md).
 * Testning av seriell driver utan fysisk hårdvara.
-* Fortsatt arbete med **P04**.
+* Resten av lektionen: fortsatt arbete med testsviten i övningsbiblioteket.
 
 ---
 
@@ -36,6 +36,5 @@ integrationstester? Varför drog ni gränsen där ni gjorde?
 
 ## Nästa lektion
 * Enhetstester (del III): timer-drivern.
-* Fortsatt arbete med **P04**.
 
 ---

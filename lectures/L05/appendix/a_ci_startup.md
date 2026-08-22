@@ -333,46 +333,23 @@ Den nedladdade `.bin`-filen ger er tre konkreta saker:
 ---
 
 ## Och testsviten?
-Demot ovan bygger och granskar kod, men kör inga tester. Det är avsiktligt: målet med demot är att
-visa pipelinens delar med minsta möjliga projekt, och firmware-demot innehåller inga tester att
-köra.
+Pipelinen ovan bygger och granskar kod, men kör inga tester. Det är avsiktligt, och gäller både
+demot och er egen pipeline så här långt: testerna ni skrivit under **L02–L04** ligger i kursens
+ATmega328p-övningsbibliotek, inte i er egen kodbas. Era **egna** tester börjar växa fram först i
+**L06**, när ni kan mocka ESP-IDF och därmed enhetstesta era riktiga `Esp32s3`-drivers.
 
-I ert eget repo ser det annorlunda ut. Där växer det fram en testsvit för era egna
-`Esp32s3`-drivers och era ML-algoritmer (**P04**), och den är själva anledningen till att ni har en
-pipeline över huvud taget. Ett test som bara körs när någon råkar komma ihåg det skyddar ingenting;
-det är först när det körs vid varje push som det är en regressionsspärr. Lägg därför till ett
-tredje jobb som bygger och kör er testsvit:
+Att pipelinen byggs redan nu är alltså inte i förväg utan i rätt ordning: när de första egna
+testerna finns i **L06** ska de ha någonstans att landa. Då lägger ni till ett tredje jobb,
+`unit-tests`, som bygger och kör sviten vid varje push. Ett test som bara körs när någon råkar komma
+ihåg det skyddar ingenting; det är först när det körs automatiskt som det är en regressionsspärr.
 
-```yaml
-  unit-tests:
-    name: Build and run unit tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - name: Build and run test suite
-        run: make test
-```
-
-Två praktiska förutsättningar innan jobbet kan bli grönt:
-* **Testramverket måste finnas i ert repo.** Enklast som en submodul, precis som i det här repot
-  ([yrgo-test](https://github.com/yrgo-libs/yrgo-test.git)). Det är därför checkout-steget använder
-  `submodules: recursive`; utan det står jobbet med en tom katalog där ramverket skulle ha legat.
-* **Det måste finnas ett kommando som bygger och kör sviten**, t.ex. ett `test`-mål i er
-  `Makefile`. Samma princip som tidigare: pipelinen ska köra exakt det ni kör lokalt.
-
-Observera att testerna ni skrivit under **L02–L04** ligger i kursens ATmega328p-övningsbibliotek,
-inte i er egen kodbas. Det är alltså inte *de* testerna som ska köras här, utan era egna, för era
-`ESP32-S3`-drivers och `ml::lin_reg::Adaptive`. Tekniken är densamma, koden är er.
-
-Att enhetstesta en riktig `Esp32s3`-driver kräver mockning av ESP-IDF, vilket ni går igenom först i
-**L06**. Vänta därför inte på att ha "rätt" tester innan ni lägger till jobbet: börja med något som
-går att testa redan i dag, t.ex. `driver::tempsensor::Tmp36`s temperaturformel eller er adaptiva
-regressionsmodell `ml::lin_reg::Adaptive` från **P03**, som båda är ren beräkningslogik utan
-hårdvaruberoenden. Poängen nu är
-att få kedjan på plats; driverstesterna fyller ni på med från **L06** och framåt.
+Två saker är värda att förbereda redan nu, så att jobbet går att lägga till direkt i **L06**:
+* **Testramverket i ert repo.** Enklast som en submodul, precis som i det här repot
+  ([yrgo-test](https://github.com/yrgo-libs/yrgo-test.git)). Det är därför checkout-steget i mallen
+  använder `submodules: recursive`; utan det står jobbet med en tom katalog där ramverket skulle ha
+  legat.
+* **Ett kommando som bygger och kör sviten**, t.ex. ett `test`-mål i er `Makefile`. Samma princip
+  som för `build` och `check-format`: pipelinen ska köra exakt det ni kör lokalt.
 
 ---
 

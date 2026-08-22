@@ -7,6 +7,7 @@
 * Repetition: era befintliga stubbar från **P02**, och vilken nivå de testar (**L02–L04**).
 * Virtuell hårdvara: att mocka ESP-IDF:s C-funktioner för att enhetstesta driverklassernas egen
   logik på värddatorn.
+* Era första egna tester in i CI: testjobbet som pipelinen från **L05** förberetts för.
 * Fortsatt arbete med **P04**.
 
 ---
@@ -21,6 +22,7 @@
 * Kunna förklara vilken nivå era befintliga `driver::*::Stub`-klasser testar, jämfört med de
   riktiga `Esp32s3`-klasserna.
 * Kunna testa hårdvarunära kod på värddatorn genom att mocka de ESP-IDF-funktioner den anropar.
+* Ha ett `unit-tests`-jobb i gruppens pipeline, som kör de egna testerna vid varje push.
 
 ---
 
@@ -43,6 +45,7 @@
   eller via en factory), och en klass som skapar dem internt, sett till testbarhet?
 * Varför tar er `Logic` emot en hel factory i stället för sina drivers en och en?
 * Vad är skillnaden mellan en stubb och en mock, sett till hur testresultatet verifieras?
+* Vad kör er pipeline i dag som den inte körde efter **L05**, och varför lades det till först nu?
 * Era stubbar från **P02** (t.ex. `driver::gpio::Stub`) och en mockad ESP-IDF-funktion löser
   liknande problem, hårdvaruoberoende. Vad är skillnaden i vad de faktiskt testar?
 * Varför behöver `driver::gpio::Esp32s3`s egen kod inte ändras alls för att kunna testas mot en

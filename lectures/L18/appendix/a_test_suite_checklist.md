@@ -5,13 +5,11 @@ Använd den här checklistan för att stämma av hur långt er testsvit har komm
 ---
 
 ## Enhetstester
-* Har ni enhetstester för samtliga sex `Stub`-klasser från **P02** (adc, factory, gpio, serial,
-  tempsensor, timer)?
-* Har ni enhetstester för minst en riktig `Esp32s3`-driver, skrivna mot mockade
-  ESP-IDF-funktioner snarare än fysisk hårdvara (se **L06**)?
+* Har ni enhetstester för era riktiga `Esp32s3`-drivers, skrivna mot mockade ESP-IDF-funktioner
+  snarare än fysisk hårdvara (se **L06**), med minst en driver per gruppmedlem?
 * Har ni enhetstester för `driver::tempsensor::Tmp36`s temperaturformel?
-* Har ni enhetstester för `ml::lin_reg::Adaptive` samt minst ett neuralt nätverkslager från
-  **P03**?
+* Har ni enhetstester för `ml::lin_reg::Adaptive` och `driver::tempsensor::Smart` från **P03**s
+  Fas 1, samt för den algoritm ni valde i Fas 2?
 * Innehåller testerna gränsfall, inte bara typiska värden (se **L09**)?
 
 ## Komponenttester

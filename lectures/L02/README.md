@@ -5,7 +5,9 @@
   [ATmega328p-övningsbiblioteket](../../libs/atmega/README.md).
 * Den virtuella hårdvaruplattformen: hur registerskrivningar kan verifieras utan fysisk hårdvara.
 * Enhetstestning av GPIO-drivern i övningsbiblioteket, samt jakt på de inplanterade buggarna.
-* **P04**-start: projektets syfte, upplägg och krav.
+* Kort om kursens projekt **P04**: att ni ska testa er egen kodbas från **P02**/**P03**, och att
+  betyget sätts individuellt utifrån Git-historiken. Projektet gås igenom i sin helhet i **L05**,
+  när ni öppnar ert eget repo; fram till dess övar ni i övningsbiblioteket.
 
 ---
 
@@ -16,13 +18,16 @@
 * Kunna analysera ett testfel, inklusive en krasch, och avgöra om felet ligger i testet eller i
   drivern.
 * Ha en fungerande testsvit för `driver::gpio::Atmega328p`, med hittade buggar åtgärdade.
+* Veta vad **P04** går ut på i stora drag, och att era egna commits är underlaget för ert
+  individuella betyg.
 
 ---
 
 ## Instruktioner
 
 ### Innan lektionen
-* Läs igenom projektbeskrivningen för [P04](../../projects/P04/README.md).
+* Skumma igenom projektbeskrivningen för [P04](../../projects/P04/README.md) för att se vart
+  kursen är på väg. Ni går igenom den i detalj i **L05**.
 * Läs [bilaga A](./appendix/a_gpio_testing.md) om enhetstestning av GPIO-drivern.
 
 ### Under lektionen
@@ -44,6 +49,5 @@
 
 ## Nästa lektion
 * Enhetstester (del II): den seriella drivern.
-* Fortsatt arbete med **P04**.
 
 ---

@@ -76,7 +76,8 @@ dem (kontrollera LED-tillstånd, utskriven text) i efterhand?
 ## Vad ska vara riktigt, vad ska stubbas?
 * **Riktigt:** `system::logic::Logic`, vars *eget* beteende (kommandotolkning, blinklogik,
   statushantering) testet ska verifiera.
-* **Stubbat:** samtliga sex drivers, som har egna enhetstester i **P04**, och som skulle göra
-  testet långsamt eller icke-deterministiskt om de vore riktiga.
+* **Stubbat:** samtliga sex drivers. Deras riktiga `Esp32s3`-implementationer har egna
+  enhetstester i **P04** (se **L06**); här ersätts de med stubbar, eftersom de skulle göra testet
+  långsamt eller icke-deterministiskt om de vore riktiga.
 
 ---
