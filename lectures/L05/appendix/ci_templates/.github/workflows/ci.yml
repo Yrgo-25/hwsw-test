@@ -8,34 +8,54 @@ on:
   pull_request:
     branches: [main]
 
-# Define pipeline jobs.
 jobs:
-  # Build the yrgo::test framework submodule and run both test suites, on latest Ubuntu runner.
-  build-and-test:
-    name: Build and test
+  # Build the firmware and keep the result as a downloadable artifact.
+  # 'needs: check-format' makes this job wait for the (fast) formatting check to pass first.
+  firmware-build:
+    name: Build firmware
     runs-on: ubuntu-latest
+    needs: check-format
     steps:
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: true
-      - name: Build
-        run: bash ci/build.sh
+          # Only needed if you include the test framework as a submodule.
+          submodules: recursive
 
-  # Check code formatting, run on latest Ubuntu runner.
-  format-check:
-    name: Check formatting
+      # For P04: replace this step with the ESP-IDF build below, so that the job builds the
+      # ESP32-S3 firmware. No physical board is needed to compile firmware.
+      #
+      #   - name: Build firmware with ESP-IDF
+      #     uses: espressif/esp-idf-ci-action@v1
+      #     with:
+      #       esp_idf_version: v5.2
+      #       target: esp32s3
+      #       command: idf.py build
+      #       # Add 'path:' here if the ESP-IDF project is not in the repository root.
+      - name: Build firmware
+        run: make build
+
+      # Collect everything worth keeping in one directory, then upload that directory.
+      # With ESP-IDF, copy build/*.bin here instead.
+      - name: Collect artifacts
+        run: |
+          mkdir -p fw
+          mv firmware fw
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          path: fw
+          name: firmware
+          # Fail the job if there was nothing to upload, instead of passing silently.
+          if-no-files-found: error
+          retention-days: 1
+
+  # Check code formatting. Fast and cheap, so it runs first.
+  check-format:
+    name: Analyze code with clang-format
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install clang-format
-        run: sudo apt-get update && sudo apt-get install -y clang-format
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      - name: Install black
-        run: pip install black
-      - name: Check formatting
-        run: bash ci/format.sh --check
+      - name: Perform analysis
+        run: make check-format
