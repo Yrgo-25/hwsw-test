@@ -12,8 +12,8 @@ ni faktiskt skriver tester mot den kodbasen.
 Syftet är att:
 * Skriva enhetstester för era riktiga `Esp32s3`-drivers via mockning av ESP-IDF:s C-funktioner,
   minst en driver per gruppmedlem.
-* Skriva enhetstester för era ML-algoritmer (**P03**): den adaptiva regressionsmodellen samt
-  minst ett neuralt nätverkslager.
+* Skriva enhetstester för det ni byggde i **P03**: `ml::lin_reg::Adaptive`,
+  `driver::tempsensor::Smart` samt den algoritm ni valde i Fas 2.
 * Skriva komponenttester för `system::logic::Logic`, där flera stubbade drivers samverkar.
 * Sätta upp en CI-pipeline som bygger firmware samt kör hela testsviten automatiskt vid varje
   push och pull request.
@@ -23,19 +23,24 @@ Syftet är att:
 ---
 
 ## Upplägg och tidsplan
-Projektet påbörjas i **L02**, direkt efter att grunderna i enhetstestning med `yrgo::test`
-introducerats, och pågår genom hela kursen fram till redovisning i **L19**. Arbetet sker
-löpande i takt med att nya testnivåer och verktyg introduceras på lektionerna:
-* **L02–L04:** Testramverket och testbygget på plats i ert eget repo, samt de första
-  enhetstesterna. Börja med det som går att testa utan mockning: er adaptiva regressionsmodell
-  `ml::lin_reg::Adaptive` från **P03** och `driver::tempsensor::Tmp36`s temperaturformel. Övningarna på lektionerna körs mot kursens
-  ATmega328p-övningsbibliotek; tekniken därifrån tillämpar ni sedan på er egen kodbas.
-* **L05:** Uppsättning av CI-pipeline: formatteringskontroll, firmware-bygge med
-  artefaktuppladdning samt automatisk körning av er testsvit.
-* **L06:** Analys av **P02**s testbara design, samt mockning av ESP-IDF:s C-funktioner.
-* **L07:** Fördjupning kring testning av beräkningar: referensvärden och rimliga toleranser för
-  `Tmp36` och `ml::lin_reg::Adaptive`, plus tillämpning av mockningstekniken från **L06** på fler
-  egna drivers.
+Projektet nämns kort i **L02** och gås igenom i sin helhet i **L05**, då även det praktiska
+arbetet i er egen kodbas börjar. Det pågår sedan fram till redovisning i **L19**. Anledningen till
+att arbetet börjar först i **L05** är enkel: dessförinnan saknas den teknik som krävs för att testa
+er kodbas, eftersom samtliga era `Esp32s3`-drivers går via ESP-IDF (se **L06**). **L02–L04** ägnas
+därför helt åt att öva tekniken mot kursens ATmega328p-övningsbibliotek. Arbetet sker sedan löpande
+i takt med att nya testnivåer och verktyg introduceras på lektionerna:
+* **L02–L04:** Inget arbete i er egen kodbas ännu. Ni övar enhetstestning mot kursens
+  ATmega328p-övningsbibliotek, och det är den tekniken ni sedan tillämpar på era egna drivers.
+  Skumma igenom den här projektbeskrivningen så att ni vet vart kursen är på väg.
+* **L05:** Genomgång av projektet i sin helhet, och fördelning av drivers inom gruppen.
+  Testramverket och testbygget på plats i ert eget repo, så att en testsvit kan byggas och köras
+  med ett enda kommando, samt uppsättning av CI-pipeline: formatteringskontroll och firmware-bygge
+  med artefaktuppladdning.
+* **L06:** Analys av **P02**s testbara design, mockning av ESP-IDF:s C-funktioner och därmed era
+  första egna enhetstester, samt testjobbet in i pipelinen.
+* **L07:** Enhetstester för `driver::tempsensor::Tmp36`s temperaturformel och för
+  `ml::lin_reg::Adaptive`, med kända referensvärden och rimliga toleranser, plus tillämpning av
+  mockningstekniken från **L06** på fler egna drivers.
 * **L08–L09, L11:** Komponenttester för `system::logic::Logic`.
 * **L12–L13:** Statisk analys som eget jobb i pipelinen, samt härdning av pipelinen
   (jobbordning, branch protection, caching).
@@ -119,7 +124,8 @@ hjälp av `driver::factory::Stub` och de övriga stubbarna, exempelvis:
   baserat på simulerade värden i `driver::tempsensor::Stub`.
 
 ### Testautomatisering (G)
-Pipelinen sätts upp redan i **L05** och byggs ut löpande under kursen. Vid inlämning ska den:
+Pipelinen sätts upp i **L05**, får sitt testjobb i **L06** och byggs ut löpande under kursen. Vid
+inlämning ska den:
 * Bygga och köra hela testsviten automatiskt vid varje push och pull request.
 * Bygga er firmware för `ESP32-S3` via ESP-IDF, och i samma jobb ladda upp den byggda binären
   som en artefakt (`actions/upload-artifact`), så att den går att hämta från körningen på GitHub. Det kräver ingen fysisk hårdvara eller self-hosted runner, se
