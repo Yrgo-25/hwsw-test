@@ -9,7 +9,7 @@
 ## Skriv tester
 * Ta bort `#ifdef LECTURE2` samt motsvarande `#endif` i testfilen för att aktivera testerna.
 * Fyll i testfallen enligt kommentarerna i filen, med start i `Gpio_Atmega328p.Initialization`,
-  följt av output- och input-testen.
+  följt av output-testet och de två input-testen (med och utan intern pull-up).
 * Bygg och kör testsviten:
 
   ```bash

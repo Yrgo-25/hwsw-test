@@ -52,16 +52,16 @@ struct PinOffset
 constexpr std::uint8_t PinCount{20U};
 
 // -----------------------------------------------------------------------------
-constexpr bool isPinValid(const std::uint8_t id) noexcept { return PinCount > id; }
+[[nodiscard]] constexpr bool isPinValid(const std::uint8_t pin) noexcept { return PinCount > pin; }
 
 // -----------------------------------------------------------------------------
-constexpr std::uint8_t getPhysicalPin(const std::uint8_t id) noexcept
+[[nodiscard]] constexpr std::uint8_t getRegBit(const std::uint8_t pin) noexcept
 {
-    // Return physical pin 0 - 7 on the associated GPIO port.
-    if (!isPinValid(id)) { return static_cast<std::uint8_t>(-1); }
-    if (PinOffset::B > id) { return id; }
-    else if (PinOffset::C > id) { return id - PinOffset::B; }
-    return id - PinOffset::C;
+    // Return register bit 0 - 7 on the associated GPIO port.
+    if (!isPinValid(pin)) { return static_cast<std::uint8_t>(-1); }
+    if (PinOffset::B > pin) { return pin; }
+    else if (PinOffset::C > pin) { return pin - PinOffset::B; }
+    return pin - PinOffset::C;
 }
 
 // -----------------------------------------------------------------------------
@@ -69,23 +69,22 @@ constexpr void simulateToggle(GpioRegs& regs) noexcept
 {
     constexpr std::uint8_t bitCount{8U};
 
-    // Check each pin one by one.
-    for (std::uint8_t pin{}; pin < bitCount; ++pin)
+    // Check each register bit one by one.
+    for (std::uint8_t bit{}; bit < bitCount; ++bit)
     {
-        // Toggle the output of a given pin if configured as output and the pin bit has been set.
-        if (utils::read(regs.ddrx, pin) && utils::read(regs.pinx, pin))
+        // Toggle the output of a given bit if configured as output and the bit in PINx is set.
+        if (utils::read(regs.ddrx, bit) && utils::read(regs.pinx, bit))
         {
-            utils::toggle(regs.portx, pin);
-            utils::clear(regs.pinx, pin);
+            utils::toggle(regs.portx, bit);
+            utils::clear(regs.pinx, bit);
         }
     }
 }
 
 // -----------------------------------------------------------------------------
-void runOutputTest(const std::uint8_t id, GpioRegs& regs)
+void runOutputTest(const std::uint8_t pin, GpioRegs& regs)
 {
-    // Get the physical pin on the given port.
-    // Example: const std::uint8_t pin{getPhysicalPin(id)};
+    // Get the associated register bit on the given port by invoking getRegBit().
 
     // Limit the scope of the GPIO instance.
     {
@@ -94,11 +93,10 @@ void runOutputTest(const std::uint8_t id, GpioRegs& regs)
         // Expect the instance to be initialized correctly if the pin is valid.
 
         // Expect the GPIO to be set as output, i.e., the corresponding bit in DDRx should be set.
-        // Tips: Check that the pin is set with EXPECT_TRUE() and utils::read(regs.ddrx, pin).
+        // Tips: Check that the pin is set with EXPECT_TRUE() and utils::read(regs.ddrx, bit).
 
         // Set the output high, expect the corresponding bit in PORTx to be set.
-        // Tips: Use gpio.write() to set the output, read the bit with
-        // utils::read(regs.portx, pin);
+        // Tip: Use gpio.write() to set the output, read the bit with utils::read(regs.portx, bit);
 
         // Set the output low, expect the corresponding bit in PORTx to be cleared.
 
@@ -112,13 +110,36 @@ void runOutputTest(const std::uint8_t id, GpioRegs& regs)
 }
 
 // -----------------------------------------------------------------------------
-void runInputTest(const std::uint8_t id, GpioRegs& regs)
+void runInputTest(const std::uint8_t pin, GpioRegs& regs)
 {
-    // Get the physical pin on the given port.
+    // Get the associated register bit on the given port.
 
     // Limit the scope of the GPIO instance.
     {
-        // Create a new GPIO input with internal pull-up resistor enabled.
+        // Create a new GPIO input without its internal pull-up resistor enabled.
+        // Expect the instance to be initialized correctly if the pin is valid.
+
+        // Expect the GPIO to be set as input, i.e., the corresponding bit in DDRx should be
+        // cleared.
+
+        // Expect the internal pull-up resistor to be disabled, i.e., the corresponding bit in
+        // PORTx should be cleared.
+
+        // Set the input high in PINx, expect the GPIO input to be high.
+
+        // Set the input low in PINx, expect the GPIO input to be low.
+    }
+    // Expect DDRx and PORTx to be cleared after the instance has been deleted.
+}
+
+// -----------------------------------------------------------------------------
+void runInputPullupTest(const std::uint8_t pin, GpioRegs& regs)
+{
+    // Get the associated register bit on the given port.
+
+    // Limit the scope of the GPIO instance.
+    {
+        // Create a new GPIO input with its internal pull-up resistor enabled.
         // Expect the instance to be initialized correctly if the pin is valid.
 
         // Expect the GPIO to be set as input, i.e., the corresponding bit in DDRx should be
@@ -214,6 +235,36 @@ TEST(Gpio_Atmega328p, Input)
     {
         GpioRegs regs{DDRC, PORTC, PINC};
         runInputTest(pin, regs);
+    }
+}
+
+/**
+ * @brief GPIO input test with internal pull-up resistors enabled.
+ *
+ *        Verify that GPIO inputs can be used for reading, and that the internal pull-up resistor
+ *        is enabled via PORTx when the GPIO is configured as input with pull-up.
+ */
+TEST(Gpio_Atmega328p, InputPullup)
+{
+    // Systematically test I/O port D.
+    for (std::uint8_t pin{}; pin < PinOffset::B; ++pin)
+    {
+        GpioRegs regs{DDRD, PORTD, PIND};
+        runInputPullupTest(pin, regs);
+    }
+
+    // Systematically test I/O port B.
+    for (std::uint8_t pin{PinOffset::B}; pin < PinOffset::C; ++pin)
+    {
+        GpioRegs regs{DDRB, PORTB, PINB};
+        runInputPullupTest(pin, regs);
+    }
+
+    // Systematically test I/O port C.
+    for (std::uint8_t pin{PinOffset::C}; pin < PinCount; ++pin)
+    {
+        GpioRegs regs{DDRC, PORTC, PINC};
+        runInputPullupTest(pin, regs);
     }
 }
 } // namespace
