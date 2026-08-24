@@ -35,6 +35,7 @@
 * Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
   * Ni får tid på er att genomföra uppgiften enskilt.
   * Uppgiften gås sedan igenom i helklass.
+* Lösningsförslag finns [här](./exercises/README.md).
 
 ---
 
