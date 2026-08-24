@@ -3,11 +3,10 @@
  */
 #include <cstdint>
 
-#include "yrgo/test/test.h"
-
 #include "arch/avr/hw_platform.h"
 #include "driver/gpio/atmega328p.h"
 #include "utils/utils.h"
+#include "yrgo/test/test.h"
 
 #ifdef TESTSUITE
 
@@ -116,7 +115,7 @@ void runInputTest(const std::uint8_t pin, GpioRegs& regs)
 
     // Limit the scope of the GPIO instance.
     {
-        // Create a new GPIO input without its internal pull-up resistor enabled.
+        // Create a new GPIO input without its internal pull-up resistor disabled.
         // Expect the instance to be initialized correctly if the pin is valid.
 
         // Expect the GPIO to be set as input, i.e., the corresponding bit in DDRx should be
@@ -167,13 +166,9 @@ TEST(Gpio_Atmega328p, Initialization)
     // Systematically test GPIO initialization across a range of pin numbers.
     for (std::uint8_t pin{}; pin < pinMax; ++pin)
     {
-        // Create a new GPIO instance with the current pin number.
-        // Example: gpio::Atmega328p gpio{pin, gpio::Mode::Output};
+        // Create a new GPIO instance with the current pin number, use any valid mode.
 
         // Expect the instance to be initialized correctly if the pin is valid.
-        // Tips: Check if the instance is initialized by invoking gpio.isInitialized().
-        //       Check if the pin is valid by invoking isPinValid(pin).
-        //       Use EXPECT_TRUE(), EXPECT_FALSE, and/or EXPECT_EQ to validate the functionality.
 
         // Create another GPIO instance on the same pin.
         // Expect the instance to not be initialized, since the pin is already reserved.
