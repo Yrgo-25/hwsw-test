@@ -1,8 +1,10 @@
 /**
  * @brief GPIO driver implementation details for ATmega328P.
  */
-#include "driver/gpio/atmega328p.h"
+#include <stdio.h>
+
 #include "arch/avr/hw_platform.h"
+#include "driver/gpio/atmega328p.h"
 #include "utils/callback_array.h"
 #include "utils/utils.h"
 
@@ -125,12 +127,15 @@ Atmega328p::Atmega328p(const uint8_t pin, const Mode mode, void (*callback)()) n
 // -----------------------------------------------------------------------------
 Atmega328p::~Atmega328p() noexcept
 {
-    // Free resources used for the GPIO before deletion.
-    enableInterrupt(false);
-    utils::clear(myHw->ddrx, myPin);
-    utils::clear(myHw->portx, myPin);
-    utils::clear(myPinRegistry, myId);
-    myHw = nullptr;
+    // Free resources used for the GPIO if initialized.
+    if (isInitialized())
+    {
+        enableInterrupt(false);
+        utils::clear(myHw->ddrx, myPin);
+        utils::clear(myHw->portx, myPin);
+        utils::clear(myPinRegistry, myId);
+        myHw = nullptr;
+    }
 }
 
 // -----------------------------------------------------------------------------
@@ -207,7 +212,7 @@ Atmega328p::IoPort Atmega328p::getIoPort(const uint8_t id) const noexcept
     // Return the port associated with the given ID, or an invalid enum on failure.
     if (utils::inRange(id, Port::B0, Port::B5)) { return IoPort::B; }
     else if (utils::inRange(id, Port::C0, Port::C5)) { return IoPort::C; }
-    else if (utils::inRange(id, Port::D0, Port::D5)) { return IoPort::D; }
+    else if (utils::inRange(id, Port::D0, Port::D7)) { return IoPort::D; }
     return IoPort::Count;
 }
 
@@ -268,7 +273,11 @@ ISR(PCINT2_vect) { myCallbacks.invoke(CbIndex::PortD); }
 namespace
 {
 // -----------------------------------------------------------------------------
-constexpr bool isPinFree(const uint8_t id) noexcept { return PinCount > id; }
+constexpr bool isPinFree(const uint8_t id) noexcept
+{
+    // Return true if the ID is valid and the pin is free, otherwise false.
+    return PinCount > id ? !utils::read(myPinRegistry, id) : false;
+}
 
 // -----------------------------------------------------------------------------
 constexpr bool isModeValid(const Mode mode) noexcept
