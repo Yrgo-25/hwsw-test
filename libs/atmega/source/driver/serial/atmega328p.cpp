@@ -1,8 +1,10 @@
 /**
  * @brief Implementation details of serial driver.
  */
-#include "driver/serial/atmega328p.h"
+#include <stdint.h>
+
 #include "arch/avr/hw_platform.h"
+#include "driver/serial/atmega328p.h"
 #include "utils/utils.h"
 
 namespace driver
@@ -24,8 +26,7 @@ constexpr char CarriageReturn{'\r'};
 void transmitChar(const char character) noexcept
 {
     // Wait until the previous character has been sent.
-    while (!utils::read(UCSR0A, UDRE0))
-        ;
+    while (!utils::read(UCSR0A, UDRE0)) {}
 
     // Put the new character in the transmission register.
     UDR0 = character;
@@ -60,17 +61,15 @@ int16_t Atmega328p::read(uint8_t* buffer, const uint16_t size,
 {
     // Check the input parameters, return -1 if invalid.
     if ((nullptr == buffer) || (size == 0U)) { return -1; }
-
     uint16_t bytesRead{};
 
     if (0U == timeout_ms)
     {
         // Read indefinitely until the buffer is full if no timeout has been specified.
-        while (bytesRead < size)
+        while (size > bytesRead)
         {
             // Wait until a byte has been received.
-            while (!utils::read(UCSR0A, RXC0))
-                ;
+            while (!utils::read(UCSR0A, RXC0)) {}
             buffer[bytesRead++] = UDR0;
         }
     }
@@ -84,7 +83,6 @@ int16_t Atmega328p::read(uint8_t* buffer, const uint16_t size,
             {
                 buffer[bytesRead++] = UDR0;
             }
-
             // Stop reading if the read buffer is full.
             if (size == bytesRead) { break; }
 
@@ -100,7 +98,7 @@ int16_t Atmega328p::read(uint8_t* buffer, const uint16_t size,
 Atmega328p::Atmega328p() noexcept
     : myEnabled{true}
 {
-    // Baud rate value corresponding to 9600 kbps.
+    // Baud rate value corresponding to 9600 bps.
     constexpr uint16_t baudRateValue{103U};
 
     // Enable UART transmission.
@@ -109,7 +107,7 @@ Atmega328p::Atmega328p() noexcept
     // Set the data size to eight bits per byte.
     utils::set(UCSR0C, UCSZ00, UCSZ01);
 
-    // Set the baud rate to 9600 kbps.
+    // Set the baud rate to 9600 bps.
     UBRR0 = baudRateValue;
 
     // Send carriage return to align the first message left.
