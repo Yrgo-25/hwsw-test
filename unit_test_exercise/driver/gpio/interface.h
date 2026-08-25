@@ -18,14 +18,14 @@ public:
 
     /**
      * @brief Get GPIO state.
-     * 
+     *
      * @return True if enabled, false if disabled.
      */
     [[nodiscard]] virtual bool read() const noexcept = 0;
 
     /**
      * @brief Set GPIO state.
-     * 
+     *
      * @param[in] state New state (true = enabled, false = disabled).
      */
     virtual void write(bool state) noexcept = 0;

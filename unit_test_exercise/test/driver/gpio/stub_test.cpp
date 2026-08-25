@@ -5,7 +5,7 @@
 #include "yrgo/test/test.h"
 
 /**
- * @brief Test GPIO initial state. 
+ * @brief Test GPIO initial state.
  *        Verify that the initial state is set to false by default, or true if manually set.
  */
 TEST(GpioStub, InitialState)
@@ -34,7 +34,7 @@ TEST(GpioStub, Write)
 {
     // Create a LED instance.
     driver::gpio::Stub led1{};
-    
+
     // Set LED to true, expect the LED to be enabled.
     led1.write(true);
     EXPECT_TRUE(led1.read());
@@ -54,7 +54,7 @@ TEST(GpioStub, Write)
 
 /**
  * @brief Test toggle functionality.
- * 
+ *
  *        Verify that the GPIO state is toggled correctly.
  */
 TEST(GpioStub, Toggle)

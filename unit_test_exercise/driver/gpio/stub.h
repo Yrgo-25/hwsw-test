@@ -16,13 +16,13 @@ public:
     /**
      *
      * @brief Constructor.
-     * 
+     *
      * @param[in] initialState Initial GPIO state (default = false).
      */
     explicit Stub(const bool initialState = false) noexcept
         : myState{initialState}
     {}
-    
+
     /**
      * @brief Destructor.
      */
@@ -30,14 +30,14 @@ public:
 
     /**
      * @brief Get GPIO state.
-     * 
+     *
      * @return True if enabled, false if disabled.
      */
     [[nodiscard]] bool read() const noexcept override { return myState; }
 
     /**
      * @brief Set GPIO state.
-     * 
+     *
      * @param[in] state New state (true = enabled, false = disabled).
      */
     void write(const bool state) noexcept override { myState = state; }
