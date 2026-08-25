@@ -16,6 +16,8 @@ namespace serial
  *
  *        Use the singleton design pattern to ensure only one serial device instance exists,
  *        reflecting the hardware limitation of a single serial port on the MCU.
+ *
+ *        The configured baud rate is set to 9600 bps.
  */
 class Atmega328p final : public Interface
 {

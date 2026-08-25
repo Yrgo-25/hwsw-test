@@ -100,7 +100,7 @@ int16_t Atmega328p::read(uint8_t* buffer, const uint16_t size,
 Atmega328p::Atmega328p() noexcept
     : myEnabled{true}
 {
-    // Baud rate value corresponding to 9600 kbps.
+    // Baud rate value corresponding to 9600 bps.
     constexpr uint16_t baudRateValue{103U};
 
     // Enable UART transmission.
@@ -109,7 +109,7 @@ Atmega328p::Atmega328p() noexcept
     // Set the data size to eight bits per byte.
     utils::set(UCSR0C, UCSZ00, UCSZ01);
 
-    // Set the baud rate to 9600 kbps.
+    // Set the baud rate to 9600 bps.
     UBRR0 = baudRateValue;
 
     // Send carriage return to align the first message left.
