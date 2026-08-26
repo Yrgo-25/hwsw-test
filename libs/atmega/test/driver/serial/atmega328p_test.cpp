@@ -5,6 +5,7 @@
 #include <chrono>
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
 #include <thread>
 
 #include "arch/avr/hw_platform.h"
@@ -14,10 +15,6 @@
 
 #ifdef TESTSUITE
 
-//! @todo Remove this #ifdef in lecture 3 to enable these tests.
-#ifdef LECTURE3
-
-//! @todo Implement tests according to project requirements.
 namespace driver
 {
 namespace
@@ -26,7 +23,7 @@ namespace
 constexpr std::size_t TransmissionDelay_us{10U};
 
 /** Expected baud rate in bps. */
-constexpr std::uint16_t ExpectedBaudRate_bps{9600U};
+constexpr std::uint32_t ExpectedBaudRate_bps{9600U};
 
 // -----------------------------------------------------------------------------
 [[nodiscard]] serial::Interface& initSerial() noexcept
@@ -98,18 +95,16 @@ void simulateDataReg(const std::atomic<bool>& stop) noexcept
 // -----------------------------------------------------------------------------
 void printThread(serial::Interface& serial, const char* msg, std::atomic<bool>& stop)
 {
-    //! @todo Implement this function!
-
     // Transmit the entire string.
+    serial.printf(msg);
 
     // Set the stop flag to true to signal that transmission is complete.
+    stop.store(true);
 }
 
 // -----------------------------------------------------------------------------
 void readDataRegThread(const char* msg, const std::atomic<bool>& stop)
 {
-    //! @todo Implement this function!
-
     // Iterate through each character in the message.
     for (const char* c{msg}; '\0' != *c; ++c)
     {
@@ -121,13 +116,14 @@ void readDataRegThread(const char* msg, const std::atomic<bool>& stop)
         }
 
         // If the stop flag is set, break out of the loop.
+        if (stop.load()) { break; }
 
         // Read the character from UDR0 and verify it matches the expected character.
+        const auto character = static_cast<char>(UDR0);
+        EXPECT_EQ(character, *c);
 
         // Set UDRE0 to signal that the data has been read and the register is empty.
-
-        //! @todo Remove this line once the character 'c' is checked.
-        (void)(c);
+        utils::set(UCSR0A, UDRE0);
     }
 }
 
@@ -138,11 +134,20 @@ void readDataRegThread(const char* msg, const std::atomic<bool>& stop)
  */
 TEST(Serial_Atmega328p, Initialization)
 {
-    //! @todo Test serial initialization:
-    //! - Verify that isInitialized() returns true.
-    //! - Verify that the driver can be enabled/disabled.
-    //! - Check that baud rate can be read correctly (with the value specified in the driver
-    //!   documentation).
+    auto& serial = initSerial();
+
+    // Verify that isInitialized() returns true.
+    EXPECT_TRUE(serial.isInitialized());
+
+    // Verify that the driver can be enabled/disabled.
+    serial.setEnabled(false);
+    EXPECT_FALSE(serial.isEnabled());
+
+    serial.setEnabled(true);
+    EXPECT_TRUE(serial.isEnabled());
+
+    // Check that baud rate can be read correctly.
+    EXPECT_EQ(serial.baudRate_bps(), ExpectedBaudRate_bps);
 }
 
 /**
@@ -181,6 +186,9 @@ TEST(Serial_Atmega328p, Read)
 {
     constexpr std::uint16_t timeout_ms{100U};
     constexpr std::uint16_t bufLen{32U};
+    constexpr std::int16_t error{-1};
+    constexpr std::int16_t zero{0U};
+    constexpr std::uint16_t empty{0U};
 
     // Initialize and enable the serial driver.
     auto& serial = initSerial();
@@ -188,11 +196,16 @@ TEST(Serial_Atmega328p, Read)
     // Read buffer, initialized to zero.
     std::uint8_t buf[bufLen]{};
 
-    //! @todo Test the error handling of read():
-    //! - Expect -1 to be returned when the read buffer is a nullptr.
-    //! - Expect -1 to be returned when the buffer size is 0.
-    //! - Expect 0 to be returned when no character is received before the timeout expires.
-    //!   Tip: Clear RXC0 first, otherwise the driver reads whatever UDR0 holds at the moment.
+    // Expect -1 to be returned when the read buffer is a nullptr.
+    EXPECT_EQ(serial.read(nullptr, bufLen, timeout_ms), error);
+
+    // Expect -1 to be returned when the buffer size is 0.
+    EXPECT_EQ(serial.read(buf, empty, timeout_ms), error);
+
+    // Expect 0 to be returned when no character is received before the timeout expires.
+    // Tip: Clear RXC0 first, otherwise the driver reads whatever UDR0 holds at the moment.
+    utils::clear(UCSR0A, RXC0);
+    EXPECT_EQ(serial.read(buf, bufLen, timeout_ms), zero);
 
     // Message to receive.
     const char* msg{"This is a message!\n"};
@@ -207,33 +220,33 @@ TEST(Serial_Atmega328p, Read)
     for (const char* c{msg}; ('\0' != *c) && (bufLen > bytesRead); ++c)
     {
         // Read a single character into buf[bytesRead] by invoking read().
+        std::uint8_t byte{};
+        const auto retVal = serial.read(&byte, sizeof(byte), timeout_ms);
+
         // Check the return value, break out of the loop if it isn't 1.
+        if (sizeof(byte) != retVal) { break; }
 
         // Increment bytesRead once the character has been read.
+        buf[bytesRead++] = byte;
 
         // Clear RXC0 to simulate that the hardware clears the flag when UDR0 is read.
         // This also signals the simulator thread that the next character can be injected.
+        utils::clear(UCSR0A, RXC0);
     }
-
-    //! @todo Remove these lines once the serial driver and the read buffer are used.
-    (void)(timeout_ms);
-    (void)(serial);
-    (void)(buf);
-    (void)(bytesRead);
 
     // Synchronize the threads (this thread and the RX injector thread).
     t1.join();
 
-    //! @todo Verify the read data. Do this after joining the thread, so that a failed check
-    //! doesn't leave the simulator thread running:
-    //! - Expect the number of read characters to match the length of the message.
-    //! - Expect each character of the read buffer to match the corresponding character of the
-    //!   message.
+    // Expect the number of read characters to match the length of the message.
+    EXPECT_EQ(bytesRead, std::strlen(msg));
+
+    // Expect each character of the read buffer to match the corresponding character of the message.
+    for (std::uint16_t i{}; i < bytesRead; ++i)
+    {
+        EXPECT_EQ(msg[i], buf[i]);
+    }
 }
 } // namespace
 } // namespace driver
-
-//! @todo Remove this #endif in lecture 3 to enable these tests.
-#endif /** LECTURE3 */
 
 #endif /** TESTSUITE */
