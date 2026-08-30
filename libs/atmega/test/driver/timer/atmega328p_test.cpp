@@ -28,8 +28,6 @@ constexpr std::uint8_t MaxTimerCount{3U};
 bool callbackInvoked{false};
 
 // -----------------------------------------------------------------------------
-// Marked inline so that enabling this block does not fail the -Werror=unused-function build
-// before the Callback and Restart tests below have been written.
 inline void resetCallbackFlag() noexcept { callbackInvoked = false; }
 
 // -----------------------------------------------------------------------------
@@ -142,7 +140,7 @@ TEST(Timer_Atmega328p, Callback)
 TEST(Timer_Atmega328p, Restart)
 {
     //! @todo Test timer restart:
-    // Reset the callback flag (callbackInvoked) using resetCallbackFlag().
+    // Reset the callback flag (callbackInvoked).
     // Create and start a timer with testCallback() as callback.
     // Call handleCallback() enough times to almost reach the timeout (getMaxCount() - 1).
     // Verify that the callback flag (callbackInvoked) is still false.
