@@ -24,6 +24,7 @@
 * Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
   * Ni får tid på er att genomföra uppgiften enskilt.
   * Uppgiften gås sedan igenom i helklass.
+  * Lektionsanteckningar finns [här](./exercises/README.md).
 * Diskutera i grupp: hur skiljer sig detta från att testa mot en riktig klocka i hårdvaran?
 
 ---

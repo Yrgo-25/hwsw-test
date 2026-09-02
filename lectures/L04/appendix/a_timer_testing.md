@@ -23,7 +23,6 @@ tick, varken en för tidigt eller en för sent, på mikrosekunder:
 |---|---|
 | `TCCR0A`, `TCCR0B` | Timerläge samt prescaler, sätts vid initiering |
 | `TIMSK0` | Aktiverar timeravbrottet |
-| `TIFR0` | Avbrottsflagga; testet sätter den för att simulera att timern löpt ut |
 
 `driver::timer::Atmega328p` räknar avbrott i mjukvara:
 * Varje avbrott motsvarar ett fast intervall (0.128 ms).
