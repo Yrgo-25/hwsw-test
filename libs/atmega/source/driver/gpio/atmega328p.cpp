@@ -1,8 +1,10 @@
 /**
  * @brief GPIO driver implementation details for ATmega328P.
  */
-#include "driver/gpio/atmega328p.h"
+#include <stdint.h>
+
 #include "arch/avr/hw_platform.h"
+#include "driver/gpio/atmega328p.h"
 #include "utils/callback_array.h"
 #include "utils/utils.h"
 

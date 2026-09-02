@@ -1,9 +1,11 @@
 /**
  * @brief Implementation details of hardware timer driver.
  */
-#include "driver/timer/atmega328p.h"
+#include <stdint.h>
+
 #include "arch/avr/hw_platform.h"
 #include "container/array.h"
+#include "driver/timer/atmega328p.h"
 #include "utils/callback_array.h"
 #include "utils/utils.h"
 

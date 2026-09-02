@@ -1,8 +1,10 @@
 /**
  * @brief ADC driver implementation details for the ATmega328P ADC (A/D converter).
  */
-#include "driver/adc/atmega328p.h"
+#include <stdint.h>
+
 #include "arch/avr/hw_platform.h"
+#include "driver/adc/atmega328p.h"
 #include "utils/utils.h"
 
 namespace driver

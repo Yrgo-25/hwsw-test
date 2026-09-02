@@ -1,8 +1,10 @@
 /**
  * @brief Watchdog timer driver implementation details for ATmega328P.
  */
-#include "driver/watchdog/atmega328p.h"
+#include <stdint.h>
+
 #include "arch/avr/hw_platform.h"
+#include "driver/watchdog/atmega328p.h"
 #include "utils/utils.h"
 
 namespace driver

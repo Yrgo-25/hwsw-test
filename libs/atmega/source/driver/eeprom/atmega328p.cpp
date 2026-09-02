@@ -1,8 +1,10 @@
 /**
  * @brief EEPROM stream implementation details for ATmega328P.
  */
-#include "driver/eeprom/atmega328p.h"
+#include <stdint.h>
+
 #include "arch/avr/hw_platform.h"
+#include "driver/eeprom/atmega328p.h"
 #include "utils/utils.h"
 
 namespace driver

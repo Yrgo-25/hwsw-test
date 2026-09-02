@@ -1,8 +1,10 @@
 /**
  * @brief Implementation details of miscellaneous utility functions.
  */
-#include "utils/utils.h"
+#include <stdint.h>
+
 #include "arch/avr/hw_platform.h"
+#include "utils/utils.h"
 
 namespace utils
 {
