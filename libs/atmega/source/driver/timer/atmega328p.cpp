@@ -1,9 +1,11 @@
 /**
  * @brief Implementation details of hardware timer driver.
  */
-#include "driver/timer/atmega328p.h"
+#include <stdio.h>
+
 #include "arch/avr/hw_platform.h"
 #include "container/array.h"
+#include "driver/timer/atmega328p.h"
 #include "utils/callback_array.h"
 #include "utils/utils.h"
 
@@ -87,7 +89,7 @@ void invokeCallback(const uint8_t timerIndex) noexcept
 // -----------------------------------------------------------------------------
 Atmega328p::Atmega328p(const uint32_t timeout_ms, void (*callback)(),
                        const bool startTimer) noexcept
-    : myHw{Hardware::reserve()}
+    : myHw{0U < timeout_ms ? Hardware::reserve() : nullptr}
     , myMaxCount{maxCount(timeout_ms)}
     , myEnabled{false}
 {
@@ -100,6 +102,8 @@ Atmega328p::Atmega328p(const uint32_t timeout_ms, void (*callback)(),
 // -----------------------------------------------------------------------------
 Atmega328p::~Atmega328p() noexcept
 {
+    // Do nothing if the circuit isn't initialized (nothing to clean up).
+    if (!isInitialized()) { return; }
     removeCallback();
     myTimers[myHw->index] = nullptr;
     Hardware::release(myHw);
@@ -123,7 +127,8 @@ uint32_t Atmega328p::timeout_ms() const noexcept
 // -----------------------------------------------------------------------------
 void Atmega328p::setTimeout_ms(const uint32_t timeout_ms) noexcept
 {
-    if (0U == timeout_ms) { stop(); }
+    // Do nothing if the timeout is invalid.
+    if (0U == timeout_ms) { return; }
     myMaxCount = maxCount(timeout_ms);
 }
 
@@ -165,6 +170,7 @@ void Atmega328p::handleCallback() noexcept
 
     if (hasTimedOut())
     {
+        printf("Timeout reached after %d ms!\n", timeout_ms());
         myCallbacks.invoke(myHw->index);
         clearTimedOut();
     }
