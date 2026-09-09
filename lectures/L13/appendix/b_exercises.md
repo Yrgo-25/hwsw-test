@@ -13,7 +13,7 @@ byggde ut i **L06** och sannolikt även i **L12**) och beskriv hur pipelinen är
 * Vilka jobb (`jobs:`) innehåller den, och vilken fråga besvarar respektive jobb?
 * Vilka steg använder `uses:` respektive `run:`?
 * Hur används den `.clang-format`-fil som ni lade till i **L05**?
-* Vad skulle sluta fungera om ni tog bort `actions/checkout@v4` ur ett jobb?
+* Vad skulle sluta fungera om ni tog bort `actions/checkout@v5` ur ett jobb?
 
 ---
 

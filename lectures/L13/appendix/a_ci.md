@@ -21,7 +21,7 @@ värd att läsa som ett konkret exempel:
   samt `format-check`, som kör `clang-format` (se **L05**) mot all C/C++-kod och `black` mot alla
   Python-filer, i stället för mot enstaka filer för hand.
 * Varje jobb har en lista av **`steps:`** som körs i ordning. Ett steg använder antingen
-  * en färdig, återanvändbar åtgärd via `uses:` (t.ex. `actions/checkout@v4` för att hämta koden), eller
+  * en färdig, återanvändbar åtgärd via `uses:` (t.ex. `actions/checkout@v5` för att hämta koden), eller
   * kör ett eget kommando via `run:` (t.ex. `bash ci/build.sh`).
 * Om något steg i ett jobb misslyckas (returnerar en felkod som inte är noll), markeras hela
   pipelinen som misslyckad, vilket syns direkt i pull requesten på GitHub.
@@ -65,7 +65,7 @@ var det hör hemma i kedjan är ett verkligt designbeslut, inte en formalitet.
 | `on:` | Vad som utlöser pipelinen | `push` och `pull_request` mot `main` |
 | `jobs:` | Oberoende jobb, körs parallellt som standard | `build-and-test`, `format-check` |
 | `steps:` | Steg inom ett jobb, körs i ordning | checkout → installera → bygg/kontrollera |
-| `uses:` | Färdig, återanvändbar action | `actions/checkout@v4` |
+| `uses:` | Färdig, återanvändbar action | `actions/checkout@v5` |
 | `run:` | Eget kommando på runnern | `bash ci/build.sh` |
 
 ---

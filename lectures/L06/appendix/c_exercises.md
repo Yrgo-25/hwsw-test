@@ -61,7 +61,7 @@ Nu finns det äntligen egna tester att köra, så pipelinen från **L05** ska f�
       runs-on: ubuntu-latest
       steps:
         - name: Checkout repository
-          uses: actions/checkout@v4
+          uses: actions/checkout@v5
           with:
             submodules: recursive
         - name: Build and run test suite
