@@ -17,7 +17,7 @@ jobs:
     needs: check-format
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # Only needed if you include the test framework as a submodule.
           submodules: recursive
@@ -42,7 +42,7 @@ jobs:
           mkdir -p fw
           mv firmware fw
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: fw
           name: firmware
@@ -56,6 +56,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Perform analysis
         run: make check-format

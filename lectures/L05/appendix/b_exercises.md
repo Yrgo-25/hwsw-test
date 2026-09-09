@@ -1,20 +1,4 @@
 # Bilaga B - Övningsuppgifter
-
-## Gruppuppgift: fördela drivers
-Innan ni börjar koda, bestäm vem som gör vad. **P04** kräver enhetstester för era riktiga
-`Esp32s3`-drivers, minst en driver per gruppmedlem, och betyget sätts individuellt utifrån vad var
-och en faktiskt har bidragit med.
-* Lista era drivers och fördela dem inom gruppen. Har ni fler drivers än medlemmar, fördela de
-  återstående också, ingen ska bli utan och ingen ska ta allt.
-* Skriv ned fördelningen direkt i `p04_report.md`. Den kan justeras senare, men då ska ändringen
-  synas.
-* Fundera på om någon driver är märkbart svårare än de andra (t.ex. den seriella), och hur ni i så
-  fall kompenserar för det.
-
-Själva drivertesterna skriver ni från **L06**, när ni har mockningstekniken på plats.
-
----
-
 Övningarna nedan görs i **ert eget repo** och är en del av projektarbetet i **P04**. De gås inte
 igenom i helklass efteråt, eftersom varje grupps kodbas ser olika ut; utgå i stället från demot i
 [bilaga A](./a_ci_startup.md) och fråga under lektionen när ni kör fast.

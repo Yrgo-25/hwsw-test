@@ -17,7 +17,14 @@ hur den härdas vidare, går vi igenom i **L13**.
 
 ## Utgångspunkten: ett minimalt projekt
 Demot på lektionen använder ett så enkelt projekt som möjligt så att inget annat än pipelinen
-ska stå i vägen. En enda källkodsfil, som får representera "firmware":
+ska stå i vägen.
+
+Hela demot ligger på GitHub: [Yrgo-25/ci-demo](https://github.com/Yrgo-25/ci-demo). Notera att
+repot har byggts ut efter lektionen med en timer-driver, enhetstester samt CI-skript, som ett
+exempel på hur en kodbas kan struktureras. Det som beskrivs i den här bilagan är repot som det såg
+ut under lektionen, dvs. historiken fram till commiten `Update ci.yml`.
+
+En enda källkodsfil, som får representera "firmware":
 
 ```cpp
 /**
@@ -116,7 +123,7 @@ jobs:
 ```yaml
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
       - name: Build firmware
@@ -127,8 +134,8 @@ jobs:
   ordning, på samma maskin. Misslyckas ett steg avbryts jobbet där.
 * **`name:`** på ett steg är rubriken det får i loggen. Bra namn gör en misslyckad körning
   betydligt snabbare att felsöka.
-* **`uses:`** hämtar in en färdigskriven, återanvändbar *action*. `actions/checkout@v4` hämtar hem
-  koden från ert repo; `@v4` är versionen. **Utan checkout-steget står jobbet på en tom maskin
+* **`uses:`** hämtar in en färdigskriven, återanvändbar *action*. `actions/checkout@v5` hämtar hem
+  koden från ert repo; `@v5` är versionen. **Utan checkout-steget står jobbet på en tom maskin
   utan er kod**, vilket är ett vanligt nybörjarfel.
 * **`with:`** skickar in parametrar till den action som `uses:` pekar ut. Här betyder
   `submodules: recursive` att även submoduler hämtas, vilket behövs om testramverket ligger som
@@ -159,7 +166,7 @@ Ett steg använder antingen `uses:` eller `run:`, aldrig båda.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Perform analysis
         run: make check-format
 ```
@@ -203,7 +210,7 @@ Uppladdningen är det sista steget i `firmware-build`:
 
 ```yaml
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: fw
           name: firmware
@@ -211,7 +218,7 @@ Uppladdningen är det sista steget i `firmware-build`:
           retention-days: 1
 ```
 
-* **`uses: actions/upload-artifact@v4`** är den färdiga action som sköter uppladdningen. Allt
+* **`uses: actions/upload-artifact@v7`** är den färdiga action som sköter uppladdningen. Allt
   under `with:` är parametrar till den.
 * **`path:`** pekar ut vad som ska laddas upp, här katalogen `fw` som insamlingssteget
   (`mkdir -p fw`, `mv firmware fw`) nyss fyllde. Att först samla ihop filerna i en egen katalog gör
