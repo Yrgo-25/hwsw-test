@@ -7,7 +7,7 @@ Material från föreläsningar:
 * [L04](./L04/README.md): Enhetstester (del III), timer-drivern.
 * [L05](./L05/README.md): CI-uppstart, automatiserad testkörning samt `clang-format`.
 * [L06](./L06/README.md): Testbar design, stubbar och virtuell hårdvara.
-* [L07](./L07/README.md): Enhetstester (del IV), Tmp36s temperaturformel samt ML-algoritmerna.
+* [L07](./L07/README.md): Referensvärden och toleranser, Tmp36s temperaturformel samt ML-algoritmerna.
 * [L08](./L08/README.md): Komponenttester (del I), systemlogik och stubbar.
 * [L09](./L09/README.md): Komponenttester (del II), gränsvärden och edge cases.
 * [L10](./L10/README.md): Praktiskt prov 1 (gemensamt med Maskininlärning).

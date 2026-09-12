@@ -15,7 +15,7 @@ Erik Pihl ([erik.axel.pihl@gmail.com](mailto:erik.axel.pihl@gmail.com))
 | 36 | 2/9 | L04 | Enhetstester (del III): timer-drivern, arbete med **P04** |
 | 37 | 9/9 | L05 | Testbar design: interfaces, dependency injection samt `clang-format`, arbete med **P04** |
 | 38 | 16/9 | L06 | Stubbar och virtuell hårdvara, arbete med **P04** |
-| 38 | 17/9 | L07 | Enhetstester (del IV): `Tmp36`s temperaturformel samt ML-algoritmerna, arbete med **P04** |
+| 38 | 17/9 | L07 | Referensvärden och toleranser: `Tmp36`s temperaturformel samt ML-algoritmerna, arbete med **P04** |
 | 39 | 23/9 | L08 | Komponenttester (del I): systemlogik och stubbar, arbete med **P04** |
 | 40 | 30/9 | L09 | Komponenttester (del II): gränsvärden och edge cases, arbete med **P04** |
 | 41 | 7/10 | L10 | Praktiskt prov 1 (gemensamt med Maskininlärning) |

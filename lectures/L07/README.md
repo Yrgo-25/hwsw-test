@@ -1,4 +1,4 @@
-# L07 - Enhetstester (del IV)
+# L07 - Referensvärden och toleranser
 
 ## Dagordning
 * Enhetstestning av `driver::tempsensor::Tmp36`s temperaturformel från **P02**.

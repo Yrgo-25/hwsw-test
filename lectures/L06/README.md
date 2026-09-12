@@ -55,7 +55,7 @@
 ---
 
 ## Nästa lektion
-* Enhetstester (del IV).
+* Referensvärden och toleranser.
 * Fortsatt arbete med **P04**.
 
 ---
