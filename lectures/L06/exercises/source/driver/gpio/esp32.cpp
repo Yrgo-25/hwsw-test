@@ -1,0 +1,41 @@
+/**
+ * @file ESP32 driver implementation details.
+ */
+#include <cstdint>
+
+#include "arch/env/hw_platform.h"
+#include "driver/gpio/esp32.h"
+
+namespace driver::gpio
+{
+// -----------------------------------------------------------------------------
+Esp32::Esp32(const std::uint8_t pin) noexcept
+    : myPin{pin}
+{
+    // Note: In a real driver implementation, the mode, the pull-up/pull-down resistors and
+    // the interrupt type would be set according to the given data direction.
+    gpio_config_t config{
+        .pin_bit_mask = 1ULL << pin,
+        .mode         = 0,
+        .pull_up_en   = 0,
+        .pull_down_en = 0,
+        .intr_type    = 0,
+    };
+    gpio_config(&config);
+}
+
+// -----------------------------------------------------------------------------
+void Esp32::write(const bool state) noexcept
+{
+    const auto pin   = static_cast<gpio_num_t>(myPin);
+    const auto level = static_cast<std::uint32_t>(state);
+    gpio_set_level(pin, level);
+}
+
+// -----------------------------------------------------------------------------
+bool Esp32::read() const noexcept
+{
+    const auto pin = static_cast<gpio_num_t>(myPin);
+    return static_cast<bool>(gpio_get_level(pin));
+}
+} // namespace driver::gpio

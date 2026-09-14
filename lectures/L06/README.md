@@ -37,6 +37,7 @@
 * Gå igenom hur `system::logic::Logic` respektive `driver::tempsensor::Tmp36` tar emot sina
   beroenden i **P02**, och varför det gör dem testbara.
 * Genomför övningsuppgifterna i [bilaga C](./appendix/c_exercises.md) i grupp.
+  * Lektionsanteckningar, med ett komplett mock-exempel, finns [här](./exercises/README.md).
 
 ---
 

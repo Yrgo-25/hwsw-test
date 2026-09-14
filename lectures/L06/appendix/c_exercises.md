@@ -40,7 +40,7 @@ innan ni börjar, testa er fram utifrån principen i bilaga B och fråga vid beh
 Mocka er `driver::gpio::Esp32s3` i sin helhet:
 * Gå igenom drivern och lista samtliga ESP-IDF-funktioner den anropar, inte bara
   `gpio_set_level()`/`gpio_get_level()` som i bilaga B.
-* Skriv en egen header och källkodsfil (t.ex. `test/esp/gpio_mock.h`/`.c`), med samma mönster
+* Skriv en egen header och källkodsfil (t.ex. `test/esp32/gpio_mock.h`/`.c`), med samma mönster
   som i bilaga B, som innehåller en implementation av varje funktion ni listade.
 * Uppdatera testsvitens byggsystem så att den länkar mot er mock i stället för mot ESP-IDF:s
   riktiga gpio-komponent.

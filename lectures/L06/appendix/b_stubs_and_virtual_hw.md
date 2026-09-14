@@ -46,8 +46,10 @@ länka in den i stället för ESP-IDF:s riktiga när testsviten byggs. Det inneb
 ert eget ansvar att deklarationen i mock-headern är identisk med ESP-IDF:s: en avvikande
 signatur upptäcks *inte* av länkaren, utan ger fel först vid körning.
 
-Nedan visas ett exempel på en enkel mock av två ESP-IDF-funktioner för tester via en fil döpt 
-`test/esp/gpio_mock.h`:
+Nedan visas ett exempel på en enkel mock av två ESP-IDF-funktioner för tester via en fil döpt
+`test/esp32/gpio_mock.h`. I [mock-exemplet](../exercises/README.md) ligger headern i
+`test/include/test/esp32/`, med `test/include` i kompilatorns sökväg, och källkodsfilen i
+`test/source/test/esp32/`:
 
 ```c
 #ifndef ESP_GPIO_MOCK_H_
@@ -91,13 +93,13 @@ int gpio_get_level(const gpio_num_t pin);
 #endif /** ESP_GPIO_MOCK_H_ */
 ```
 
-Motsvarande källkodsfil `test/esp/gpio_mock.c` hade kunnat implementerats såsom visas nedan:
+Motsvarande källkodsfil `test/esp32/gpio_mock.c` hade kunnat implementerats såsom visas nedan:
 
 ```c
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "test/esp/gpio_mock.h"
+#include "test/esp32/gpio_mock.h"
 
 /** Maximum valid pin number for ESP32-S3. */
 #define PIN_MAX 48U
@@ -137,7 +139,7 @@ int gpio_get_level(const gpio_num_t pin)
 
 Er driverklass (t.ex. `driver::gpio::Esp32s3`) behöver inte ändras alls, den anropar exakt samma
 funktioner som förut. Skillnaden ligger i **vad testsvitens Makefile länkar mot**: ESP-IDF:s
-riktiga gpio-komponent byts ut mot er egen `test/esp/gpio_mock.c`. `pin_reg` är `static`, alltså
+riktiga gpio-komponent byts ut mot er egen `test/esp32/gpio_mock.c`. `pin_reg` är `static`, alltså
 inte synlig utanför den här filen, men det behövs inte heller: ett test verifierar vad
 `gpio_set_level()` satte genom att helt enkelt anropa `gpio_get_level()` för samma pin, precis
 som drivern själv gör.
@@ -159,7 +161,7 @@ Samma princip gäller som ovan, med ett par tillägg:
   pekare just här, eftersom den pekar på en `static`-variabel med statisk lagringstid som lever
   kvar efter att funktionen returnerat, till skillnad från den ursprungliga `config`-pekaren.
 
-Så här kan tillägget till headerfilen `test/esp/gpio_mock.h` se ut:
+Så här kan tillägget till headerfilen `test/esp32/gpio_mock.h` se ut:
 
 ```c
 /** 
@@ -202,7 +204,7 @@ const gpio_config_t* gpio_last_config(void);
 ```
 
 
-Och så här kan motsvarande tillägg till `test/esp/gpio_mock.c` se ut, med en filglobal
+Och så här kan motsvarande tillägg till `test/esp32/gpio_mock.c` se ut, med en filglobal
 struktinstans som lagrar en kopia av den senaste passerade konfigurationen:
 
 ```c
