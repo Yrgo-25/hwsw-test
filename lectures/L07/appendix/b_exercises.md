@@ -1,41 +1,25 @@
 # Bilaga B - Övningsuppgifter
 
-Skriv enhetstester för er egen `driver::tempsensor::Tmp36` från **P02**, med en
-`driver::adc::Stub` som ger ett känt, förbestämt ADC-värde:
-* Räkna för hand vilken temperatur ett givet ADC-värde ska motsvara, med er egen ADC:s
-  upplösning och referensspänning, och verifiera att `Tmp36` returnerar samma resultat. Se
-  räkneexemplet i [bilaga A](./a_testing_tmp36.md#räkneexempel).
-* Välj rätt makro: `EXPECT_EQ` om er `read()` returnerar ett heltal, `EXPECT_NEAR` med en
-  motiverad tolerans om den returnerar ett flyttal.
-* Testa minst ett gränsfall, t.ex. ett ADC-värde i utkanten av mätområdet (0 respektive
-  `maxValue()`). Mer om systematisk gränsvärdesanalys i **L09**.
+## Skriv och testa en `Tmp36`-strukt
+I filen `driver/tmp36.h`, implementera en strukt `driver::Tmp36`, som håller en inspänning och
+räknar om den till en temperatur. Lägg till följande:
+* `#pragma once` högst upp i filen.
+* En privat medlemsvariabel för inspänningen i V, initierad till `0.0`.
+* `setInputVoltage(double voltage)`: sparar spänningen, men gör ingenting om värdet ligger
+  utanför mätområdet [0.0, 5.0] V.
+* `read()`: returnerar temperaturen i grader Celsius, beräknad enligt databladets form av
+  formeln: `T = (Uin - 0.5) / 0.01`.
 
----
+Skriv nu ett testfall i [testsuite.cpp](../exercises/testsuite.cpp) som går igenom samtliga
+ADC-värden i mätområdet (0–1023):
+* Räkna ut inspänningen med `computeInputVoltage()` och mata in den med `setInputVoltage()`.
+* Räkna ut den förväntade temperaturen med `convertToTemp()`.
+* Jämför den mot `read()`.
 
-## ML-algoritmerna från P03
-**P04** kräver enhetstester även för era ML-algoritmer, och det är samma teknik tillämpad på en
-annan beräkning (se [bilaga A](./a_testing_tmp36.md#samma-teknik-gäller-era-ml-algoritmer)):
-* Skriv ett enhetstest för `ml::lin_reg::Adaptive` som verifierar en träningsiteration mot ett
-  för hand uträknat exempel: kända startvikter, känd indata och lärhastighet, framräknat
-  förväntat resultat. Här returneras flyttal, så `EXPECT_NEAR` är rätt makro.
-* Verifiera minst ett gränsfall, t.ex. ogiltig indata eller en ogiltig lärhastighet.
-* Om ni hinner: gör motsvarande för ett av era neurala nätverkslager (t.ex. `Dense`).
-
----
-
-## Fler riktiga drivers, på egen hand
-Ni har nu sett mockningstekniken från **L06** tillämpad på `driver::gpio::Esp32s3`. Använd
-resterande tid till att skriva enhetstester för minst en till av era riktiga `Esp32s3`-drivers,
-t.ex. `adc`, eller `eeprom`/`watchdog` om er grupp implementerade dem i **P02**. Ingen genomgång
-ges för detta, arbeta i gruppen precis som i **L06**.
-
----
-
-## Diskussion
-* Varför är `EXPECT_EQ` olämpligt för flyttalsjämförelser, även när beräkningen "borde" ge ett
-  exakt värde?
-* `Tmp36` ligger i driverlagret men behöver ändå ingen ESP-IDF-mockning för att enhetstestas.
-  Vad är det i dess design (se **L05**) som gör det möjligt?
-* Vilken/vilka drivers testade ni utöver `gpio`, och vad behövde ni mocka för respektive?
+Jämför nu förväntad och faktisk temperatur för varje ADC-värde:
+* Börja med att använda `EXPECT_EQ()`. Hur blir resultatet och varför?
+* Testa sedan att använda `EXPECT_NEAR()` med en viss tolerans, exempelvis `1e-2`. Hur blir
+  resultatet nu?
+* Vilken tolerans är rimlig här, och vad hade `1e-2` kunnat dölja?
 
 ---

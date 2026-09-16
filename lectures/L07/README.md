@@ -1,22 +1,17 @@
 # L07 - Referensvärden och toleranser
 
 ## Dagordning
-* Enhetstestning av `driver::tempsensor::Tmp36`s temperaturformel från **P02**.
-* Testning av beräkningar mot kända, framräknade referensvärden.
-* Samma teknik tillämpad på era ML-algoritmer från **P03**, ett **G**-krav i **P04**.
-* Resten av lektionen: enhetstester för fler av era riktiga `Esp32s3`-drivers, på egen hand i
-  gruppen.
+* Enhetstestning av en temperaturformel: flyttalsjämförelser, `EXPECT_NEAR` och val av
+  tolerans.
 * Fortsatt arbete med **P04**.
 
 ---
 
 ## Mål med lektionen
-* Kunna verifiera en beräkning mot ett känt, för hand uträknat exempel.
 * Kunna välja en rimlig tolerans för `EXPECT_NEAR` vid flyttalsjämförelser.
-* Förstå varför `Tmp36` är testbar redan nu, trots att den ligger i driverlagret.
 * Kunna tillämpa mockningstekniken från **L06** självständigt på fler av era riktiga
   `Esp32s3`-drivers.
-* Kunna verifiera en ML-beräkning (`ml::lin_reg::Adaptive`) mot ett framräknat referensvärde.
+* Kunna verifiera en ML-beräkning (er `ml::lin_reg::Adaptive`) mot ett framräknat referensvärde.
 
 ---
 
@@ -27,20 +22,17 @@
 
 ### Under lektionen
 * Delta aktivt på genomgången.
-* Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
-  * Ni får tid på er att genomföra uppgiften enskilt.
-  * Uppgiften gås sedan igenom i helklass.
+* Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md).
 * Resterande tid: skriv, på egen hand i gruppen, enhetstester för fler av era riktiga
-  `Esp32s3`-drivers (t.ex. `adc`, eller `eeprom`/`watchdog` om er grupp implementerade dem i
-  **P02**) med mockningstekniken från **L06**, samt enhetstester för era ML-algoritmer från
-  **P03** (`ml::lin_reg::Adaptive` samt minst ett neuralt nätverkslager).
+  `Esp32s3`-drivers (t.ex. `adc`, `gpio`, `timer`) med mockningstekniken från **L06**, samt
+  enhetstester för era ML-algoritmer från **P03** (`ml::lin_reg::Adaptive`).
 
 ---
 
 ## Utvärdering
 * Hur avgjorde ni vilken tolerans (`EXPECT_NEAR`) som var rimlig när ni jämförde flyttal?
-* Varför behöver `Tmp36` ingen ESP-IDF-mockning för att enhetstestas, till skillnad från
-  `driver::adc::Esp32s3`?
+* Två matematiskt identiska uttryck gav ändå olika resultat i övningen. Vad avgör om
+  `EXPECT_EQ` eller `EXPECT_NEAR` är rätt makro?
 
 ---
 
