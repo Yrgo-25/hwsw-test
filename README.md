@@ -28,8 +28,7 @@ Under kursens gång implementeras:
   nätverkslager.
 * Komponenttester för `system::logic::Logic`, som kombinerar flera stubbade drivers respektive
   ML-lager.
-* En CI-pipeline, byggd kring det medföljande testramverket `yrgo::test`, som möjliggör
-  kontinuerlig testning genom hela produktens livscykel.
+* En CI-pipeline som möjliggör kontinuerlig testning genom hela produktens livscykel.
 * Insamling, processning och visualisering av mätdata från fysisk hårdvara.
 
 Efter genomförd kurs ska studenten kunna:
@@ -112,9 +111,10 @@ pip install -r requirements.txt
 ---
 
 ## Testramverket `yrgo::test`
-Kursens enhets- och komponenttester skrivs med `yrgo::test`, ett lättviktigt C++17-ramverk som
-används genomgående i kursen (se [libs/test](./libs/test/README.md)). Ramverket byggs och
-verifieras automatiskt via `ci/build.sh`, som även bygger och kör
+Kursens övningar och praktiska prov använder `yrgo::test`, ett lättviktigt C++17-ramverk (se
+[libs/test](./libs/test/README.md)). I projektet **P04** väljer ni själva testramverk.
+
+Ramverket byggs och verifieras automatiskt via `ci/build.sh`, som även bygger och kör
 [ATmega328p-övningsbibliotekets](./libs/atmega/README.md) testsvit:
 
 ```bash

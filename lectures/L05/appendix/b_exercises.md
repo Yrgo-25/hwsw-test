@@ -65,8 +65,8 @@ få båda gröna i ert eget repo.
 ## Förbered för testjobbet i L06
 Er pipeline kör ännu inga tester, eftersom era egna tester börjar skrivas först i **L06**. Passa på
 att få infrastrukturen på plats nu, så att jobbet kan läggas till direkt då:
-* Lägg till testramverket i ert repo, lämpligen som submodul
-  ([yrgo-test](https://github.com/yrgo-libs/yrgo-test.git)).
+* Lägg till ert valda testramverk i ert repo, t.ex.
+  [yrgo-test](https://github.com/yrgo-libs/yrgo-test.git) som submodul.
 * Lägg till ett kommando som bygger och kör er (ännu tomma) testsvit, t.ex. ett `test`-mål i er
   `Makefile`, och kontrollera att det fungerar lokalt.
 * Kontrollera att `submodules: recursive` finns i checkout-steget, annars hittar jobbet inget

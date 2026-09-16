@@ -66,7 +66,11 @@ introduceras i **L01**:
    Python-skript), medan andra rimligen kräver manuell verifiering; dokumentera i så fall vad
    som testats och hur.
 
-Samtliga tester skrivs med testramverket [`yrgo::test`](../../libs/test/README.md).
+Ni väljer själva testramverk: kursens [`yrgo::test`](../../libs/test/README.md), Google Test eller
+valfritt annat ramverk. Det viktiga är att hela testsviten går att bygga och köra med ett enda
+kommando, både lokalt och i CI-pipelinen.
+
+**OBS!** De praktiska proven skrivs med `yrgo::test`, oavsett vilket ramverk ni väljer i projektet.
 
 ---
 

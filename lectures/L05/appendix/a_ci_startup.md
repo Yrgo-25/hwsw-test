@@ -351,10 +351,10 @@ testerna finns i **L06** ska de ha någonstans att landa. Då lägger ni till et
 ihåg det skyddar ingenting; det är först när det körs automatiskt som det är en regressionsspärr.
 
 Två saker är värda att förbereda redan nu, så att jobbet går att lägga till direkt i **L06**:
-* **Testramverket i ert repo.** Enklast som en submodul, precis som i det här repot
-  ([yrgo-test](https://github.com/yrgo-libs/yrgo-test.git)). Det är därför checkout-steget i mallen
-  använder `submodules: recursive`; utan det står jobbet med en tom katalog där ramverket skulle ha
-  legat.
+* **Testramverket i ert repo**, vilket ni än väljer. Använder ni
+  [yrgo-test](https://github.com/yrgo-libs/yrgo-test.git) läggs det enklast till som en submodul,
+  precis som i det här repot. Det är därför checkout-steget i mallen använder
+  `submodules: recursive`; utan det står jobbet med en tom katalog där ramverket skulle ha legat.
 * **Ett kommando som bygger och kör sviten**, t.ex. ett `test`-mål i er `Makefile`. Samma princip
   som för `build` och `check-format`: pipelinen ska köra exakt det ni kör lokalt.
 
