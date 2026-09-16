@@ -38,7 +38,23 @@
  */
 TEST(Temperature, Accuracy)
 {
-    //! @todo Add the test case as specified in Appendix B!
+    constexpr double tol{1e-9};
+    constexpr std::uint16_t adcMax{1023U};
+    driver::Tmp36 tmp36{};
+
+    // Test each and every ADC value in the range [0, 1023].
+    for (std::uint16_t adcVal{}; adcVal <= adcMax; ++adcVal)
+    {
+        // Set input voltage (since we don't have an ADC).
+        const auto inputVoltage = computeInputVoltage(adcVal);
+        tmp36.setInputVoltage(inputVoltage);
+
+        // Compare expected and actual temperature.
+        // Expect the values to be very close to each other.
+        const auto expectedTemp = convertToTemp(adcVal);
+        const auto actualTemp   = tmp36.read();
+        EXPECT_NEAR(expectedTemp, actualTemp, tol);
+    }
 }
 
 /**

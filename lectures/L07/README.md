@@ -23,6 +23,7 @@
 ### Under lektionen
 * Delta aktivt på genomgången.
 * Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md).
+* Lösningsförslag finns [här](./exercises/README.md).
 * Resterande tid: skriv, på egen hand i gruppen, enhetstester för fler av era riktiga
   `Esp32s3`-drivers (t.ex. `adc`, `gpio`, `timer`) med mockningstekniken från **L06**, samt
   enhetstester för era ML-algoritmer från **P03** (`ml::lin_reg::Adaptive`).
