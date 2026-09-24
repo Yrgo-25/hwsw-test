@@ -22,3 +22,6 @@ __pycache__/
 # Ignore IDE directories.
 .vscode/
 .vs/
+
+# Ignore the ATmega328p firmware build directory.
+libs/atmega/bin/
