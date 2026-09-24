@@ -39,6 +39,28 @@ ett interface, en riktig implementation, samt en hårdvaruoberoende stubb.
 
 ---
 
+## Bygga firmware och köra testsviten från bibliotekets rot
+[Makefilen](./Makefile) i bibliotekets rot bygger den riktiga firmwaren för `ATmega328p`, med
+[source/main.cpp](./source/main.cpp) som ingångspunkt, samt kör testsviten i `test/`:
+
+```bash
+cd libs/atmega
+make          # Bygger firmwaren och kör testsviten.
+make build    # Bygger firmwaren till bin/firmware.elf samt bin/firmware.hex.
+make test     # Bygger och kör testsviten i test/.
+make clean    # Städar bort firmwaren och testsviten.
+```
+
+Firmwaren byggs med AVR-verktygskedjan, som installeras med:
+
+```bash
+sudo apt -y install gcc-avr avr-libc binutils-avr
+```
+
+Båda körs även i repots CI-pipeline vid varje push och pull request.
+
+---
+
 ## Bygga och köra testsviten
 ```bash
 cd libs/atmega/test
