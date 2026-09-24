@@ -48,7 +48,7 @@ ci/          Skript för kodformattering och kontroll av testramverket
 info/        Kursinformation, schema och examination
 lectures/    Föreläsningar och övningsuppgifter
 libs/        Delade C++-bibliotek: testramverket yrgo::test (git-submodul) samt ett
-             ATmega328p-övningsbibliotek för L02–L04 samt L08
+             ATmega328p-övningsbibliotek för L02–L04, L08–L09 samt L11
 projects/    Projektbeskrivning, krav och inlämningsinstruktioner
 ```
 
@@ -102,7 +102,7 @@ sudo apt -y install clang-format
 ```
 
 Kursens Python-beroenden (`black`, samt `matplotlib` och `pyserial` för mätdatamomenten i
-**L14–L16**) installeras via `requirements.txt`:
+**L15**) installeras via `requirements.txt`:
 
 ```bash
 pip install -r requirements.txt

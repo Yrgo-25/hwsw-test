@@ -41,11 +41,11 @@ i takt med att nya testnivåer och verktyg introduceras på lektionerna:
 * **L07:** Enhetstester för `driver::tempsensor::Tmp36`s temperaturformel och för
   `ml::lin_reg::Adaptive`, med kända referensvärden och rimliga toleranser, plus tillämpning av
   mockningstekniken från **L06** på fler egna drivers.
-* **L08–L09, L11:** Komponenttester för `system::logic::Logic`.
-* **L12–L13:** Statisk analys som eget jobb i pipelinen, samt härdning av pipelinen
-  (jobbordning, branch protection, caching).
-* **L14–L17:** (VG) Mätdatainsamling, processning, visualisering samt HW/SW-integrationstester.
-* **L18:** Finputsning och redovisningsförberedelser.
+* **L08–L09:** Stubbar i övningsbiblioteket, inför komponenttesterna.
+* **L11–L12:** Komponenttester för `system::logic::Logic`, inklusive gränsfall och robusthet.
+* **L13:** Statisk analys, branch protection samt jobbordning i pipelinen.
+* **L14, L16, L18:** Projektarbete, med L18 som finputsning och redovisningsförberedelser.
+* **L15, L17:** (VG) Mätdatainsamling, lagring och visualisering, samt HW/SW-integrationstester.
 * **L19:** Redovisning och inlämning.
 
 ---
@@ -147,6 +147,7 @@ inlämning ska den:
   testad klass.
 
 ### Mätdatainsamling och HW/SW-integration (VG)
+Räknas till VG-momentet *Ett testramverk för kontinuerlig testning*, se [Bedömning](#bedömning).
 * Samla in mätdata från systemet på fysisk hårdvara (t.ex. temperaturen över tid via `"temp"`,
   eller tidmätning av blinktogglingens precision) via seriell kommunikation.
 * Processa och lagra mätdatan strukturerat (t.ex. som CSV).
@@ -156,6 +157,7 @@ inlämning ska den:
   verifierades manuellt.
 
 ### Robusthet (VG)
+Räknas till VG-momentet *Säker och robust programvara*, se [Bedömning](#bedömning).
 * Identifiera och testa minst tre relevanta edge cases som inte redan täcks av era G-tester,
   t.ex. ogiltiga serial-kommandon (`"period 0"`, ett okänt kommando), eller, om ni implementerat
   EEPROM/watchdog i **P02**, larmgränsen för temperatur respektive att watchdogen faktiskt
@@ -235,9 +237,10 @@ ett av kursplanens två VG-moment:
   (ogiltig indata, gränsvärden, samtidiga händelser) och/eller åtgärdat fel som hittats av
   statisk analys eller sanitizers, och kan motivera varför just dessa gör systemet mer robust.
 * **Ett testramverk för kontinuerlig testning:** du har ansvarat för och drivit fram en väsentlig
-  del av CI-pipelinen, teststrukturen eller ESP-IDF-mockningen, och kan förklara hur den
-  möjliggör fortsatt testning genom produktens livscykel, inte bara att den finns, utan varför
-  den är utformad som den är.
+  del av CI-pipelinen, teststrukturen, ESP-IDF-mockningen eller verifieringen mot fysisk
+  hårdvara (mätdatainsamling och visualisering jämfört mot kravställning, samt dokumenterade
+  integrationstester), och kan förklara hur den möjliggör fortsatt testning genom produktens
+  livscykel, inte bara att den finns, utan varför den är utformad som den är.
 
 ---
 

@@ -13,21 +13,21 @@ Erik Pihl ([erik.axel.pihl@gmail.com](mailto:erik.axel.pihl@gmail.com))
 | 34 | 20/8 | L02 | Enhetstester (del I): grunder samt GPIO-drivern, introduktion till **P04** |
 | 35 | 26/8 | L03 | Enhetstester (del II): den seriella drivern, arbete med **P04** |
 | 36 | 2/9 | L04 | Enhetstester (del III): timer-drivern, arbete med **P04** |
-| 37 | 9/9 | L05 | Testbar design: interfaces, dependency injection samt `clang-format`, arbete med **P04** |
-| 38 | 16/9 | L06 | Stubbar och virtuell hårdvara, arbete med **P04** |
+| 37 | 9/9 | L05 | CI-uppstart: automatiserad testkörning samt `clang-format`, arbete med **P04** |
+| 38 | 16/9 | L06 | Testbar design: dependency injection, stubbar och virtuell hårdvara, arbete med **P04** |
 | 38 | 17/9 | L07 | Referensvärden och toleranser: `Tmp36`s temperaturformel samt ML-algoritmerna, arbete med **P04** |
-| 39 | 23/9 | L08 | Komponenttester (del I): systemlogik och stubbar, arbete med **P04** |
-| 40 | 30/9 | L09 | Komponenttester (del II): gränsvärden och edge cases, arbete med **P04** |
+| 39 | 23/9 | L08 | Komponenttester (del I): vad ett komponenttest är, samt `driver::tempsensor::Stub`, arbete med **P04** |
+| 40 | 30/9 | L09 | Komponenttester (del II): `driver::gpio::Stub` samt `driver::timer::Stub`, arbete med **P04** |
 | 41 | 7/10 | L10 | Praktiskt prov 1 (gemensamt med Maskininlärning) |
-| 2 | - | L11 | Komponenttester (del III): täckningsgrad och testkvalitet, arbete med **P04** |
-| 2 | - | L12 | Statisk analys och verktyg för korrekthet, arbete med **P04** |
-| 3 | - | L13 | Testautomatisering och kontinuerlig integration (CI), arbete med **P04** |
-| 3 | - | L14 | Mätdatainsamling (del I): insamling från DUT, arbete med **P04** |
-| 4 | - | L15 | Mätdatainsamling (del II): processning och strukturerad lagring, arbete med **P04** |
-| 4 | - | L16 | Visualisering av mätdata och jämförelse mot kravställning, arbete med **P04** |
-| 5 | - | L17 | HW/SW-integrationstestning samt säker och robust mjukvara, arbete med **P04** |
-| 5 | - | L18 | Projektarbete (del I): **P04** |
-| 6 | - | L19 | Projektarbete (del II) och förberedelse inför det praktiska provet |
+| 2 | - | L11 | Komponenttester (del III): systemlogiken och stubbar med styrbar utdata, arbete med **P04** |
+| 2 | - | L12 | Komponenttester (del IV): gränsvärdesanalys, robusthet och sanitizers, arbete med **P04** |
+| 3 | - | L13 | Kodkvalitet i pipelinen: statisk analys, branch protection och jobbordning, arbete med **P04** |
+| 3 | - | L14 | Projektarbete (del I): **P04** |
+| 4 | - | L15 | Mätdatainsamling och visualisering (VG), arbete med **P04** |
+| 4 | - | L16 | Projektarbete (del II): **P04** |
+| 5 | - | L17 | HW/SW-integrationstestning (VG), arbete med **P04** |
+| 5 | - | L18 | Projektarbete (del III): **P04** |
+| 6 | - | L19 | Redovisning av **P04** och förberedelse inför praktiskt prov 2 |
 | 6 | - | L20 | Praktiskt prov 2 (gemensamt med Maskininlärning) och kursavslut |
 
 **OBS!** Kursen är vilande från vecka 42 fram till årsskiftet; L11 återupptas i januari. Veckor
@@ -103,8 +103,6 @@ Följande hårdvara, som finns på skolan, kommer att användas under kursen:
       kontrolleras i CI.
 * `clang-tidy` samt `cppcheck`:
     * Statisk analys av C/C++-kod.
-* `gcov` samt `lcov`:
-    * Mätning av täckningsgrad för testsviten, se **L11**.
 * AddressSanitizer/UndefinedBehaviorSanitizer (ASan/UBSan):
     * Körtidsverktyg för att hitta minnesfel och odefinierat beteende.
 * Python 3 med `matplotlib` samt `pyserial`:
