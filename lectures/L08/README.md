@@ -25,6 +25,7 @@
 * Genomför övningsuppgiften i [bilaga B](./appendix/b_exercises.md):
   * Ni får tid på er att genomföra uppgiften enskilt eller i grupp.
   * Uppgiften gås sedan igenom i helklass.
+* Lösningsförslag finns [här](./exercises/README.md).
 * Resterande tid: fortsatt arbete med enhetstesterna i **P04**.
 
 ---
