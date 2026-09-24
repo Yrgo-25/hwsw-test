@@ -22,6 +22,18 @@ jobs:
       - name: Build
         run: bash ci/build.sh
 
+  # Build the ATmega328p firmware with the AVR toolchain, on latest Ubuntu runner.
+  atmega-firmware:
+    name: Build ATmega328p firmware
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+      - name: Install AVR toolchain
+        run: sudo apt-get update && sudo apt-get install -y gcc-avr avr-libc binutils-avr
+      - name: Build firmware
+        run: make -C libs/atmega build
+
   # Check code formatting, run on latest Ubuntu runner.
   format-check:
     name: Check formatting
