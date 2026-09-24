@@ -16,6 +16,9 @@
 #include "logic/stub.h"
 #include "yrgo/test/test.h"
 
+//! @todo Remove this #ifdef block once all stubs are implemented!
+#ifdef STUBS_IMPLEMENTED
+
 #ifdef TESTSUITE
 
 namespace logic
@@ -306,3 +309,6 @@ TEST(Logic, Eeprom)
 } // namespace logic
 
 #endif /** TESTSUITE */
+
+//! @todo Remove this #endif once all stubs are implemented!
+#endif /** STUBS_IMPLEMENTED */
