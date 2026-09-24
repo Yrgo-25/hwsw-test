@@ -15,13 +15,12 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # Test framework directory.
 TEST_LIB_DIR="$ROOT_DIR/libs/test"
 
-# ATmega328p practice library test directory.
-ATMEGA_TEST_DIR="$ROOT_DIR/libs/atmega/test"
+# ATmega328p practice library directory.
+ATMEGA_DIR="$ROOT_DIR/libs/atmega"
 
 # Build the yrgo::test library and run the bundled example.
 cd "$TEST_LIB_DIR"
 make
 
 # Build and run the ATmega328p practice library's test suite.
-cd "$ATMEGA_TEST_DIR"
-make
+make -C "$ATMEGA_DIR" test
