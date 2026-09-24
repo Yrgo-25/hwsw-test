@@ -1,21 +1,17 @@
 # L08 - Komponenttester (del I)
 
 ## Dagordning
-* Repetition: skriv `driver::gpio::Stub` samt `driver::timer::Stub` i det delade
-  ATmega328p-övningsbiblioteket.
 * Vad är ett komponenttest, och hur skiljer det sig från ett enhetstest?
-* Testning av `system::logic::Logic` med samtliga sex drivers stubbade.
+* Repetition: skriv `driver::tempsensor::Stub` i det delade ATmega328p-övningsbiblioteket.
 * Fortsatt arbete med **P04**.
 
 ---
 
 ## Mål med lektionen
-* Kunna skriva en stubb mot ett givet interface (repetition från en tidigare kurs).
 * Kunna förklara skillnaden mellan ett enhetstest och ett komponenttest.
-* Kunna sätta ihop `Logic` med en `driver::factory::Stub` och komma åt de skapade
-  stubb-instanserna i ett test.
-* Kunna verifiera samspelet mellan `Logic` och dess drivers, t.ex. att kommandot `"on"`
-  resulterar i att `driver::gpio::Stub` sätts till rätt nivå.
+* Kunna skriva en stubb mot ett givet interface (repetition från en tidigare kurs).
+* Kunna förklara varför en stubb behöver ett värde som testet själv kan styra, t.ex. en
+  förbestämd temperatur, för att kunna användas i ett komponenttest.
 
 ---
 
@@ -26,27 +22,22 @@
 
 ### Under lektionen
 * Delta aktivt på genomgången.
-* Bygg upp `Logic` i testet med en `driver::factory::Stub` i stället för
-  `driver::factory::Esp32s3`.
-* Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
+* Genomför övningsuppgiften i [bilaga B](./appendix/b_exercises.md):
   * Ni får tid på er att genomföra uppgiften enskilt eller i grupp.
   * Uppgiften gås sedan igenom i helklass.
+* Resterande tid: fortsatt arbete med enhetstesterna i **P04**.
 
 ---
 
 ## Utvärdering
-* Vilka val gjorde ni för `driver::gpio::Stub` respektive `driver::timer::Stub`, t.ex. vilka
-  hjälpmetoder ni lade till utöver interfacet?
+* Vilka hjälpmetoder lade ni till i `driver::tempsensor::Stub` utöver interfacet, och varför?
 * Vad testar ett komponenttest som ett enhetstest inte fångar, och tvärtom?
-* Hur exponerar er `driver::factory::Stub` de stubb-instanser den skapar, så att testet kan
-  styra och läsa av dem?
-* Varför använder ni stubbar för samtliga drivers i stället för de riktiga klasserna när ni
+* Varför använder man stubbar för samtliga drivers i stället för de riktiga klasserna när man
   komponenttestar `Logic`?
 
 ---
 
 ## Nästa lektion
-* Komponenttester (del II).
-* Fortsatt arbete med **P04**.
+* Komponenttester (del II): `driver::gpio::Stub` samt `driver::timer::Stub`.
 
 ---

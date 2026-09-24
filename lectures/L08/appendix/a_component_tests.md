@@ -46,7 +46,7 @@ vilket är precis det som gör åtkomstfrågan nedan intressant:
 
 ## Ett exempel, i ord
 `Logic` tar emot en `driver::factory::Interface&` i sin konstruktor och skapar sina drivers
-genom den (se **L05**). Ett komponenttest av `Logic` skulle därför:
+genom den (se **L06**). Ett komponenttest av `Logic` skulle därför:
 1. Skapa en `driver::factory::Stub` och skicka in den till `Logic`s konstruktor.
 2. Mata in ett serial-kommando, t.ex. `"on"`, i den `driver::serial::Stub` som factory-stubben
    skapade.

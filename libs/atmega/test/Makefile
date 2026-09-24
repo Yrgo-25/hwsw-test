@@ -42,9 +42,8 @@ YRGO_TEST_LIB := $(YRGO_TEST_DIR)/libyrgo_test.a
 # C++ compiler.
 CXX_COMPILER = g++
 
-# Extra compiler flags, appended to CXX_FLAGS. Used to build the suite with coverage
-# instrumentation (L11) or sanitizers (L12) without editing this file, e.g.:
-#   make clean && make EXTRA_FLAGS="--coverage -O0 -g"
+# Extra compiler flags, appended to CXX_FLAGS. Used to build the suite with sanitizers (L12)
+# without editing this file, e.g.:
 #   make clean && make EXTRA_FLAGS="-fsanitize=address,undefined -fno-sanitize-recover=all -g"
 EXTRA_FLAGS =
 

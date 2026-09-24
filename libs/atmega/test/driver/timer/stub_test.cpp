@@ -8,8 +8,8 @@
 
 #ifdef TESTSUITE
 
-//! @todo Remove this #ifdef in lecture 8 to enable these tests.
-#ifdef LECTURE8
+//! @todo Remove this #ifdef in lecture 9 to enable these tests.
+#ifdef LECTURE9
 
 namespace driver
 {
@@ -112,6 +112,6 @@ TEST(Timer_Stub, SetTimeout)
 } // namespace
 } // namespace driver
 
-#endif /** LECTURE8 */
+#endif /** LECTURE9 */
 
 #endif /** TESTSUITE */

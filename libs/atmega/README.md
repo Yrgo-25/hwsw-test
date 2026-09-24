@@ -1,6 +1,6 @@
 # ATmega328p-övningsbibliotek
 Ett litet, färdigskrivet C++17-driverbibliotek för mikrokontrollern `ATmega328p` (samma familj
-som Arduino Uno), som ni skriver enhets- och komponenttester för i **L02–L04** samt **L08**.
+som Arduino Uno), som ni skriver enhets- och komponenttester för i **L02–L04**, **L08–L09** samt **L11**.
 Biblioteket
 används som en gemensam, delad övning innan ni tillämpar samma tekniker på er egen kodbas från
 **P02** (`ESP32-S3`) i **P04**.
@@ -50,7 +50,7 @@ make clean    # Städar bort byggda filer, både testsviten och yrgo::test.
 
 Testerna för `adc`, `eeprom`, `tempsensor::Tmp36` samt `watchdog` är redan kompletta och ska alla
 vara gröna direkt (10 testfall). Testerna för `gpio` (**L02**), `serial` (**L03**), `timer`
-(**L04**) samt stubbarna för `gpio`, `timer` och `tempsensor` (**L08**) är avsiktligt
+(**L04**) samt stubbarna för `tempsensor` (**L08**) och `gpio`/`timer` (**L09**) är avsiktligt
 inaktiverade tills vidare.
 
 ---
@@ -75,24 +75,24 @@ Kör om testsviten efter varje ifyllt testfall. Om ett test misslyckas: avgör o
 ert test eller i drivern, och åtgärda i så fall buggen i motsvarande fil under
 [source/driver](./source/driver).
 
-**L08** är av en annan sort: `driver::gpio::Stub`, `driver::timer::Stub` samt
-`driver::tempsensor::Stub` är fortfarande tomma (se
+**L08–L09** är av en annan sort: `driver::tempsensor::Stub` (**L08**) samt
+`driver::gpio::Stub` och `driver::timer::Stub` (**L09**) är fortfarande tomma (se
 [include/driver/gpio/stub.h](./include/driver/gpio/stub.h),
 [include/driver/timer/stub.h](./include/driver/timer/stub.h) samt
 [include/driver/tempsensor/stub.h](./include/driver/tempsensor/stub.h)), till skillnad från
 övriga drivers stubbar som redan är kompletta. Ni skrev motsvarande stubbar i en tidigare kurs,
 så det här är repetition. Här är det själva stubben, inte testfilen, som ska skrivas:
-* [driver/gpio/stub_test.cpp](./test/driver/gpio/stub_test.cpp) (`LECTURE8`, **L08**)
-* [driver/timer/stub_test.cpp](./test/driver/timer/stub_test.cpp) (`LECTURE8`, **L08**)
+* [driver/gpio/stub_test.cpp](./test/driver/gpio/stub_test.cpp) (`LECTURE9`, **L09**)
+* [driver/timer/stub_test.cpp](./test/driver/timer/stub_test.cpp) (`LECTURE9`, **L09**)
 
 `driver::tempsensor::Stub` har ingen egen testfil; den behövs för komponenttestet nedan och ska
 kunna ge ett förbestämt temperaturvärde.
 
-Ta bort `#ifdef LECTURE8`/`#endif` i båda testfilerna, implementera stubbarna mot respektive
+Ta bort `#ifdef LECTURE9`/`#endif` i båda testfilerna, implementera stubbarna mot respektive
 `Interface` (se **P02**s egna stubbar för samma mönster), och kör om testsviten tills testerna
 är gröna.
 
-**Två krav som är lätta att missa:**
+**Tre krav som är lätta att missa:**
 * **Ge samtliga konstruktorparametrar default-värden**, som i
   [include/driver/adc/stub.h](./include/driver/adc/stub.h). Testfilerna skapar stubbarna med
   argument (`gpio::Stub{Mode::Input}`, `timer::Stub{100U}`), medan
@@ -104,14 +104,16 @@ Ta bort `#ifdef LECTURE8`/`#endif` i båda testfilerna, implementera stubbarna m
   [source/driver/gpio/atmega328p.cpp](./source/driver/gpio/atmega328p.cpp). Två oberoende
   booleaner räcker inte: det färdiga testfallet `DebounceHandling` förutsätter att
   `enableInterruptOnPort(false)` slår igenom på pin-nivå.
+* **`driver::timer::Stub` ska inte starta sig själv i konstruktorn**, precis som
+  `driver::timer::Atmega328p` (`startTimer = false`). Annars *växlar* `Logic` av timern i
+  `DebounceHandling` i stället för att slå på den.
 
 Biblioteket innehåller även en färdig `logic::Logic`, som binder ihop samtliga sju drivers,
 med ett tillhörande komponenttest i [logic/logic_test.cpp](./test/logic/logic_test.cpp). Det
 testet är omslutet av `#ifdef STUBS_IMPLEMENTED` i stället för en enskild `LECTUREn`, eftersom
-det förutsätter att samtliga tre stubbar ovan precis skrivits färdigt. Ett
+det förutsätter att samtliga tre stubbar ovan är färdiga. Ett
 av testfallen (`DebounceHandling`) är komplett, medan övriga (`ToggleHandling`, `TempHandling`,
-`Eeprom`) ska fyllas i enligt kommentarerna i filen, precis som **L02–L04**s testfiler. Allt
-detta sker under **L08**, som en uppvärmning inför komponenttester av er egen systemlogik och
-stubbar.
+`Eeprom`) ska fyllas i enligt kommentarerna i filen, precis som **L02–L04**s testfiler. Det sker
+under **L11**, som en uppvärmning inför komponenttester av er egen systemlogik och stubbar.
 
 ---

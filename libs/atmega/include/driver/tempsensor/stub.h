@@ -1,1 +1,1 @@
-//! @todo Add temperature sensor stub here!
+//! @todo Add temperature sensor driver stub here!

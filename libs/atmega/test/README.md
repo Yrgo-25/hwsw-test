@@ -34,10 +34,9 @@ make clean
 ```
 
 Extra kompilatorflaggor kan skickas in via `EXTRA_FLAGS`, utan att makefilen behöver ändras.
-Det används för täckningsgrad (**L11**) samt sanitizers (**L12**):
+Det används för sanitizers (**L12**):
 
 ```bash
-make clean && make EXTRA_FLAGS="--coverage -O0 -g"
 make clean && make EXTRA_FLAGS="-fsanitize=address,undefined -fno-sanitize-recover=all -g"
 ```
 
