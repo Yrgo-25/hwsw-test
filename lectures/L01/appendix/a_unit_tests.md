@@ -15,7 +15,7 @@ Ett enhetstest svarar på en enkel fråga:
 > Gör den här lilla biten kod vad den ska, givet den här indatan?
 
 Det är alltså inte enhetstestets uppgift att verifiera att hela systemet fungerar ihop; det
-kommer vi öva på med komponenttester senare i kursen (**L08–L09, L11**).
+kommer vi öva på med komponenttester senare i kursen (**L08–L09, L11–L12**).
 
 ---
 

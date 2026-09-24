@@ -1,11 +1,11 @@
-# Bilaga A - HW/SW-integrationstestning och robust mjukvara
+# Bilaga A - HW/SW-integrationstestning
 
 ## Vad kan automatiseras, vad kräver en människa?
 Enhets- och komponenttester körs på värddatorn, utan hårdvara, och kan därför köras automatiskt
-i CI (**L13**) vid varje push. **HW/SW-integrationstester** verifierar i stället det färdiga
+i CI vid varje push. **HW/SW-integrationstester** verifierar i stället det färdiga
 systemet på riktig `ESP32-S3`-hårdvara, och här är gränsen för vad som går att automatisera
 mindre självklar:
-* Ett test som skickar kommandon över seriell kommunikation och verifierar svaret (se **L14**)
+* Ett test som skickar kommandon över seriell kommunikation och verifierar svaret (se **L15**)
   går ofta att automatisera med ett Python-skript.
 * Ett test som kräver att en människa fysiskt trycker på en knapp, mäter en spänning med ett
   instrument, eller bedömer om en lysdiod faktiskt lyser med rätt styrka, kräver manuell
@@ -31,8 +31,8 @@ Det är de sex fälten ni ska använda i övningsuppgiften i [bilaga B](./b_exer
 
 ---
 
-## Att automatisera hårdvarutestning: self-hosted runner (demo)
-Pipelinen från **L05**/**L13** kör på en GitHub-hostad runner (`runs-on: ubuntu-latest`), en
+## Att automatisera hårdvarutestning: self-hosted runner
+Pipelinen från **L05** kör på en GitHub-hostad runner (`runs-on: ubuntu-latest`), en
 virtuell maskin utan något kort inkopplat. Den kan bygga firmwaren och spara den som artefakt, men
 inte flasha den. Demot i **L05** körde på en self-hosted runner, men skillnaden var då bara var
 maskinen stod, inte vad den kunde göra.
@@ -55,24 +55,10 @@ via `runs-on:`. Det som gör tekniken krävande är allt därefter:
   kan vem som helst öppna en pull request och därmed köra godtycklig kod hos er, vilket är
   anledningen till att GitHub avråder från self-hosted runners på publika repon.
 
-Vi demonstrerar upplägget under lektionen. Det ingår inte i kraven för **P04**, dels för att det
-förutsätter att varje grupp har ett kort permanent inkopplat till en maskin som alltid är igång,
-dels för att den manuella dokumentationen (se ovan) är det ni faktiskt bedöms på. Poängen är att
+Upplägget ingår inte i kraven för **P04**, dels för att det förutsätter att varje grupp har ett
+kort permanent inkopplat till en maskin som alltid är igång, dels för att den manuella dokumentationen (se ovan) är det ni faktiskt bedöms på. Poängen är att
 ni ska veta att gränsen mellan "automatiserbart" och "kräver en människa" går att flytta, och vad
 det kostar att flytta den.
 
 ---
 
-## Säker och robust mjukvara
-Ett system som styr fysisk hårdvara bör hantera ogiltig indata och oväntade tillstånd på ett
-kontrollerat sätt, i stället för att fortsätta i ett odefinierat tillstånd. Några principer:
-* **Validera indata vid systemets gränser**, t.ex. värden som kommer från en sensor eller från
-  seriell kommunikation, snarare än att lita blint på att de alltid är rimliga.
-* **Markera funktioner `noexcept`** där de rimligen inte ska kasta undantag, och undvik
-  undantag (`throw`/`try`/`catch`) i hårdvarunära kod överlag, i linje med kursens kodbaser.
-* **Faila högt, inte tyst.** Ett tydligt felmeddelande och ett kontrollerat avslut
-  (`std::terminate()`) vid ett allvarligt, orimligt tillstånd är ofta bättre än att låta
-  programmet fortsätta i ett odefinierat läge.
-* **Kontrollera returvärden.** Ignorera inte felkoder från hårdvara eller operativsystem. Ett misslyckat anrop bör hanteras direkt, inte upptäckas långt senare.
-
----

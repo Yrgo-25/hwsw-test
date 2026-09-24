@@ -141,7 +141,7 @@ temperaturen från `adcVal = 204`. Skillnaden är exakt ett ADC-steg, omräknat 
 ## Vad som medvetet inte testas
 * **Spänningar utanför mätområdet.** Att `setInputVoltage()` ignorerar t.ex. -0.1 eller 5.1 V,
   och att den tidigare spänningen då ligger kvar, testas inte. Det är ett naturligt andra
-  testfall för den som vill bygga vidare, och mer om gränsvärden kommer i **L09**.
+  testfall för den som vill bygga vidare, och mer om gränsvärden kommer i **L12**.
 * **En riktig ADC.** Strukten tar emot spänningen direkt, och omräkningen från ADC-värde till
   spänning finns bara i testets hjälpfunktion. Det är den delen som `driver::tempsensor::Tmp36`
   i er egen kodbas behöver en `driver::adc::Stub` för.

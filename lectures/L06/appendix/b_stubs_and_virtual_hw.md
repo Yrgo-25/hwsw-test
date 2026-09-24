@@ -1,10 +1,10 @@
-# Bilaga A - Stubbar och virtuell hårdvara
+# Bilaga B - Stubbar och virtuell hårdvara
 
 ## Stubb, mock eller fake?
 Tre besläktade begrepp används ofta om vartannat, men betyder olika saker:
 * **Stubb.** En enkel, alternativ implementation av ett interface som returnerar fördefinierade
   svar. Testet verifierar resultatet av koden som *använder* stubben, inte stubben själv. Det är
-  den typ ni redan använt i **L01–L04**.
+  den typ ni redan använt i **L01**.
 * **Spy.** Liknar en stubb, men registrerar dessutom *hur* den anropades (vilka funktioner, med
   vilka argument, hur många gånger). **Testet** läser av det i efterhand och verifierar själva
   interaktionen. Det är den varianten ni bygger nedan, via `gpio_last_config()`.
@@ -55,6 +55,11 @@ Nedan visas ett exempel på en enkel mock av två ESP-IDF-funktioner för tester
 #ifndef ESP_GPIO_MOCK_H_
 #define ESP_GPIO_MOCK_H_
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <stdint.h>
 
 /** Error code indicating success. */
@@ -90,6 +95,9 @@ esp_err_t gpio_set_level(gpio_num_t pin, uint32_t level);
  */
 int gpio_get_level(const gpio_num_t pin);
 
+#ifdef __cplusplus
+} // extern "C"
+#endif
 #endif /** ESP_GPIO_MOCK_H_ */
 ```
 

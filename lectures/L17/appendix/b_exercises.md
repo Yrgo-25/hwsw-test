@@ -16,7 +16,6 @@ Genomför testet och dokumentera resultatet.
 ## Diskussion
 * Varför är det värt att dokumentera ett manuellt test lika noggrant som ett automatiserat,
   trots att det kräver en människa varje gång?
-* Vilken del av er egen kodbas hanterar i dag ogiltig indata minst kontrollerat, och vad skulle
-  ett rimligt och kontrollerat beteende vara i stället?
+* Vad hade krävts för att automatisera just ert testfall, och hade det varit värt besväret?
 
 ---

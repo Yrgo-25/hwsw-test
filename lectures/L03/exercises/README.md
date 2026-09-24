@@ -174,8 +174,8 @@ rensa `UDRE0` i samma ögonblick som `UDR0` skrivs. Det kräver att `UDR0` kan u
 aldrig vinna det tidsloppet. Så länge hårdvarusidan i stället letar efter ett *ändrat värde* i
 `UDR0` kan den dessutom inte se två identiska tecken i rad, som dubbel-s:et i `"message"`.
 
-Ett grönt testfall som inte kontrollerar något är precis den sortens testkvalitet vi återkommer
-till i **L11**, då med täckningsgrad som verktyg.
+Ett grönt testfall som inte kontrollerar något är precis den sortens testkvalitet ni ska granska
+er egen testsvit mot inför redovisningen av **P04** (se **L18**).
 
 ---
 

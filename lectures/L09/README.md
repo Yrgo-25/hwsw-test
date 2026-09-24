@@ -1,36 +1,37 @@
 # L09 - Komponenttester (del II)
 
 ## Dagordning
-* Gränsvärdesanalys (*boundary value analysis*) och varför edge cases hittar fler buggar än
-  "typiska" indata.
-* Vidareutveckling av komponenttesterna från **L08** med relevanta gränsfall.
-* Fortsatt arbete med **P04**.
+* Repetition: skriv `driver::gpio::Stub` samt `driver::timer::Stub` i det delade
+  ATmega328p-övningsbiblioteket.
+* Varför en stubbs utgångsläge och beteende måste motsvara den riktiga drivrutinens.
+* Genomgång i helklass.
 
 ---
 
 ## Mål med lektionen
-* Kunna identifiera relevanta gränsfall för en given komponent, t.ex. tomma indata, maxvärden
-  och samtidiga händelser.
-* Kunna skriva komponenttester som täcker dessa gränsfall, inte bara "happy path".
+* Kunna skriva en stubb mot ett givet interface (repetition från en tidigare kurs).
+* Ha fungerande `driver::gpio::Stub` och `driver::timer::Stub`, med gröna stubbtester, redo att
+  användas i komponenttesterna i **L11**.
 
 ---
 
 ## Instruktioner
 
 ### Innan lektionen
-* Läs [bilaga A](./appendix/a_boundary_analysis.md) om gränsvärdesanalys.
+* Repetera [bilaga A i L08](../L08/appendix/a_component_tests.md) om komponenttester.
 
 ### Under lektionen
-* Delta aktivt på genomgången.
-* Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
+* Genomför övningsuppgifterna i [bilaga A](./appendix/a_exercises.md):
   * Ni får tid på er att genomföra uppgiften enskilt eller i grupp.
   * Uppgiften gås sedan igenom i helklass.
 
 ---
 
 ## Utvärdering
-* Vilka edge cases identifierade ni, och varför bedömde ni just dessa som relevanta?
-* Vad är risken med att bara testa "happy path" i en kodbas som styr fysisk hårdvara?
+* Vilka val gjorde ni för `driver::gpio::Stub` respektive `driver::timer::Stub`, t.ex. vilka
+  hjälpmetoder ni lade till utöver interfacet?
+* Varför måste en stubbs utgångsläge motsvara den riktiga drivrutinens, för att ett
+  komponenttest ska säga något om `Logic`?
 
 ---
 

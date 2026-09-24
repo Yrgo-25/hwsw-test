@@ -54,8 +54,8 @@ avrundar resultatet till `int16_t` och jämför därför med `EXPECT_EQ`.
 ---
 
 ## Samma teknik gäller era ML-algoritmer
-**P04** kräver enhetstester även för `ml::lin_reg::Adaptive` samt minst ett neuralt nätverkslager
-från **P03**. Det är samma princip tillämpad på en annan beräkning: mata in ett känt, för hand
+**P04** kräver enhetstester även för era ML-algoritmer från **P03**: `ml::lin_reg::Adaptive`,
+`driver::tempsensor::Smart` samt den algoritm ni valde i Fas 2. Det är samma princip tillämpad på en annan beräkning: mata in ett känt, för hand
 uträknat exempel (indata, parametrar och förväntat resultat) och verifiera utdatan med
 `EXPECT_NEAR`.
 

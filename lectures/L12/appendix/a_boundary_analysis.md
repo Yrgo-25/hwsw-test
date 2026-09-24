@@ -52,6 +52,6 @@ minskar antalet testfall i mitten, gränsvärdesanalys lägger till dem i kanter
 * **Upprepade tillståndsbyten.** Vad händer vid `"blink on"` två gånger i rad? Vid `"off"` när
   LED:en redan är släckt?
 * **Exakt vid periodgränsen.** Triggar blinktoggling exakt när `period_ms` har passerat, snarare
-  än en tick för tidigt eller för sent (jämför med er timer-stubbtestning i **L04**)?
+  än en tick för tidigt eller för sent (jämför med timer-drivertesterna i **L04**)?
 
 ---

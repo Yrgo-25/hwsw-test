@@ -1,42 +1,45 @@
-# L15 - Mätdatainsamling (del II)
+# L15 - Mätdatainsamling och visualisering (VG)
 
 ## Dagordning
-* Processning av rå mätdata: validering, filtrering, medelvärdesberäkning och enhetskonvertering.
-* Strukturerad lagring av mätdata, t.ex. som CSV.
-* Fortsatt arbete med **P04** (VG).
+* Kort genomgång: insamling av mätdata från en DUT, strukturerad lagring samt visualisering
+  jämfört mot kravställning.
+* Fortsatt arbete med **P04**.
 
 ---
 
 ## Mål med lektionen
-* Kunna processa rå mätdata till ett mer användbart format.
-* Kunna lagra mätdata strukturerat och återanvändbart, t.ex. med tidsstämpel och enhet per
-  kolumn.
+* Kunna skicka strukturerad mätdata från `ESP32-S3` över seriell kommunikation och läsa in den
+  med ett Python-skript.
+* Kunna lagra mätdata strukturerat, t.ex. som CSV, och visualisera den jämfört mot en
+  kravställning.
+* Ha påbörjat mätdatadelen av VG-kraven i **P04**, för den som siktar på VG. Den räknas till
+  VG-momentet *Ett testramverk för kontinuerlig testning* (se
+  [Bedömning](../../projects/P04/README.md#bedömning)).
 
 ---
 
 ## Instruktioner
 
 ### Innan lektionen
-* Läs [bilaga A](./appendix/a_data_processing.md) om processning och strukturerad lagring av
-  mätdata.
+* Läs [bilaga A](./appendix/a_measurement_data.md) om mätdatainsamling, lagring och
+  visualisering.
 
 ### Under lektionen
 * Delta aktivt på genomgången.
-* Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
-  * Ni får tid på er att genomföra uppgiften enskilt eller i grupp.
-  * Uppgiften gås sedan igenom i helklass.
+* Den som siktar på VG: genomför uppgifterna i [bilaga B](./appendix/b_exercises.md), i ert eget
+  repo.
+* Övriga: fortsatt arbete med G-kraven i **P04**.
 
 ---
 
 ## Utvärdering
-* Vilken processning gjorde ni på den insamlade mätdatan, och varför var den nödvändig?
-* Varför är det fördelaktigt att lagra mätdata strukturerat (t.ex. CSV) i stället för att bara
-  skriva ut den i terminalen?
+* Varför är det viktigt att ha ett väldefinierat, dokumenterat format på datan som skickas över
+  seriell kommunikation?
+* Uppfyller ert system kravet ni ritade in i grafen? Hur ser ni det?
 
 ---
 
 ## Nästa lektion
-* Visualisering av mätdata och jämförelse mot kravställning.
-* Fortsatt arbete med **P04**.
+* Projektarbete (del II).
 
 ---

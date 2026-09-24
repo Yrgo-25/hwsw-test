@@ -1,40 +1,30 @@
-# L16 - Visualisering av mätdata och jämförelse mot kravställning
+# L16 - Projektarbete (del II)
 
 ## Dagordning
-* Visualisering av mätdata med Python och `matplotlib`.
-* Att jämföra uppmätta resultat mot systemets kravställning, t.ex. förväntad noggrannhet på en
-  temperaturprediktion.
-* Fortsatt arbete med **P04** (VG).
+* Arbete med **P04**.
 
 ---
 
 ## Mål med lektionen
-* Kunna visualisera mätdata på ett sätt som gör det enkelt att dra slutsatser.
-* Kunna avgöra, utifrån en visualisering, om systemet uppfyller en given kravställning.
+* Ha samtliga G-krav i **P04** uppfyllda.
+* För den som siktar på VG: ha mätdatainsamling, lagring och visualisering på plats.
 
 ---
 
 ## Instruktioner
-
-### Innan lektionen
-* Läs [bilaga A](./appendix/a_data_visualization.md) om visualisering av mätdata.
-
-### Under lektionen
-* Delta aktivt på genomgången.
-* Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
-  * Ni får tid på er att genomföra uppgiften enskilt eller i grupp.
-  * Uppgiften gås sedan igenom i helklass.
+* Se uppgiftsbeskrivningen av **P04** [här](../../projects/P04/README.md) vid behov.
+* Prioritera det som saknas för G före VG-kraven.
+* Använd lektionstiden för att ställa frågor och be om granskning av era pull requests.
 
 ---
 
 ## Utvärdering
-* Vad visade er visualisering: uppfyllde systemet kravställningen?
-* Vilken typ av graf valde ni, och varför passade den bättre än andra alternativ för er data?
+* Vilka krav i **P04** återstår, och vem i gruppen ansvarar för respektive del?
 
 ---
 
 ## Nästa lektion
-* HW/SW-integrationstestning samt säker och robust mjukvara.
+* HW/SW-integrationstestning (VG).
 * Fortsatt arbete med **P04**.
 
 ---

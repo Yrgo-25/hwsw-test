@@ -1,51 +1,42 @@
-# L17 - HW/SW-integrationstestning samt säker och robust mjukvara
+# L17 - HW/SW-integrationstestning (VG)
 
 ## Dagordning
-* HW/SW-integrationstestning: att verifiera det färdiga systemet mot fysisk hårdvara.
-* Vad går att automatisera (t.ex. via seriell kommunikation), och vad kräver manuell
-  verifiering?
-* Demo: en self-hosted runner med ett inkopplat kort, som flashar firmware-artefakten från
-  pipelinen och kör test mot fysisk hårdvara (hardware-in-the-loop).
-* Säker och robust mjukvara: defensiv programmering, hantering av ogiltig indata och
-  gränsfall i produktionskod.
-* Fortsatt arbete med **P04** (VG).
+* Kort genomgång: HW/SW-integrationstestning, och vad som går att automatisera respektive kräver
+  manuell verifiering.
+* Hur ett manuellt testfall dokumenteras spårbart.
+* Fortsatt arbete med **P04**.
 
 ---
 
 ## Mål med lektionen
 * Kunna avgöra vilka integrationstester som rimligen kan automatiseras, och vilka som kräver
   manuell verifiering.
-* Kunna dokumentera ett manuellt genomfört integrationstest på ett spårbart sätt.
-* Kunna identifiera vanliga orsaker till att ett inbyggt system blir mindre robust, och föreslå lämpliga åtgärder.
-* Kunna redogöra för vad en self-hosted runner möjliggör, och vilka praktiska baksidor den för
-  med sig.
+* Kunna dokumentera ett manuellt genomfört integrationstest på ett spårbart sätt. För den som
+  siktar på VG räknas det till VG-momentet *Ett testramverk för kontinuerlig testning* (se
+  [Bedömning](../../projects/P04/README.md#bedömning)).
 
 ---
 
 ## Instruktioner
 
 ### Innan lektionen
-* Läs [bilaga A](./appendix/a_integration_and_robustness.md) om HW/SW-integrationstestning och
-  robust mjukvara.
+* Läs [bilaga A](./appendix/a_integration.md) om HW/SW-integrationstestning.
 
 ### Under lektionen
 * Delta aktivt på genomgången.
-* Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
-  * Ni får tid på er att genomföra uppgiften enskilt eller i grupp.
-  * Uppgiften gås sedan igenom i helklass.
+* Den som siktar på VG: genomför uppgiften i [bilaga B](./appendix/b_exercises.md) på riktig
+  hårdvara.
+* Övriga: fortsatt arbete med G-kraven i **P04**.
 
 ---
 
 ## Utvärdering
 * Vilket integrationstest genomförde ni, och varför gick det (eller gick det inte) att
   automatisera?
-* Vilka delar av er kodbas är mest känsliga för ogiltig indata, och hur hanteras det i dag?
-* Vad hade krävts för att flytta just ert manuella testfall in i pipelinen, och hade det varit
-  värt besväret?
 
 ---
 
 ## Nästa lektion
-* Projektarbete (del I).
+* Projektarbete (del III).
 
 ---

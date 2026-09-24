@@ -8,18 +8,18 @@ Material från föreläsningar:
 * [L05](./L05/README.md): CI-uppstart, automatiserad testkörning samt `clang-format`.
 * [L06](./L06/README.md): Testbar design, stubbar och virtuell hårdvara.
 * [L07](./L07/README.md): Referensvärden och toleranser, Tmp36s temperaturformel samt ML-algoritmerna.
-* [L08](./L08/README.md): Komponenttester (del I), systemlogik och stubbar.
-* [L09](./L09/README.md): Komponenttester (del II), gränsvärden och edge cases.
+* [L08](./L08/README.md): Komponenttester (del I), vad ett komponenttest är samt tempsensor-stubben.
+* [L09](./L09/README.md): Komponenttester (del II), gpio- och timer-stubbarna.
 * [L10](./L10/README.md): Praktiskt prov 1 (gemensamt med Maskininlärning).
-* [L11](./L11/README.md): Komponenttester (del III), täckningsgrad och testkvalitet.
-* [L12](./L12/README.md): Statisk analys och verktyg för korrekthet.
-* [L13](./L13/README.md): Testautomatisering och kontinuerlig integration (CI).
-* [L14](./L14/README.md): Mätdatainsamling (del I), insamling från DUT.
-* [L15](./L15/README.md): Mätdatainsamling (del II), processning och strukturerad lagring.
-* [L16](./L16/README.md): Visualisering av mätdata och jämförelse mot kravställning.
-* [L17](./L17/README.md): HW/SW-integrationstestning samt säker och robust mjukvara.
-* [L18](./L18/README.md): Projektarbete (del I).
-* [L19](./L19/README.md): Projektarbete (del II) och förberedelse inför det praktiska provet.
+* [L11](./L11/README.md): Komponenttester (del III), systemlogiken och stubbar med styrbar utdata.
+* [L12](./L12/README.md): Komponenttester (del IV), gränsvärdesanalys, robusthet och sanitizers.
+* [L13](./L13/README.md): Kodkvalitet i pipelinen, statisk analys, branch protection och jobbordning.
+* [L14](./L14/README.md): Projektarbete (del I).
+* [L15](./L15/README.md): Mätdatainsamling och visualisering (VG).
+* [L16](./L16/README.md): Projektarbete (del II).
+* [L17](./L17/README.md): HW/SW-integrationstestning (VG).
+* [L18](./L18/README.md): Projektarbete (del III).
+* [L19](./L19/README.md): Redovisning av P04 och förberedelse inför praktiskt prov 2.
 * [L20](./L20/README.md): Praktiskt prov 2 (gemensamt med Maskininlärning) och kursavslut.
 
 ---

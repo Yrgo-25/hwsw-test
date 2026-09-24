@@ -1,41 +1,51 @@
-# L11 - Komponenttester (del III)
+# L11 - Komponenttester (del III): systemlogiken
 
 ## Dagordning
 * Genomgång av provet från **L10**.
-* Vad är täckningsgrad (*code coverage*), och vad säger den egentligen om testkvalitet?
-* Skillnaden mellan hög täckningsgrad och bra tester.
-* Fortsatt arbete med **P04**.
+* Stubbar med styrbar utdata: det mönster komponenttesterna för systemlogiken bygger på.
+* Komponenttestet `logic_test.cpp` i ATmega328p-övningsbiblioteket, med stubbarna från
+  **L08–L09**.
+* Komponenttester för er egen `system::logic::Logic` i **P04**.
 
 ---
 
 ## Mål med lektionen
-* Kunna förklara vad täckningsgrad mäter, och vilka svagheter måttet har.
-* Kunna bedöma om en given testsvit faktiskt testar rätt saker, inte bara "rör vid" mycket kod.
-* Ha identifierat luckor i er egen testsvit för **P04**.
+* Kunna förklara hur en stubb med styrbar utdata gör det möjligt att komponenttesta en klass med
+  kända, kontrollerade indata.
+* Kunna sätta ihop `Logic` med en `driver::factory::Stub` och komma åt de skapade
+  stubb-instanserna i ett test.
+* Kunna verifiera samspelet mellan `Logic` och dess drivers, t.ex. att kommandot `"on"`
+  resulterar i att `driver::gpio::Stub` sätts till rätt nivå.
+* Ha påbörjat komponenttesterna för er egen `Logic`, med minst ett scenario per gruppmedlem.
 
 ---
 
 ## Instruktioner
 
 ### Innan lektionen
-* Läs [bilaga A](./appendix/a_code_coverage.md) om täckningsgrad och testkvalitet.
+* Repetera [bilaga A i L08](../L08/appendix/a_component_tests.md) om komponenttester.
+* Läs [bilaga A](./appendix/a_controllable_stubs.md) om stubbar med styrbar utdata.
 
 ### Under lektionen
-* Delta aktivt på genomgången.
+* Delta aktivt på genomgången av provet.
 * Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
-  * Ni får tid på er att genomföra uppgiften enskilt eller i grupp.
-  * Uppgiften gås sedan igenom i helklass.
+  * Uppvärmningen i övningsbiblioteket gås igenom i helklass.
+  * Komponenttesterna för er egen `Logic` är projektarbete i **P04**, och gås inte igenom i
+    helklass.
 
 ---
 
 ## Utvärdering
-* Varför kan en testsvit ha hög täckningsgrad utan att vara bra på att hitta buggar?
-* Hittade ni kod som kördes under testerna men vars beteende aldrig faktiskt verifierades?
+* Vad testar ett komponenttest som ett enhetstest inte fångar, och tvärtom?
+* Hur exponerar er `driver::factory::Stub` de stubb-instanser den skapar, så att testet kan
+  styra och läsa av dem?
+* Vilka av era stubbar har en styrbar utdata, och hur skulle ni lägga till en i en stubb som
+  saknar det?
 
 ---
 
 ## Nästa lektion
-* Statisk analys och verktyg för korrekthet.
+* Komponenttester (del IV): gränsfall, robusthet och sanitizers.
 * Fortsatt arbete med **P04**.
 
 ---

@@ -1,42 +1,33 @@
-# L14 - Mätdatainsamling (del I)
+# L14 - Projektarbete (del I)
 
 ## Dagordning
-* Vad är en DUT (*Device Under Test*), och varför behöver vi samla in mätdata från den?
-* Seriell kommunikation mellan `ESP32-S3` och värddatorn för att skicka mätdata.
-* Ett enkelt Python-skript (`pyserial`) som läser data från den seriella porten.
-* Fortsatt arbete med **P04** (VG).
+* Arbete med **P04**, med fokus på att färdigställa komponenttesterna.
 
 ---
 
 ## Mål med lektionen
-* Kunna förklara vad en DUT är i sammanhanget testning och verifiering.
-* Kunna skicka strukturerad mätdata från `ESP32-S3` över seriell kommunikation.
-* Kunna skriva ett Python-skript som läser in denna data på värddatorn.
+* Ha komponenttester på plats för samtliga scenarier i kravet
+  [Komponenttester (G)](../../projects/P04/README.md#komponenttester-g) i **P04**.
+* Ha en grön pipeline med branch protection på `main`.
 
 ---
 
 ## Instruktioner
-
-### Innan lektionen
-* Läs [bilaga A](./appendix/a_data_collection.md) om mätdatainsamling från en DUT.
-
-### Under lektionen
-* Delta aktivt på genomgången.
-* Genomför övningsuppgifterna i [bilaga B](./appendix/b_exercises.md):
-  * Ni får tid på er att genomföra uppgiften enskilt eller i grupp.
-  * Uppgiften gås sedan igenom i helklass.
+* Stäm av i gruppen mot kraven för G i [P04](../../projects/P04/README.md#krav): vad saknas, och
+  vem tar vad?
+* Prioritera det som saknas för G före VG-kraven.
+* Använd lektionstiden för att ställa frågor och be om granskning av era pull requests.
 
 ---
 
 ## Utvärdering
-* Varför är det viktigt att ha ett väldefinierat, dokumenterat format på datan som skickas över
-  seriell kommunikation?
-* Vad händer om mätdata går förlorad eller kommer i fel ordning, och hur kan man upptäcka det?
+* Uppfyller er testsvit nu samtliga G-krav i **P04**? Om inte, vad återstår?
+* Siktar någon i gruppen på VG, och vilka av VG-kraven planerar ni i så fall att ta er an?
 
 ---
 
 ## Nästa lektion
-* Mätdatainsamling (del II).
+* Mätdatainsamling och visualisering (VG).
 * Fortsatt arbete med **P04**.
 
 ---

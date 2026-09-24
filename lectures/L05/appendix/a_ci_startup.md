@@ -10,8 +10,8 @@ Nyttan är störst tidigt. En formatteringskontroll som funnits sedan **L05** sl
 städa upp efter i efterhand, och ett rött kryss på en pull request hindrar ej fungerande kod från att nå
 `main` under hela projektets gång, inte bara under de sista veckorna.
 
-Den här bilagan räcker för att få en fungerande pipeline på plats. Hur den fungerar i detalj, och
-hur den härdas vidare, går vi igenom i **L13**.
+Den här bilagan räcker för att få en fungerande pipeline på plats. Hur den härdas vidare, med
+branch protection och ordningen mellan jobben, går vi igenom i **L13**.
 
 ---
 

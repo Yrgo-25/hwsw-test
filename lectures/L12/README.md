@@ -1,53 +1,47 @@
-# L12 - Statisk analys och verktyg för korrekthet
+# L12 - Komponenttester (del IV): gränsfall, robusthet och sanitizers
 
 ## Dagordning
-* Statisk analys: att hitta buggar utan att köra koden.
-* Demo: verktygen körda på ett minimalt program, där felet är känt i förväg.
-* Verktyg: `clang-tidy` och `cppcheck`.
-* Körtidsanalys med `AddressSanitizer (ASan)` och `UndefinedBehaviorSanitizer (UBSan)`.
-* Att låta pipelinen växa: statisk analys och sanitizers som egna jobb i den `ci.yml` ni satte
-  upp i **L05**.
-* Fortsatt arbete med **P04**.
+* Gränsvärdesanalys (*boundary value analysis*) och varför edge cases hittar fler buggar än
+  "typiska" indata.
+* Kort genomgång: robust mjukvara, ogiltig konfiguration kontra ogiltig indata, samtidiga
+  händelser samt sanitizers (ASan/UBSan).
+* Gränsfall i er egen systemlogik, som en fortsättning på komponenttesterna från **L11**.
+* Fortsatt arbete med komponenttesterna i **P04**.
 
 ---
 
 ## Mål med lektionen
-* Kunna förklara skillnaden mellan statisk analys och testning (körning av kod).
-* Kunna köra `clang-tidy`/`cppcheck` på en kodbas och tolka resultatet.
-* Kunna köra en testsvit med ASan/UBSan och tolka en sanitizer-rapport.
-* Kunna avgöra när en varning kan ignoreras och när den bör åtgärdas.
-* Kunna lägga till ett nytt jobb i en befintlig pipeline, och motivera varför analysen hör hemma
-  där snarare än enbart på den egna datorn.
+* Kunna tillämpa gränsvärdesanalys och ekvivalenspartitionering för att välja testfall.
+* Kunna identifiera relevanta gränsfall för `system::logic::Logic`, inklusive samtidiga
+  händelser, och skriva komponenttester som täcker dem.
+* Kunna motivera när ett fel ska avvisas med ett returvärde och när ett kontrollerat avslut är
+  rimligare.
+* Kunna köra testsviten med ASan/UBSan och tolka en sanitizer-rapport.
+* Ha påbörjat robusthetskraven (VG) i **P04**, för den som siktar på VG.
 
 ---
 
 ## Instruktioner
 
 ### Innan lektionen
-* Läs [bilaga A](./appendix/a_static_analysis.md) om statisk analys och sanitizers.
+* Läs [bilaga A](./appendix/a_boundary_analysis.md) om gränsvärdesanalys.
+* Läs [bilaga B](./appendix/b_robustness.md) om robust mjukvara och sanitizers.
 
 ### Under lektionen
-* Delta aktivt på genomgången, där verktygen demonstreras live på ett minimalt program med en
-  medvetet inplanterad bugg.
-* Genomför därefter övningsuppgifterna i [bilaga B](./appendix/b_exercises.md), i grupp och i ert
-  eget repo.
-* **Lösningen gås inte igenom i helklass efteråt.** Att tillämpa det här på gruppens egen kodbas
-  är projektarbete i **P04**: varje grupps repo ser olika ut, och det är i genomförandet ni lär
-  er tekniken. Demot från genomgången är mallen ni utgår från, och jag går runt och hjälper till
-  under tiden.
+* Delta aktivt på genomgången.
+* Genomför därefter uppgifterna i [bilaga C](./appendix/c_exercises.md), i grupp och i ert eget
+  repo. De gås inte igenom i helklass; jag går runt och hjälper till under tiden.
 
 ---
 
 ## Utvärdering
-* Vad kan statisk analys hitta som era enhets- och komponenttester inte kan, och vice versa?
-* Hittade sanitizers eller den statiska analysen något i er kodbas? Vad, och hur åtgärdade ni
-  det?
-* Varför är det värt att köra analysen i pipelinen, när ni ändå kan köra den lokalt?
+* Vilka gränsfall identifierade ni, och hittade något av dem ett fel i er implementation?
+* Hittade ASan/UBSan något i er testsvit? Vad, och hur åtgärdade ni det?
 
 ---
 
 ## Nästa lektion
-* Testautomatisering och kontinuerlig integration (CI).
+* Kodkvalitet i pipelinen: statisk analys, branch protection och jobbordning.
 * Fortsatt arbete med **P04**.
 
 ---

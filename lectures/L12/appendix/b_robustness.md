@@ -1,15 +1,41 @@
-# Bilaga A - Statisk analys och sanitizers
+# Bilaga B - Robust mjukvara och sanitizers
 
-## Statisk analys: buggar utan att köra koden
-Statisk analys läser er källkod utan att exekvera den, och letar efter mönster som ofta är
-buggar: oinitierade variabler, oanvänd kod, misstänkt komplex logik, jämförelser som alltid är
-sanna eller falska. Två vanliga verktyg för C++:
-* **`clang-tidy`.** Kontrollerar bland annat kodkonventioner, moderna C++-mönster och vanliga
-  buggkällor. Körs t.ex. som `clang-tidy source/main.cpp -- -std=c++17 -Iinclude`.
-* **`cppcheck`.** Ett fristående verktyg som främst fokuserar på att hitta potentiella buggar snarare än stilfrågor. Körs t.ex. som `cppcheck --enable=all --std=c++17 source/`.
+## Säker och robust mjukvara
+Ett system som styr fysisk hårdvara bör hantera ogiltig indata och oväntade tillstånd på ett
+kontrollerat sätt, i stället för att fortsätta i ett odefinierat tillstånd. Några principer:
+* **Validera indata vid systemets gränser**, t.ex. värden som kommer från en sensor eller från
+  seriell kommunikation, snarare än att lita blint på att de alltid är rimliga.
+* **Markera funktioner `noexcept`** där de rimligen inte ska kasta undantag, och undvik
+  undantag (`throw`/`try`/`catch`) i hårdvarunära kod överlag, i linje med kursens kodbaser.
+* **Skilj på ogiltig konfiguration och ogiltig indata.**
+  * Ett objekt som inte går att skapa korrekt, t.ex. en konstruktor som får en ogiltig pin eller
+    storlek 0, bör faila högt: ett tydligt felmeddelande och ett kontrollerat avslut
+    (`std::terminate()`), i stället för att fortsätta i ett odefinierat läge.
+  * Ogiltig indata till ett objekt som redan fungerar, t.ex. ett okänt serial-kommando eller en
+    matris med fel dimension, bör i stället avvisas med ett returvärde (`false`), och objektet
+    ska behålla sitt tidigare, giltiga tillstånd. Det gör beteendet testbart: ett
+    `std::terminate()` avslutar hela testprogrammet, så `yrgo::test` hinner aldrig rapportera
+    felet, och inga efterföljande testfall körs.
+* **Kontrollera returvärden.** Ignorera inte felkoder från hårdvara eller operativsystem. Ett
+  misslyckat anrop bör hanteras direkt, inte upptäckas långt senare.
 
-Statisk analys hittar en annan typ av fel än era tester: tester verifierar att koden *gör rätt
-sak* givet viss indata, statisk analys letar efter kod som är *misstänkt* oavsett indata.
+Varje sådan princip i produktionskoden är också ett gränsfall att testa: vad *ska* `Logic` göra
+vid `"period 0"`, ett okänt kommando eller `"off"` när LED:en redan är släckt? Se listan över
+gränsfall i [bilaga A](./a_boundary_analysis.md#gränsfall-i-er-egen-systemlogik).
+
+---
+
+## Samtidiga händelser
+En typ av gränsfall som sällan dyker upp av sig själv i ett test är **samtidiga händelser**: två
+saker som inträffar inom samma iteration av `Logic`s loop. I ett komponenttest med stubbar går
+de att framkalla exakt, till skillnad från på riktig hårdvara:
+* Ett `"blink off"`-kommando i `driver::serial::Stub` samtidigt som `driver::timer::Stub`s
+  timeout triggas. Är LED:en släckt efteråt, oavsett i vilken ordning `Logic` hanterar dem?
+* Ett `"period"`-kommando som kommer precis när den gamla perioden löper ut. Används den nya
+  perioden från och med nästa toggling, eller blir en toggling kvar med den gamla?
+
+Testet sätter båda händelserna via stubbarna innan `Logic` körs ett steg, och verifierar sedan
+det förväntade tillståndet.
 
 ---
 
@@ -35,21 +61,10 @@ felkod*. Utan flaggan kan alltså testsviten, och därmed CI-jobbet, lysa grönt
 hittat odefinierat beteende. `-fno-omit-frame-pointer` ger läsbara anropsstackar.
 
 Om ni kompilerar och länkar i separata steg måste `-fsanitize=...` anges i **båda** stegen,
-annars misslyckas länkningen med odefinierade `__asan_*`-symboler. I övningsbibliotekets
-testsvit räcker det med:
-```bash
-cd libs/atmega/test
-make clean && make EXTRA_FLAGS="-fsanitize=address,undefined -fno-sanitize-recover=all -g"
-```
+annars misslyckas länkningen med odefinierade `__asan_*`-symboler.
 
-Kör sedan programmet (eller testsviten) som vanligt. Sanitizers är särskilt värdefulla att köra
-mot just testsviten, eftersom testerna redan motionerar koden med varierad indata.
-
-Utan en sanitizer kan samma fel orsaka en krasch långt senare, eller ge felaktiga resultat utan
-att programmet kraschar alls. En sanitizer rapporterar i stället felet direkt där det uppstår,
-med en detaljerad felrapport, och avbryter programmet med en nollskild felkod så länge
-`-fno-sanitize-recover=all` är angiven.
-
-I många projekt körs både statisk analys och sanitizers automatiskt i CI vid varje commit.
+Kör sedan testsviten som vanligt. Sanitizers är särskilt värdefulla att köra mot just
+testsviten, eftersom testerna redan motionerar koden med varierad indata, inte minst de gränsfall
+ni skriver under den här lektionen.
 
 ---

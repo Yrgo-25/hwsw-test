@@ -1,4 +1,4 @@
-# L18 - Projektarbete (del I)
+# L18 - Projektarbete (del III)
 
 ## Dagordning
 * Arbete med **P04**.
@@ -25,6 +25,6 @@
 ---
 
 ## Nästa lektion
-* Projektarbete (del II) och förberedelse inför det praktiska provet.
+* Redovisning av **P04** och förberedelse inför praktiskt prov 2.
 
 ---
