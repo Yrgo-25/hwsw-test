@@ -16,9 +16,6 @@
 #include "logic/stub.h"
 #include "yrgo/test/test.h"
 
-//! @todo Remove this #ifdef block once all stubs are implemented!
-#ifdef STUBS_IMPLEMENTED
-
 #ifdef TESTSUITE
 
 namespace logic
@@ -161,6 +158,7 @@ TEST(Logic, DebounceHandling)
     // Expect button interrupts to be disabled and the debounce timer to be enabled.
     // Expect the toggle timer to be enabled due to the toggle button being pressed.
     {
+        EXPECT_FALSE(mock.toggleTimer.isEnabled());
         mock.toggleButton.write(true);
         logic.handleButtonEvent();
         mock.toggleButton.write(false);
@@ -309,6 +307,3 @@ TEST(Logic, Eeprom)
 } // namespace logic
 
 #endif /** TESTSUITE */
-
-//! @todo Remove this #endif once all stubs are implemented!
-#endif /** STUBS_IMPLEMENTED */
