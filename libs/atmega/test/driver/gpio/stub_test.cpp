@@ -67,32 +67,31 @@ TEST(Gpio_Stub, Toggle)
 /**
  * @brief Simulated input test.
  *
- *        Verify that setState() can be used to simulate an external input, e.g. a button press,
- *        without going through write().
+ *        Verify that write() can be used to simulate an external input, e.g. a button press, on
+ *        a GPIO configured as input.
  */
 TEST(Gpio_Stub, SimulatedInput)
 {
     gpio::Stub button{gpio::Mode::InputPullup};
     EXPECT_FALSE(button.read());
 
-    button.setState(true);
+    button.write(true);
     EXPECT_TRUE(button.read());
 
-    button.setState(false);
+    button.write(false);
     EXPECT_FALSE(button.read());
 }
 
 /**
  * @brief Interrupt test.
  *
- *        Verify that pin change interrupt enablement is tracked, both for the GPIO itself and
- *        for its associated I/O port.
+ *        Verify that pin change interrupt enablement is tracked, both when enabled for the GPIO
+ *        itself and for its associated I/O port.
  */
 TEST(Gpio_Stub, Interrupt)
 {
     gpio::Stub button{gpio::Mode::InputPullup};
     EXPECT_FALSE(button.isInterruptEnabled());
-    EXPECT_FALSE(button.isPortInterruptEnabled());
 
     button.enableInterrupt(true);
     EXPECT_TRUE(button.isInterruptEnabled());
@@ -101,7 +100,10 @@ TEST(Gpio_Stub, Interrupt)
     EXPECT_FALSE(button.isInterruptEnabled());
 
     button.enableInterruptOnPort(true);
-    EXPECT_TRUE(button.isPortInterruptEnabled());
+    EXPECT_TRUE(button.isInterruptEnabled());
+
+    button.enableInterruptOnPort(false);
+    EXPECT_FALSE(button.isInterruptEnabled());
 }
 } // namespace
 } // namespace driver

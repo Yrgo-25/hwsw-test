@@ -7,7 +7,7 @@ I det delade [ATmega328p-övningsbiblioteket](../../../libs/atmega/README.md) ä
 * Implementera `driver::gpio::Stub` mot `driver::gpio::Interface` samt `driver::timer::Stub` mot
   `driver::timer::Interface`. Använd bibliotekets övriga stubbar (t.ex.
   [driver/adc/stub.h](../../../libs/atmega/include/driver/adc/stub.h)) som mall.
-* Ta bort `#ifdef LECTURE8`/`#endif` i
+* Ta bort `#ifdef LECTURE9`/`#endif` i
   [driver/gpio/stub_test.cpp](../../../libs/atmega/test/driver/gpio/stub_test.cpp) samt
   [driver/timer/stub_test.cpp](../../../libs/atmega/test/driver/timer/stub_test.cpp), och kör
   testsviten tills stubbtesterna är gröna:
@@ -17,7 +17,7 @@ I det delade [ATmega328p-övningsbiblioteket](../../../libs/atmega/README.md) ä
   make
   ```
 
-Om ni tar bort `#ifdef LECTURE8` *innan* stubbarna finns får ni en lång rad kompileringsfel
+Om ni tar bort `#ifdef LECTURE9` *innan* stubbarna finns får ni en lång rad kompileringsfel
 (`'gpio' has not been declared` m.fl.). Det är väntat, och försvinner när stubbarna är på plats.
 
 ---
@@ -33,10 +33,10 @@ utöver att stubbtesterna blir gröna:
   startar inte timern om det inte uttryckligen begärs, och det ska inte stubben heller. En
   timer-stubb som startar sig själv i konstruktorn gör att `Logic` senare *växlar av* en timer
   som testet förväntar sig ska bli påslagen, och felet ser då ut att ligga i `Logic`.
-* **Pin och port är två olika saker.** `enableInterrupt()` styr pinnens egen avbrottsmask,
-  `enableInterruptOnPort()` hela portens, precis som `PCMSK`/`PCICR` i den riktiga drivern. Med
-  en enda gemensam flagga skriver de över varandra. `isInterruptEnabled()` ska bara vara sann när
-  *båda* är aktiverade, och stubbtestet förutsätter dessutom en `isPortInterruptEnabled()`.
+* **Avbrotten måste gå att läsa av.** Interfacet har ingen metod för att se om avbrott är
+  aktiverade, men `logic_test.cpp` förutsätter en `isInterruptEnabled()` i `gpio::Stub`. Den ska
+  spegla det senaste anropet till `enableInterrupt()` *eller* `enableInterruptOnPort()`, eftersom
+  `Logic` stänger av och slår på portens avbrott under debounce-hanteringen.
 
 ---
 
