@@ -1,7 +1,7 @@
 # L11 - Komponenttester (del III): systemlogiken
 
 ## Dagordning
-* Genomgång av provet från **L10**.
+* Genomgång av praktiskt prov 1.
 * Stubbar med styrbar utdata: det mönster komponenttesterna för systemlogiken bygger på.
 * Komponenttestet `logic_test.cpp` i ATmega328p-övningsbiblioteket, med stubbarna från
   **L08–L09**.

@@ -2,7 +2,7 @@
 
 ## Dagordning
 * Redovisning och inlämning av **P04**.
-* Förberedelse inför praktiskt prov 2: genomgång av testuppgifterna i övningstentamen 2.
+* Förberedelse inför praktiskt prov 2: genomgång av provets testuppgifter.
 
 ---
 
@@ -19,15 +19,15 @@
 ### Innan lektionen
 * Kontrollera att projektet bygger, att testsviten går igenom och att allt material finns
   tillgängligt inför redovisningen.
-* Läs igenom testuppgifterna (uppgift 6 samt 10–11) i
-  [övningstentamen 2](https://github.com/Yrgo-25/Machine-Learning/blob/main/exams/exam2/practice_exam2.md).
+* Läs igenom testuppgifterna (uppgift 1, 2 och 4) i
+  [hemtentamen 2](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam2/home_exam2.md), som utgör provet.
 
 ### Under lektionen
 * Redovisa **P04** enligt [Redovisning](../../projects/P04/README.md#redovisning) i
   uppgiftsbeskrivningen.
 * Övriga tiden: förberedelse inför **L20**, med stöd av
   [bilaga A](./appendix/a_course_summary.md), en sammanfattning av kursens centrala begrepp.
-  Tre saker från övningstentamen 2 som är värda att repetera särskilt:
+  Tre saker från provet som är värda att repetera särskilt:
   * Att komplettera en stubb med styrbar utdata, se
     [bilaga A i L11](../L11/appendix/a_controllable_stubs.md).
   * När ett fel ska avvisas med `false` och när ett kontrollerat avslut är rimligare, se
@@ -43,11 +43,12 @@
 ## Utvärdering
 * Är **P04** redovisat och inlämnat enligt kraven i uppgiftsbeskrivningen?
 * Vad är ni mest nöjda med i er testsvit, och vad hade ni gjort annorlunda om ni fick börja om?
-* Känner ni er redo att genomföra det praktiska provet på egen hand?
+* Känner ni er redo att genomföra det praktiska provet på egen hand, och att förklara era
+  lösningar vid den muntliga redovisningen?
 
 ---
 
 ## Nästa lektion
-* Praktiskt prov 2 (gemensamt med Maskininlärning) och kursavslut.
+* Utdelning av praktiskt prov 2 (gemensamt med Maskininlärning) och kursavslut.
 
 ---

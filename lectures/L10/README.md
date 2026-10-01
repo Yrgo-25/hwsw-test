@@ -1,7 +1,8 @@
-# L10 - Praktiskt prov 1
+# L10 - Arbete med praktiskt prov 1
 
 ## Dagordning
-* Genomförande av **Praktiskt prov 1**, gemensamt med kursen Maskininlärning.
+* Eget arbete med **Praktiskt prov 1**, gemensamt med kursen Maskininlärning. Provet är redan
+  utdelat; lektionen är tid för att arbeta vidare med det och slutföra det.
 
 ---
 
@@ -21,23 +22,32 @@
 
 ## Instruktioner
 
-### Förberedelse
-* Repetera [övningstentamen 1](https://github.com/Yrgo-25/Machine-Learning/blob/main/exams/exam1/practice_exam1.md), uppgift 8–10, som gicks igenom i Maskininlärning-kursens **L10**.
+### Innan lektionen
+* Läs igenom provet och påbörja arbetet, så att ni vet vilka frågor ni behöver ställa. Länken
+  till provet finns i Maskininlärning-kursens Classroom.
+* Repetera vid behov [övningstentamen 1](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam1/practice_exam1.md), uppgift 1, 2, 4, 6
+  och 7, som gicks igenom i Maskininlärning-kursens **L10**.
 * Se [Praktiska prov](../../info/README.md#praktiska-prov) i kursinfon för mer information om
   hur provet är upplagt.
 
 ### Under lektionen
-* Provet genomförs individuellt under lärarens överinseende.
-* Provmaterial delas ut vid provtillfället.
+* Arbeta vidare med provet på egen hand, och slutför det om möjligt under lektionen.
+* Ställ frågor om något i uppgifterna är oklart.
+* Kontrollera att varje uppgift ni räknar som genomförd är klar och fungerar, dvs. att testfallen
+  går igenom och att rättningarna är på plats.
+* Provet lämnas in senast angiven deadline, och redovisas därefter muntligt.
 
 ---
 
 ## Utvärdering
-* Reflektera i efterhand: vilka delar av provet kändes säkra, och vilka kändes osäkra?
+* Vilka delar av provet känns säkra, och vilka känns osäkra inför den muntliga redovisningen?
+* Kan ni förklara varje testfall och varje rättning ni lämnar in? Det är den frågan den muntliga
+  redovisningen ställer.
 
 ---
 
 ## Nästa lektion
+* Genomgång av provet.
 * Komponenttester (del III).
 * Fortsatt arbete med **P04**.
 

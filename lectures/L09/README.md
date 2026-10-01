@@ -37,6 +37,6 @@
 ---
 
 ## Nästa lektion
-* Praktiskt prov 1 (gemensamt med Maskininlärning).
+* Arbete med praktiskt prov 1 (gemensamt med Maskininlärning).
 
 ---
