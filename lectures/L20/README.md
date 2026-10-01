@@ -1,7 +1,7 @@
-# L20 - Praktiskt prov 2 och kursavslut
+# L20 - Utdelning av praktiskt prov 2 och kursavslut
 
 ## Dagordning
-* Genomförande av **Praktiskt prov 2**, gemensamt med kursen Maskininlärning.
+* Genomgång av **Praktiskt prov 2**, gemensamt med kursen Maskininlärning, samt tid att påbörja det.
 * Kursavslut.
 
 ---
@@ -21,13 +21,15 @@
 ## Instruktioner
 
 ### Förberedelse
-* Repetera [övningstentamen 2](https://github.com/Yrgo-25/Machine-Learning/blob/main/exams/exam2/practice_exam2.md), uppgift 6 och 10–11, som gicks igenom i Maskininlärning-kursens **L20**.
+* Läs igenom [hemtentamen 2](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam2/home_exam2.md), som utgör provet;
+  uppgift 1, 2 och 4 examinerar testning.
 * Se [Praktiska prov](../../info/README.md#praktiska-prov) i kursinfon för mer information om
   hur provet är upplagt.
 
 ### Under lektionen
-* Provet genomförs individuellt under lärarens överinseende.
-* Provmaterial delas ut vid provtillfället.
+* Provet delas ut och gås igenom i helklass.
+* Påbörja arbetet på egen hand, och ställ frågor om något är oklart.
+* Provet genomförs därefter individuellt fram till angiven deadline, och redovisas muntligt.
 
 ---
 

@@ -1,5 +1,5 @@
 # Bilaga A - Sammanfattning inför praktiskt prov 2
-En kompakt repetition av kursens centrala begrepp, som stöd inför **L20**. Den här sammanfattningen kompletterar, men ersätter inte [övningstentamen 2](https://github.com/Yrgo-25/Machine-Learning/blob/main/exams/exam2/practice_exam2.md), uppgift 6 och 10-11.
+En kompakt repetition av kursens centrala begrepp, som stöd inför **L20**. Den här sammanfattningen kompletterar, men ersätter inte [hemtentamen 2](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam2/home_exam2.md), uppgift 1, 2 och 4.
 
 ---
 

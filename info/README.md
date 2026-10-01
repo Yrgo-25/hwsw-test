@@ -40,35 +40,44 @@ de gemensamma proven genomförs (se [Praktiska prov](#praktiska-prov)).
 
 ### Upplägg
 * Ett projekt (**P04**).
-* Två praktiska prov, gemensamma med kursen Maskininlärning.
+* Två praktiska prov, gemensamma med kursen Maskininlärning, genomförda som inlämningsuppgifter
+  med muntlig redovisning.
 
 ### Praktiska prov
-Båda proven är gemensamma med kursen [Maskininlärning](https://github.com/Yrgo-25/Machine-Learning)
-och genomförs under den här kursens **L10** respektive **L20**, eftersom dessa lektioner
-infaller senare i schemat än motsvarande lektioner i Maskininlärning. Provet består av en
-gemensam uppgiftsuppsättning per tillfälle: en delmängd av uppgifterna examinerar
-maskininlärning, en annan delmängd examinerar testning. Betyg sätts separat per kurs, utifrån
-den delmängd av uppgifterna som hör till respektive kurs.
+Båda proven är gemensamma med kursen [Maskininlärning](https://github.com/Yrgo-25/machine-learning).
+Provet består av en gemensam uppgiftsuppsättning per tillfälle: en delmängd av uppgifterna
+examinerar maskininlärning, en annan delmängd examinerar testning. Betyg sätts separat per kurs,
+utifrån den delmängd av uppgifterna som hör till respektive kurs.
+
+Proven genomförs på egen hand fram till angiven deadline, och redovisas därefter muntligt: ni visar
+er egen kod och förklarar den. AI-verktyg får användas under arbetet, men koden ska skrivas av er
+själva, och ni ska kunna redogöra för varje test och varje rättning ni lämnar in.
+
+Varje uppgift är märkt med vilken kurs den examinerar samt med **G** eller **VG**. Betyget avgörs
+av vilka uppgifter ni genomför: G-uppgifterna ger ett **G**, och samtliga uppgifter ger ett **VG**.
+En uppgift räknas som genomförd när den är klar och fungerar, dvs. testfallen går igenom och
+rättningarna är på plats.
 
 Denna kurss del av respektive prov täcker:
 * **Prov 1:** Enhets- och komponenttester av ett neuralt nätverks dense-lager, skrivna med
-  `yrgo::test`. Testteori kring skillnaden mellan enhets- och komponenttester.
-* **Prov 2:** Enhets- och komponenttester av konvolutionella lager (Conv, MaxPool, Flatten)
-  samt ett helt CNN uppbyggt via stubbar. Testteori kring varför stubbar används i
-  komponenttester.
+  `yrgo::test`, samt felsökning av en färdig implementation med hjälp av dessa tester.
+* **Prov 2:** Enhets- och komponenttester av konvolutionella lager (Conv, MaxPool, Flatten) samt
+  ett helt CNN uppbyggt via stubbar.
 
-Övningstentorna, inklusive den kod ni ska utgå från, delas mellan kurserna och finns i
+Övningstentamen inför prov 1, inklusive den kod ni ska utgå från, delas mellan kurserna och finns i
 Maskininlärning-kursens repo:
-* [Övningstentamen 1](https://github.com/Yrgo-25/Machine-Learning/blob/main/exams/exam1/practice_exam1.md): uppgift 8–10 examinerar testning. Gås igenom i Maskininlärning-kursens **L10**.
-* [Övningstentamen 2](https://github.com/Yrgo-25/Machine-Learning/blob/main/exams/exam2/practice_exam2.md): uppgift 6, 10–11 examinerar testning. Gås igenom i Maskininlärning-kursens **L20**.
+* [Övningstentamen 1](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam1/practice_exam1.md): uppgift 1, 2, 4, 6 och 7 examinerar
+  testning. Gås igenom i Maskininlärning-kursens **L10**.
+* [Hemtentamen 2](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam2/home_exam2.md) utgör prov 2: uppgift 1, 2 och 4 examinerar
+  testning.
 
 ### Poängfördelning
 * **P04** ger upp till 4 poäng per student (**G** = 2p, **VG** = 4p), satta individuellt enligt
   kriterierna i [projektbeskrivningen](../projects/P04/README.md#bedömning).
 * **Praktiskt prov 1** ger upp till 2 poäng (**G** = 1p, **VG** = 2p), baserat på
-  testuppgifterna i övningstentamen 1.
+  testuppgifterna i provet.
 * **Praktiskt prov 2** ger upp till 2 poäng (**G** = 1p, **VG** = 2p), baserat på
-  testuppgifterna i övningstentamen 2.
+  testuppgifterna i provet.
 
 ### Betygsnivåer
 Totalt 8 poäng:

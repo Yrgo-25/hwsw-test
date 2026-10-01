@@ -2,8 +2,9 @@
 Repo för kursen **Mjuk- och hårdvarutestning** (kurskod `Ee14H26`) med klassen Ee25, ht26–vt27.
 
 Kursen genomförs parallellt med kursen **Maskininlärning**. De två kursernas praktiska prov är
-gemensamma (se [Examination](#examination)), och den här kursens projekt bygger vidare på
-kodbaser från både *Hårdvarunära programmering C/C++* (**P02**) och Maskininlärning (**P03**).
+gemensamma (se [Examination](#examination)) och genomförs som inlämningsuppgifter med muntlig
+redovisning. Den här kursens projekt bygger vidare på kodbaser från både *Hårdvarunära
+programmering C/C++* (**P02**) och Maskininlärning (**P03**).
 
 ---
 
@@ -57,7 +58,9 @@ projects/    Projektbeskrivning, krav och inlämningsinstruktioner
 ## Examination
 Kursen examineras genom:
 * Ett projekt, **P04**, se [projects/P04](./projects/P04/README.md).
-* Två praktiska prov, gemensamma med kursen [Maskininlärning](https://github.com/Yrgo-25/Machine-Learning), se [Praktiska prov](./info/README.md#praktiska-prov) i kursinfon.
+* Två praktiska prov, gemensamma med kursen [Maskininlärning](https://github.com/Yrgo-25/machine-learning), genomförda som
+  inlämningsuppgifter med muntlig redovisning, se [Praktiska prov](./info/README.md#praktiska-prov)
+  i kursinfon.
 
 Fullständig information om schema och poängfördelning finns i [info](./info/README.md).
 
