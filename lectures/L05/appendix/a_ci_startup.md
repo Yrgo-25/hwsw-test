@@ -288,7 +288,7 @@ Etiketter är alltså inget annat än fritextnamn ni själva hittar på. Allt an
 identiskt, det är bara den här raden som skiljer. Två skäl gör det intressant: verktygskedjor kan
 förinstalleras på en egen maskin i stället för att hämtas varje körning, och en egen maskin kan ha
 **hårdvara inkopplad**. Det sistnämnda är vad som gör automatiserad hårdvarutestning möjlig, se
-**L17**.
+**L18**.
 
 ### Vad som händer när ingen maskin matchar
 Eftersom `runs-on:` är ett krav, och inte en order, händer något som förvånar många första gången:
@@ -307,7 +307,7 @@ Det demonstreras på lektionen, så att ni känner igen symptomet. Två praktisk
 Binären ovan är ett helt vanligt C++-program, byggt med värddatorns kompilator. För **P04** ska
 samma jobb i stället bygga er **firmware** för `ESP32-S3`. Det kräver ingen fysisk hårdvara: att
 **kompilera** firmware behöver bara rätt verktygskedja, det är först **flashning** och körning mot
-ett riktigt kort som kräver hårdvara (se **L17**).
+ett riktigt kort som kräver hårdvara (se **L18**).
 
 I stället för att installera hela ESP-IDF-verktygskedjan för hand i varje körning finns Espressifs
 officiella GitHub Action, som paketerar verktygskedjan i en Docker-image. Byt ut byggsteget mot
@@ -335,7 +335,7 @@ Den nedladdade `.bin`-filen ger er tre konkreta saker:
 * En gruppmedlem som inte har ESP-IDF installerat kan ändå få tag på en byggd firmware.
 * Ni kan flasha exakt den binär som byggdes från en viss commit, i stället för att bygga om lokalt
   och hoppas att det blev samma sak.
-* Den binären är utgångspunkten för HW/SW-integrationstesterna i **L17**.
+* Den binären är utgångspunkten för HW/SW-integrationstesterna i **L18**.
 
 ---
 
@@ -364,6 +364,6 @@ Två saker är värda att förbereda redan nu, så att jobbet går att lägga ti
 Allt som kräver fysisk hårdvara ligger utanför de GitHub-hostade runnerna: de har inget kort
 inkopplat, och kan alltså varken flasha eller mäta något. Det betyder inte att det är omöjligt att
 automatisera, bara att det kräver en runner som körs på en maskin med ett kort inkopplat. Den
-varianten tittar vi på i **L17**.
+varianten tittar vi på i **L18**.
 
 ---

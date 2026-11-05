@@ -47,7 +47,7 @@ få båda gröna i ert eget repo.
   GitHub. Titta särskilt på loggen för ett jobb som misslyckas: felmeddelandet där är detsamma
   som ni hade fått lokalt.
 * Ladda ner artefakten från körningen (*Actions → körningen → Artifacts*) och kontrollera att
-  filen faktiskt ligger där. Spara den, i **L17** är det en sådan binär ni utgår från vid
+  filen faktiskt ligger där. Spara den, i **L18** är det en sådan binär ni utgår från vid
   HW/SW-integrationstestning.
 * Provocera fram ett rött kryss, en gång per jobb, och verifiera att pipelinen faktiskt fångar
   det:

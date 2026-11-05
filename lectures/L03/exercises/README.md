@@ -175,7 +175,7 @@ aldrig vinna det tidsloppet. Så länge hårdvarusidan i stället letar efter et
 `UDR0` kan den dessutom inte se två identiska tecken i rad, som dubbel-s:et i `"message"`.
 
 Ett grönt testfall som inte kontrollerar något är precis den sortens testkvalitet ni ska granska
-er egen testsvit mot inför redovisningen av **P04** (se **L18**).
+er egen testsvit mot inför redovisningen av **P04** (se **L19**).
 
 ---
 
@@ -189,6 +189,6 @@ er egen testsvit mot inför redovisningen av **P04** (se **L18**).
 * **Baud rate som verklig bittiming.** `baudRate_bps()` returnerar en konstant, och konstruktorn
   skriver 103 till `UBRR0` - båda går att läsa av, men själva överföringshastigheten på ledningen
   går inte att verifiera i ett enhetstest, varken här eller i er egen kodbas. Det hör hemma i
-  HW/SW-integrationstesterna i **L17**.
+  HW/SW-integrationstesterna i **L18**.
 
 ---
