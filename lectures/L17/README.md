@@ -1,42 +1,47 @@
-# L17 - HW/SW-integrationstestning (VG)
+# L17 - Mätdatainsamling (del II): processning och visualisering
 
 ## Dagordning
-* Kort genomgång: HW/SW-integrationstestning, och vad som går att automatisera respektive kräver
-  manuell verifiering.
-* Hur ett manuellt testfall dokumenteras spårbart.
-* Fortsatt arbete med **P04**.
+* Genomgång: från mätdata till en bedömning mot kravställning, dvs. mätbara krav, processning,
+  visualisering och automatisk bedömning.
+* Arbete med mätdatadelen av **P04**.
 
 ---
 
 ## Mål med lektionen
-* Kunna avgöra vilka integrationstester som rimligen kan automatiseras, och vilka som kräver
-  manuell verifiering.
-* Kunna dokumentera ett manuellt genomfört integrationstest på ett spårbart sätt. För den som
-  siktar på VG räknas det till VG-momentet *Ett testramverk för kontinuerlig testning* (se
-  [Bedömning](../../projects/P04/README.md#bedömning)).
+* Kunna formulera ett krav så att det går att jämföra mätdata mot, med nominellt värde och
+  tolerans.
+* Kunna processa mätdata med Python och välja relevanta storheter, t.ex. medelvärde, spridning
+  och största avvikelse, utifrån vad kravet handlar om.
+* Kunna visualisera mätdata med `matplotlib`, med kravet inritat, och motivera om systemet
+  uppfyller kravet.
+* Kunna låta ett Python-skript göra bedömningen automatiskt, med en returkod som en pipeline kan
+  tolka.
 
 ---
 
 ## Instruktioner
 
 ### Innan lektionen
-* Läs [bilaga A](./appendix/a_integration.md) om HW/SW-integrationstestning.
+* Läs [bilaga A](./appendix/a_processing_visualization.md) om processning och visualisering av
+  mätdata.
+* Ha mätningen från **L16** incheckad i ert repo, och ta med ert `ESP32-S3`-kort för nya
+  mätningar.
 
 ### Under lektionen
 * Delta aktivt på genomgången.
-* Den som siktar på VG: genomför uppgiften i [bilaga B](./appendix/b_exercises.md) på riktig
-  hårdvara.
-* Övriga: fortsatt arbete med G-kraven i **P04**.
+* Genomför därefter uppgifterna i [bilaga B](./appendix/b_exercises.md), i grupp och i ert eget
+  repo. De gås inte igenom i helklass; läraren går runt och hjälper till under tiden.
 
 ---
 
 ## Utvärdering
-* Vilket integrationstest genomförde ni, och varför gick det (eller gick det inte) att
-  automatisera?
+* Uppfyller ert system kravet ni ritade in i grafen? Hur ser ni det?
+* Vad säger medelvärdet respektive den största avvikelsen om ert system, och vilken av dem
+  handlar ert krav egentligen om?
 
 ---
 
 ## Nästa lektion
-* Projektarbete (del III).
+* Automatiserade HW/SW-integrationstester med Python.
 
 ---

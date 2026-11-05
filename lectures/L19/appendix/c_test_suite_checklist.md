@@ -1,6 +1,6 @@
-# Bilaga A - Självgranskning av testsviten inför redovisning
-Använd den här checklistan under **L18** för att stämma av hur långt projektet har kommit inför
-redovisningen i **L19**. Den speglar kraven och de individuella bedömningskriterierna i
+# Bilaga C - Självgranskning av testsviten inför redovisning
+Använd den här checklistan under **L19** för att stämma av hur långt projektet har kommit inför
+redovisningen i **L20**. Den speglar kraven och de individuella bedömningskriterierna i
 [P04](../../../projects/P04/README.md#bedömning).
 
 ---
@@ -30,12 +30,20 @@ redovisningen i **L19**. Den speglar kraven och de individuella bedömningskrite
 * (VG) Har ni kört testsviten med sanitizers, och åtgärdat det som hittades (se **L12**)?
 * Följer testkoden en tydlig struktur, en testsvit per testad klass?
 
+## Mätdatainsamling och integrationstester
+* Har ni ett dokumenterat protokoll för mätdata, och ett Python-skript som samlar in mätdata från
+  `ESP32-S3` och sparar den som CSV (se **L16**)?
+* Har ni ett mätbart krav, och en graf där mätdatan visualiseras med kravet inritat (se **L17**)?
+* Har ni minst ett automatiserat integrationstest i `pytest` som går igenom mot riktig hårdvara,
+  och som ni har sett bli rött (se **L18**)?
+
 ## VG
 * *Säker och robust programvara:* har ni testat minst tre gränsfall utöver G-testerna, och kört
   testsviten med sanitizers (se **L12**)?
-* *Ett testramverk för kontinuerlig testning:* har ni, om ni valt den vägen, samlat in,
-  lagrat och visualiserat mätdata jämfört mot kravställning (se **L15**), samt dokumenterat
-  minst ett manuellt integrationstest (se **L17**)?
+* *Ett testramverk för kontinuerlig testning:* har ni, om ni valt den vägen, en automatisk
+  bedömning av mätdata mot kravställning, integrationstester för samtliga seriella kommandon med
+  testrapport (se **L17–L18**), samt minst ett dokumenterat manuellt integrationstest (se
+  **L19**)?
 
 ## Rapport
 * Innehåller `p04_report.md` fördelningen av drivers och övriga bidrag inom gruppen, samt var och
@@ -50,7 +58,7 @@ redovisningen i **L19**. Den speglar kraven och de individuella bedömningskrite
 ---
 
 ## Om något saknas
-Är svaret nej på någon punkt ovan, är det precis det ni bör prioritera under resten av **L18**, inte
+Är svaret nej på någon punkt ovan, är det precis det ni bör prioritera under resten av **L19**, inte
 nya funktioner eller kosmetiska förbättringar.
 
 ---

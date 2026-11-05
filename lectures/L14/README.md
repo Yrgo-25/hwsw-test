@@ -27,7 +27,6 @@
 ---
 
 ## Nästa lektion
-* Mätdatainsamling och visualisering (VG).
-* Fortsatt arbete med **P04**.
+* Projektarbete (del II).
 
 ---

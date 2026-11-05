@@ -17,6 +17,8 @@ Syftet är att:
 * Skriva komponenttester för `system::logic::Logic`, där flera stubbade drivers samverkar.
 * Sätta upp en CI-pipeline som bygger firmware samt kör hela testsviten automatiskt vid varje
   push och pull request.
+* Samla in, lagra och visualisera mätdata från systemet på fysisk hårdvara, samt automatisera
+  HW/SW-integrationstester med Python.
 * Öva på att bedöma vad som är rimligt att automatisera respektive verifiera manuellt eller mot
   fysisk hårdvara.
 
@@ -24,7 +26,7 @@ Syftet är att:
 
 ## Upplägg och tidsplan
 Projektet nämns kort i **L02** och gås igenom i sin helhet i **L05**, då även det praktiska
-arbetet i er egen kodbas börjar. Det pågår sedan fram till redovisning i **L19**. Anledningen till
+arbetet i er egen kodbas börjar. Det pågår sedan fram till redovisning i **L20**. Anledningen till
 att arbetet börjar först i **L05** är enkel: dessförinnan saknas den teknik som krävs för att testa
 er kodbas, eftersom samtliga era `Esp32s3`-drivers går via ESP-IDF (se **L06**). **L02–L04** ägnas
 därför helt åt att öva tekniken mot kursens ATmega328p-övningsbibliotek. Arbetet sker sedan löpande
@@ -44,9 +46,15 @@ i takt med att nya testnivåer och verktyg introduceras på lektionerna:
 * **L08–L09:** Stubbar i övningsbiblioteket, inför komponenttesterna.
 * **L11–L12:** Komponenttester för `system::logic::Logic`, inklusive gränsfall och robusthet.
 * **L13:** Statisk analys, branch protection samt jobbordning i pipelinen.
-* **L14, L16, L18:** Projektarbete, med L18 som finputsning och redovisningsförberedelser.
-* **L15, L17:** (VG) Mätdatainsamling, lagring och visualisering, samt HW/SW-integrationstester.
-* **L19:** Redovisning och inlämning.
+* **L14–L15:** Projektarbete, med målet att allt som körs på värddatorn (enhetstester,
+  komponenttester, CI-pipeline och statisk analys) är klart inför **L16**.
+* **L16–L17:** Mätdatainsamling, lagring, processning och visualisering jämfört mot
+  kravställning.
+* **L18:** Automatiserade HW/SW-integrationstester med Python och `pytest`.
+* **L19:** Manuella integrationstester, samt finputsning och redovisningsförberedelser.
+* **L20:** Redovisning och inlämning.
+
+**L16–L20** hålls av en gästlärare.
 
 ---
 
@@ -61,13 +69,13 @@ introduceras i **L01**:
 2. **Komponenttester**: testar hur flera klasser samverkar, t.ex. `system::logic::Logic`
    tillsammans med samtliga sex stubbade drivers, eller ett helt neuralt nätverk uppbyggt av
    flera lager. Beroenden som inte testas direkt ersätts med stubbar via respektive interface.
-3. **HW/SW-integrationstester (VG)**: verifierar det färdiga systemet mot fysisk `ESP32-S3`-
-   hårdvara. Vissa av dessa kan automatiseras (t.ex. via seriell kommunikation och ett
-   Python-skript), medan andra rimligen kräver manuell verifiering; dokumentera i så fall vad
-   som testats och hur.
+3. **HW/SW-integrationstester**: verifierar det färdiga systemet mot fysisk `ESP32-S3`-
+   hårdvara. Vissa av dessa kan automatiseras (via seriell kommunikation och `pytest`, se
+   **L18**), medan andra rimligen kräver manuell verifiering; dokumentera i så fall vad som
+   testats och hur (se **L19**).
 
-Ni väljer själva testramverk: kursens [`yrgo::test`](../../libs/test/README.md), Google Test eller
-valfritt annat ramverk. Det viktiga är att hela testsviten går att bygga och köra med ett enda
+Ni väljer själva testramverk för C++-testerna: kursens [`yrgo::test`](../../libs/test/README.md),
+Google Test eller valfritt annat ramverk. Integrationstesterna skrivs i Python med `pytest`. Det viktiga är att hela testsviten går att bygga och köra med ett enda
 kommando, både lokalt och i CI-pipelinen.
 
 **OBS!** De praktiska proven skrivs med `yrgo::test`, oavsett vilket ramverk ni väljer i projektet.
@@ -134,7 +142,7 @@ inlämning ska den:
 * Bygga er firmware för `ESP32-S3` via ESP-IDF, och i samma jobb ladda upp den byggda binären
   som en artefakt (`actions/upload-artifact`), så att den går att hämta från körningen på GitHub. Det kräver ingen fysisk hårdvara eller self-hosted runner, se
   [bilaga A i L05](../../lectures/L05/appendix/a_ci_startup.md) för ett konkret exempel.
-  Flashning och körning mot riktig hårdvara ligger utanför CI, se **L17**.
+  Flashning och körning mot riktig hårdvara ligger utanför CI, se **L18**.
 * Kontrollera kodformattering automatiskt, i linje med [ci/format.sh](../../ci/format.sh) i det
   här repot.
 * Vara konfigurerad så att en pull request med röda jobb inte går att merga till `main`
@@ -146,15 +154,25 @@ inlämning ska den:
 * All tillagd testkod ska följa befintlig kodstil och vara tydligt strukturerad, en testsvit per
   testad klass.
 
-### Mätdatainsamling och HW/SW-integration (VG)
-Räknas till VG-momentet *Ett testramverk för kontinuerlig testning*, se [Bedömning](#bedömning).
+### Mätdatainsamling och automatiserade integrationstester (G)
+Se **L16–L18**.
 * Samla in mätdata från systemet på fysisk hårdvara (t.ex. temperaturen över tid via `"temp"`,
-  eller tidmätning av blinktogglingens precision) via seriell kommunikation.
-* Processa och lagra mätdatan strukturerat (t.ex. som CSV).
-* Visualisera mätdatan (t.ex. med Python och `matplotlib`) och jämför resultatet mot systemets
-  kravställning.
+  eller tidmätning av blinktogglingens precision) via seriell kommunikation och ett
+  Python-skript, enligt ett dokumenterat protokoll.
+* Lagra mätdatan strukturerat, som CSV med kolumnrubriker.
+* Formulera ett mätbart krav (nominellt värde och tolerans), visualisera mätdatan med Python och
+  `matplotlib` med kravet inritat, och bedöm om systemet uppfyller det.
+* Skriv minst ett automatiserat HW/SW-integrationstest i `pytest` som skickar ett seriellt
+  kommando till systemet på fysisk hårdvara och verifierar svaret.
+
+### Utökad testautomatisering mot hårdvara (VG)
+Räknas till VG-momentet *Ett testramverk för kontinuerlig testning*, se [Bedömning](#bedömning).
+* Låt mätdatan bedömas automatiskt mot kravställningen, med en returkod eller som ett testfall i
+  `pytest`-sviten (se **L17–L18**).
+* Täck samtliga seriella kommandon, inklusive ogiltiga kommandon och argument, med automatiserade
+  integrationstester, och generera en testrapport.
 * Dokumentera minst ett integrationstest som inte rimligen kan automatiseras, samt hur det
-  verifierades manuellt.
+  verifierades manuellt (se **L19**).
 
 ### Robusthet (VG)
 Räknas till VG-momentet *Säker och robust programvara*, se [Bedömning](#bedömning).
@@ -210,7 +228,8 @@ besvaras i samma fil (se [Utvärdering](#utvärdering)).
 ---
 
 ## Bedömning
-Betyget sätts **individuellt, inte på gruppnivå**. Gruppens gemensamma testsvit (se
+Betyget sätts **individuellt, inte på gruppnivå**, av kursansvarig lärare tillsammans med
+gästläraren. Gruppens gemensamma testsvit (se
 [Krav](#krav)) är underlaget som gör bedömningen möjlig, men det som avgör ditt betyg är vad
 *du* personligen har bidragit med och kan redogöra för, bedömt utifrån Git-historik,
 bidragsrapporten och din förmåga att förklara tester och designbeslut vid redovisning.
@@ -227,6 +246,8 @@ bidragsrapporten och din förmåga att förklara tester och designbeslut vid red
   eller integrationstest) och varför de är utformade som de är. Kan du inte förklara ett test
   räknas det inte som ditt bidrag, oavsett vad Git-historiken visar.
 * Du kan redogöra för hur testsviten byggs och körs, både lokalt och i CI-pipelinen.
+* Du kan redogöra för hur gruppens mätdata samlas in, lagras och bedöms mot kravställningen,
+  samt hur de automatiserade integrationstesterna körs mot fysisk hårdvara.
 * Gruppens gemensamma testsvit och CI-pipeline uppfyller G-kraven i [Krav](#krav); annars
   finns inget konkret för dig att visa upp och förklara.
 
@@ -238,17 +259,20 @@ ett av kursplanens två VG-moment:
   statisk analys eller sanitizers, och kan motivera varför just dessa gör systemet mer robust.
 * **Ett testramverk för kontinuerlig testning:** du har ansvarat för och drivit fram en väsentlig
   del av CI-pipelinen, teststrukturen, ESP-IDF-mockningen eller verifieringen mot fysisk
-  hårdvara (mätdatainsamling och visualisering jämfört mot kravställning, samt dokumenterade
-  integrationstester), och kan förklara hur den möjliggör fortsatt testning genom produktens
+  hårdvara (automatisk bedömning av mätdata mot kravställning, en heltäckande svit av
+  integrationstester, samt dokumenterade manuella integrationstester), och kan förklara hur den möjliggör fortsatt testning genom produktens
   livscykel, inte bara att den finns, utan varför den är utformad som den är.
 
 ---
 
 ## Redovisning
-Projektet redovisas för lärare under lektionstid:
+Projektet redovisas för kursansvarig lärare och gästläraren under **L20**:
 * Gemensam genomgång av testsviten: struktur, testnivåer och hur stubbar används.
 * Demo av CI-pipelinen som körs automatiskt vid en push.
-* (VG) Demo av mätdatainsamling och visualisering på fysisk hårdvara.
+* Demo av mätdatainsamling, visualisering och de automatiserade integrationstesterna på fysisk
+  hårdvara.
+* (VG) Demo av den automatiska bedömningen mot kravställning, samt genomgång av ett dokumenterat
+  manuellt integrationstest.
 * Var och en av er ska individuellt kunna förklara era egna tester och designbeslut, samt
   motivera vad som testas på vilken nivå, se [Bedömning](#bedömning).
 
@@ -264,8 +288,9 @@ Besvara följande frågor gemensamt i `p04_report.md`, tillsammans med bidragsra
    **P02**? Motivera.
 4. Vad var fördelen med att mocka ESP-IDF:s C-funktioner i stället för att testa mot fysisk
    hårdvara, och vad missar man genom att göra det?
-5. (Om VG-krav genomförts) Vilket integrationstest kunde inte automatiseras, och hur verifierade
-   ni det manuellt i stället?
+5. Vad kunde era automatiserade integrationstester hitta som era komponenttester inte kunde, och
+   tvärtom? (Om VG-krav genomförts) Vilket integrationstest kunde inte automatiseras, och hur
+   verifierade ni det manuellt i stället?
 6. Vad hittade den statiska analysen respektive sanitizers, om något? Hur åtgärdade ni det?
 7. Vad lärde ni er av projektet? Vad var lätt respektive svårt?
 

@@ -1,39 +1,46 @@
-# L20 - Utdelning av praktiskt prov 2 och kursavslut
+# L20 - Redovisning av P04 och kursavslut
 
 ## Dagordning
-* Genomgång av **Praktiskt prov 2**, gemensamt med kursen Maskininlärning, samt tid att påbörja det.
+* Redovisning och inlämning av **P04**.
 * Kursavslut.
 
 ---
 
 ## Mål med lektionen
-* Visa förmåga att skriva enhets- och komponenttester för konvolutionella lager (Conv, MaxPool,
-  Flatten) samt ett helt CNN uppbyggt via stubbar.
-* Kunna motivera varför lagerstubbar används i komponenttester i stället för riktiga implementationer.
-
----
-
-## Förutsättningar
-* Enhets- och komponenttestning med `yrgo::test` (**L01–L19**).
+* Ha redovisat samt lämnat in **P04**.
+* Kunna förklara skillnaden mellan kursens testnivåer, från enhetstest till HW/SW-integrationstest,
+  samt vad respektive testnivå kan hitta.
 
 ---
 
 ## Instruktioner
 
-### Förberedelse
-* Läs igenom [hemtentamen 2](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam2/home_exam2.md), som utgör provet;
-  uppgift 1, 2 och 4 examinerar testning.
-* Se [Praktiska prov](../../info/README.md#praktiska-prov) i kursinfon för mer information om
-  hur provet är upplagt.
+### Innan lektionen
+* Kontrollera att projektet bygger, att testsviten och integrationstesterna går igenom, och att
+  allt material finns tillgängligt inför redovisningen: mätdata, grafer och dokumenterade manuella
+  testfall.
+* Ta med ert `ESP32-S3`-kort, så att mätdatainsamlingen och integrationstesterna kan demonstreras
+  på riktig hårdvara.
+* Repetera kursens centrala begrepp med stöd av [bilaga A](./appendix/a_course_summary.md).
 
 ### Under lektionen
-* Provet delas ut och gås igenom i helklass.
-* Påbörja arbetet på egen hand, och ställ frågor om något är oklart.
-* Provet genomförs därefter individuellt fram till angiven deadline, och redovisas muntligt.
+* Redovisa **P04** enligt [Redovisning](../../projects/P04/README.md#redovisning) i
+  uppgiftsbeskrivningen, för kursansvarig lärare och gästläraren.
+
+---
+
+## Notering
+**Praktiskt prov 2** är gemensamt med kursen Maskininlärning. Det delas ut i början av januari, i
+samband med Maskininlärning-kursens **L11**, och examineras under Maskininlärning-kursens **L20**,
+inte under den här lektionen. Provet ska fortfarande genomföras,
+och testuppgifterna betygssätts som en del av den här kursen. Se
+[Praktiska prov](../../info/README.md#praktiska-prov) i kursinfon för mer information.
 
 ---
 
 ## Utvärdering
+* Är **P04** redovisat och inlämnat enligt kraven i uppgiftsbeskrivningen?
+* Vad är ni mest nöjda med i er testsvit, och vad hade ni gjort annorlunda om ni fick börja om?
 * Reflektera gärna över kursen:
     * Vad har ni lärt er?
     * Något som var anmärkningsvärt bra/mindre bra?

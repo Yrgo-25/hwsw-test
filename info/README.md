@@ -3,6 +3,9 @@
 ## Lärare
 Erik Pihl ([erik.axel.pihl@gmail.com](mailto:erik.axel.pihl@gmail.com))
 
+**L16–L19** hålls av en gästlärare, **L20** hålls av båda. **P04** bedöms av kursansvarig lärare
+tillsammans med gästläraren.
+
 ---
 
 ## Kursplan - Mjuk- och hårdvarutestning
@@ -23,16 +26,17 @@ Erik Pihl ([erik.axel.pihl@gmail.com](mailto:erik.axel.pihl@gmail.com))
 | 2 | - | L12 | Komponenttester (del IV): gränsvärdesanalys, robusthet och sanitizers, arbete med **P04** |
 | 3 | - | L13 | Kodkvalitet i pipelinen: statisk analys, branch protection och jobbordning, arbete med **P04** |
 | 3 | - | L14 | Projektarbete (del I): **P04** |
-| 4 | - | L15 | Mätdatainsamling och visualisering (VG), arbete med **P04** |
-| 4 | - | L16 | Projektarbete (del II): **P04** |
-| 5 | - | L17 | HW/SW-integrationstestning (VG), arbete med **P04** |
-| 5 | - | L18 | Projektarbete (del III): **P04** |
-| 6 | - | L19 | Redovisning av **P04** och förberedelse inför praktiskt prov 2 |
-| 6 | - | L20 | Praktiskt prov 2 (gemensamt med Maskininlärning) och kursavslut |
+| 4 | - | L15 | Projektarbete (del II): **P04** |
+| 4 | - | L16 | Mätdatainsamling (del I): insamling och lagring, arbete med **P04** (gästlärare) |
+| 5 | - | L17 | Mätdatainsamling (del II): processning och visualisering, arbete med **P04** (gästlärare) |
+| 5 | - | L18 | Automatiserade HW/SW-integrationstester med Python, arbete med **P04** (gästlärare) |
+| 6 | - | L19 | Manuella integrationstester och projektarbete (del III): **P04** (gästlärare) |
+| 6 | - | L20 | Redovisning av **P04** och kursavslut (gästlärare + huvudlärare) |
 
 **OBS!** Kursen är vilande från vecka 42 fram till årsskiftet; L11 återupptas i januari. Veckor
-för L11–L20 är preliminära och kan komma att justeras. Datum för L10 respektive L20 styrs av när
-de gemensamma proven genomförs (se [Praktiska prov](#praktiska-prov)).
+för L11–L20 är preliminära och kan komma att justeras. Praktiskt prov 2 examineras under
+Maskininlärning-kursens **L20**, och har ingen egen lektion i den här kursen (se
+[Praktiska prov](#praktiska-prov)).
 
 ---
 
@@ -67,6 +71,13 @@ Denna kurss del av respektive prov täcker:
 Prov 1 är utdelat; länken till provet finns i Maskininlärning-kursens Classroom. **L10** är
 avsatt för att arbeta med provet och slutföra det.
 
+Prov 2 ([hemtentamen 2](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam2/home_exam2.md))
+delas ut i början av januari, i samband med Maskininlärning-kursens **L11**, och examineras under
+Maskininlärning-kursens **L20**. Ni har alltså flera veckor på er, och provet genomförs i övrigt på
+samma sätt som prov 1: som en inlämningsuppgift på egen hand, med muntlig redovisning. Den här
+kursen har ingen egen lektion för provet, men provet ska fortfarande genomföras, och
+testuppgifterna betygssätts som en del av den här kursen, precis som för prov 1.
+
 Övningstentamen inför prov 1, inklusive den kod ni ska utgå från, delas mellan kurserna och finns i
 Maskininlärning-kursens repo:
 * [Övningstentamen 1](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam1/practice_exam1.md): uppgift 1, 2, 4, 6 och 7 examinerar
@@ -99,7 +110,7 @@ För godkänt ska samtliga examinerande moment vara godkända.
 ### Hårdvara
 Följande hårdvara, som finns på skolan, kommer att användas under kursen:
 * **ESP32-S3** För **P04** samt HW/SW-integrationstestning.
-* Multimeter samt referenstermometer: för de manuella integrationstesterna i **L17** (VG), där
+* Multimeter samt referenstermometer: för de manuella integrationstesterna i **L19** (VG), där
   ett mätvärde från systemet ska jämföras mot en oberoende mätning.
 
 ### Mjukvara
@@ -117,8 +128,9 @@ Följande hårdvara, som finns på skolan, kommer att användas under kursen:
     * Statisk analys av C/C++-kod.
 * AddressSanitizer/UndefinedBehaviorSanitizer (ASan/UBSan):
     * Körtidsverktyg för att hitta minnesfel och odefinierat beteende.
-* Python 3 med `matplotlib` samt `pyserial`:
-    * För insamling, processning och visualisering av mätdata.
+* Python 3 med `matplotlib`, `pyserial` samt `pytest`:
+    * För insamling, processning och visualisering av mätdata, samt automatiserade
+      HW/SW-integrationstester (**L16–L18**).
 * GitHub Actions:
     * För testautomatisering och kontinuerlig integration (CI).
 

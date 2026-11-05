@@ -1,45 +1,46 @@
-# L15 - Mätdatainsamling och visualisering (VG)
+# L15 - Projektarbete (del II)
 
 ## Dagordning
-* Kort genomgång: insamling av mätdata från en DUT, strukturerad lagring samt visualisering
-  jämfört mot kravställning.
-* Fortsatt arbete med **P04**.
+* Arbete med **P04**, med fokus på att färdigställa allt som körs på värddatorn: enhetstester,
+  komponenttester, CI-pipeline och statisk analys.
+* Förberedelse inför **L16–L20**, som handlar om mätdatainsamling och testautomatisering med
+  Python mot fysisk hårdvara.
 
 ---
 
 ## Mål med lektionen
-* Kunna skicka strukturerad mätdata från `ESP32-S3` över seriell kommunikation och läsa in den
-  med ett Python-skript.
-* Kunna lagra mätdata strukturerat, t.ex. som CSV, och visualisera den jämfört mot en
-  kravställning.
-* Ha påbörjat mätdatadelen av VG-kraven i **P04**, för den som siktar på VG. Den räknas till
-  VG-momentet *Ett testramverk för kontinuerlig testning* (se
-  [Bedömning](../../projects/P04/README.md#bedömning)).
+* Ha samtliga G-krav i **P04** som inte kräver fysisk hårdvara uppfyllda:
+  [Enhetstester för drivers](../../projects/P04/README.md#enhetstester-för-drivers-g),
+  [Enhetstester för ML-algoritmer](../../projects/P04/README.md#enhetstester-för-ml-algoritmer-g),
+  [Komponenttester](../../projects/P04/README.md#komponenttester-g),
+  [Testautomatisering](../../projects/P04/README.md#testautomatisering-g) samt
+  [Kodkvalitet](../../projects/P04/README.md#kodkvalitet-g).
+* Ha en firmware som går att flasha till `ESP32-S3` och kommunicera med över seriell
+  kommunikation, så att arbetet mot hårdvaran kan börja direkt i **L16**.
 
 ---
 
 ## Instruktioner
-
-### Innan lektionen
-* Läs [bilaga A](./appendix/a_measurement_data.md) om mätdatainsamling, lagring och
-  visualisering.
-
-### Under lektionen
-* Delta aktivt på genomgången.
-* Den som siktar på VG: genomför uppgifterna i [bilaga B](./appendix/b_exercises.md), i ert eget
-  repo.
-* Övriga: fortsatt arbete med G-kraven i **P04**.
+* Stäm av i gruppen mot kraven ovan: vad saknas, och vem tar vad?
+* Prioritera det som saknas för G före VG-kraven.
+* Kontrollera inför **L16** att varje grupp har:
+  * Ett `ESP32-S3`-kort med USB-kabel.
+  * En firmware byggd från `main`, gärna den artefakt CI-pipelinen laddar upp (se **L05**).
+  * Fungerande seriell kommunikation: flasha kortet, skicka t.ex. `"status"` via `idf.py monitor`
+    och kontrollera att svaret kommer tillbaka.
+* Använd lektionstiden för att ställa frågor och be om granskning av era pull requests.
 
 ---
 
 ## Utvärdering
-* Varför är det viktigt att ha ett väldefinierat, dokumenterat format på datan som skickas över
-  seriell kommunikation?
-* Uppfyller ert system kravet ni ritade in i grafen? Hur ser ni det?
+* Uppfyller er testsvit och CI-pipeline nu samtliga G-krav i **P04** som inte kräver hårdvara? Om
+  inte, vad återstår och när gör ni det?
+* Siktar någon i gruppen på VG, och vilka av VG-kraven planerar ni i så fall att ta er an?
 
 ---
 
 ## Nästa lektion
-* Projektarbete (del II).
+* **L16–L20** hålls av en gästlärare.
+* Mätdatainsamling (del I): insamling och lagring av mätdata från en DUT.
 
 ---

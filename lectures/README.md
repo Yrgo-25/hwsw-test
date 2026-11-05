@@ -15,11 +15,13 @@ Material från föreläsningar:
 * [L12](./L12/README.md): Komponenttester (del IV), gränsvärdesanalys, robusthet och sanitizers.
 * [L13](./L13/README.md): Kodkvalitet i pipelinen, statisk analys, branch protection och jobbordning.
 * [L14](./L14/README.md): Projektarbete (del I).
-* [L15](./L15/README.md): Mätdatainsamling och visualisering (VG).
-* [L16](./L16/README.md): Projektarbete (del II).
-* [L17](./L17/README.md): HW/SW-integrationstestning (VG).
-* [L18](./L18/README.md): Projektarbete (del III).
-* [L19](./L19/README.md): Redovisning av P04 och förberedelse inför praktiskt prov 2.
-* [L20](./L20/README.md): Utdelning av praktiskt prov 2 (gemensamt med Maskininlärning) och kursavslut.
+* [L15](./L15/README.md): Projektarbete (del II).
+* [L16](./L16/README.md): Mätdatainsamling (del I), insamling och lagring.
+* [L17](./L17/README.md): Mätdatainsamling (del II), processning och visualisering.
+* [L18](./L18/README.md): Automatiserade HW/SW-integrationstester med Python.
+* [L19](./L19/README.md): Manuella integrationstester och projektarbete (del III).
+* [L20](./L20/README.md): Redovisning av P04 och kursavslut.
+
+**L16–L20** hålls av en gästlärare.
 
 ---

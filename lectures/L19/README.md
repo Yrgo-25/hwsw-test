@@ -1,54 +1,48 @@
-# L19 - Redovisning av P04 och förberedelse inför praktiskt prov 2
+# L19 - Manuella integrationstester och projektarbete (del III)
 
 ## Dagordning
-* Redovisning och inlämning av **P04**.
-* Förberedelse inför praktiskt prov 2: genomgång av provets testuppgifter.
+* Kort genomgång: manuella HW/SW-integrationstester, hur de dokumenteras spårbart, samt
+  spårbarhet från krav till testfall.
+* Arbete med **P04**, med fokus på att färdigställa projektet inför redovisningen i **L20**.
 
 ---
 
 ## Mål med lektionen
-* Ha redovisat samt lämnat in **P04**.
-* Kunna förklara skillnaden mellan ett enhetstest, ett komponenttest och ett test som tränar ett
-  helt nätverk med riktiga lager, samt vad respektive testtyp kan hitta.
-* Känna sig förberedd inför det praktiska provet i **L20**.
+* Kunna avgöra vilka integrationstester som rimligen kan automatiseras, och vilka som kräver
+  manuell verifiering.
+* Kunna dokumentera ett manuellt genomfört integrationstest på ett spårbart sätt. För den som
+  siktar på VG räknas det till VG-momentet *Ett testramverk för kontinuerlig testning* (se
+  [Bedömning](../../projects/P04/README.md#bedömning)).
+* Ha ett i det närmaste färdigt projekt, inklusive testsvit, mätdata, dokumentation och övrigt
+  material inför redovisningen i **L20**.
 
 ---
 
 ## Instruktioner
 
 ### Innan lektionen
-* Kontrollera att projektet bygger, att testsviten går igenom och att allt material finns
-  tillgängligt inför redovisningen.
-* Läs igenom testuppgifterna (uppgift 1, 2 och 4) i
-  [hemtentamen 2](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam2/home_exam2.md), som utgör provet.
+* Läs [bilaga A](./appendix/a_manual_integration.md) om manuella HW/SW-integrationstester och
+  spårbarhet.
+* Ta med ert `ESP32-S3`-kort och en USB-kabel.
 
 ### Under lektionen
-* Redovisa **P04** enligt [Redovisning](../../projects/P04/README.md#redovisning) i
-  uppgiftsbeskrivningen.
-* Övriga tiden: förberedelse inför **L20**, med stöd av
-  [bilaga A](./appendix/a_course_summary.md), en sammanfattning av kursens centrala begrepp.
-  Tre saker från provet som är värda att repetera särskilt:
-  * Att komplettera en stubb med styrbar utdata, se
-    [bilaga A i L11](../L11/appendix/a_controllable_stubs.md).
-  * När ett fel ska avvisas med `false` och när ett kontrollerat avslut är rimligare, se
-    [bilaga B i L12](../L12/appendix/b_robustness.md).
-  * Vad ett test som tränar ett helt nätverk med riktiga lager kan hitta, som varken enhetstester
-    eller komponenttester med stubbar kan: fel i hur lagren *samverkar*, t.ex. en gradient som
-    skickas vidare i fel ordning eller med fel dimension mellan två lager som var för sig är
-    korrekta.
-* Ställ frågor om sådant som känns oklart inför provet.
+* Delta aktivt på genomgången.
+* Genomför uppgifterna i [bilaga B](./appendix/b_exercises.md) på riktig hårdvara.
+* Gå därefter igenom [bilaga C](./appendix/c_test_suite_checklist.md), en
+  självgranskningschecklista inför redovisning, och använd resten av lektionen till det som
+  saknas.
+* Använd lektionstiden för att ställa frågor om sådant ni vill få granskat innan redovisningen.
 
 ---
 
 ## Utvärdering
-* Är **P04** redovisat och inlämnat enligt kraven i uppgiftsbeskrivningen?
-* Vad är ni mest nöjda med i er testsvit, och vad hade ni gjort annorlunda om ni fick börja om?
-* Känner ni er redo att genomföra det praktiska provet på egen hand, och att förklara era
-  lösningar vid den muntliga redovisningen?
+* Vilket integrationstest genomförde ni manuellt, och varför gick det inte att automatisera?
+* Vad återstår innan **P04** kan redovisas och lämnas in, och vem i gruppen ansvarar för
+  respektive del?
 
 ---
 
 ## Nästa lektion
-* Utdelning av praktiskt prov 2 (gemensamt med Maskininlärning) och kursavslut.
+* Redovisning av **P04** och kursavslut.
 
 ---

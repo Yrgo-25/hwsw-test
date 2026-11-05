@@ -31,6 +31,7 @@ Under kursens gång implementeras:
   ML-lager.
 * En CI-pipeline som möjliggör kontinuerlig testning genom hela produktens livscykel.
 * Insamling, processning och visualisering av mätdata från fysisk hårdvara.
+* Automatiserade HW/SW-integrationstester i Python mot fysisk hårdvara.
 
 Efter genomförd kurs ska studenten kunna:
 * Beskriva olika metoder och verktyg för testning av mjukvara.
@@ -104,8 +105,8 @@ sudo apt -y update
 sudo apt -y install clang-format
 ```
 
-Kursens Python-beroenden (`black`, samt `matplotlib` och `pyserial` för mätdatamomenten i
-**L15**) installeras via `requirements.txt`:
+Kursens Python-beroenden (`black`, samt `matplotlib`, `pyserial` och `pytest` för mätdata- och
+integrationstestmomenten i **L16–L18**) installeras via `requirements.txt`:
 
 ```bash
 pip install -r requirements.txt
