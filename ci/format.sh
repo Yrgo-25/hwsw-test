@@ -11,10 +11,14 @@ set -euo pipefail
 # Root directory.
 ROOT_DIR="$(dirname "${BASH_SOURCE[0]}")/.."
 
+# Required clang-format major version, the same as in CI. Different major versions format
+# code differently.
+CLANG_FORMAT_VERSION=18
+
 ################################################################################
-# Terminate the script if clang-format is not installed.
+# Terminate the script if clang-format is not installed, or has the wrong version.
 # Globals:
-#   None
+#   CLANG_FORMAT_VERSION
 # Arguments:
 #   None
 ################################################################################
@@ -22,6 +26,15 @@ check_clang_format() {
     if ! command -v clang-format &> /dev/null
     then
         echo "error: clang-format not found. Install it, e.g. 'sudo apt -y install clang-format'." >&2
+        exit 1
+    fi
+
+    local version
+    version="$(clang-format --version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)"
+    if [[ "${version%%.*}" != "$CLANG_FORMAT_VERSION" ]]
+    then
+        echo "error: clang-format $CLANG_FORMAT_VERSION is required, found ${version:-unknown}." \
+             "Install it, e.g. 'pip install clang-format==18.1.3'." >&2
         exit 1
     fi
 }

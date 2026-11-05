@@ -72,8 +72,7 @@ Prov 1 är utdelat; länken till provet finns i Maskininlärning-kursens Classro
 avsatt för att arbeta med provet och slutföra det.
 
 Prov 2 ([hemtentamen 2](https://github.com/Yrgo-25/machine-learning/blob/main/exams/exam2/home_exam2.md))
-delas ut i början av januari, i samband med Maskininlärning-kursens **L11**, och examineras under
-Maskininlärning-kursens **L20**. Ni har alltså flera veckor på er, och provet genomförs i övrigt på
+delas ut i början av januari och examineras under Maskininlärning-kursens **L20**. Ni har alltså flera veckor på er, och provet genomförs i övrigt på
 samma sätt som prov 1: som en inlämningsuppgift på egen hand, med muntlig redovisning. Den här
 kursen har ingen egen lektion för provet, men provet ska fortfarande genomföras, och
 testuppgifterna betygssätts som en del av den här kursen, precis som för prov 1.

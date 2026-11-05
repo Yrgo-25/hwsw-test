@@ -98,11 +98,19 @@ ci/format.sh --check  # Kontrollera formattering utan att ändra filer.
 Innan skriptet körs behöver `clang-format` samt `black` finnas installerade och tillgängliga i
 `PATH`.
 
-`clang-format` installeras via `apt` i WSL:
+Skriptet kräver `clang-format` version 18, samma version som i CI, eftersom olika versioner
+formaterar koden olika. I WSL med Ubuntu 24.04 är det den version som installeras via `apt`:
 
 ```bash
 sudo apt -y update
 sudo apt -y install clang-format
+```
+
+Ger `apt` en annan version, t.ex. i en nyare Ubuntu, installera i stället exakt samma version som
+CI via `pip`:
+
+```bash
+pip install clang-format==18.1.3
 ```
 
 Kursens Python-beroenden (`black`, samt `matplotlib`, `pyserial` och `pytest` för mätdata- och

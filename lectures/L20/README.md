@@ -30,8 +30,8 @@
 ---
 
 ## Notering
-**Praktiskt prov 2** är gemensamt med kursen Maskininlärning. Det delas ut i början av januari, i
-samband med Maskininlärning-kursens **L11**, och examineras under Maskininlärning-kursens **L20**,
+**Praktiskt prov 2** är gemensamt med kursen Maskininlärning. Det delas ut i början av januari, och
+examineras under Maskininlärning-kursens **L20**,
 inte under den här lektionen. Provet ska fortfarande genomföras,
 och testuppgifterna betygssätts som en del av den här kursen. Se
 [Praktiska prov](../../info/README.md#praktiska-prov) i kursinfon för mer information.
